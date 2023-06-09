@@ -89,14 +89,14 @@
 
 			$result = $xpath->query('//p[contains(@class, "gqLncc")]');
 			if ($result) {
-				$span = $xpath->query('//p[contains(@class, "gqLncc")]//span');
+				$span = $xpath->query('//span[contains(@class, "gL9Hy")]', $result->item(0))->item(0);
 				@$span = $span->textContent;
 				$corr = $xpath->query('.//i', $result->item(0))->item(0);
 				@$corr = $corr->textContent;
 				
 				echo "<div class=\"correction-div\">";
 				echo "<p class=\"dym\">" . $span;
-				echo "<a class=\"correction\" href=\"/search?q=$corr&pg=0&tp=0\">" . $corr . "</span>";
+				echo "<a class=\"correction\" href=\"/search.php?q=$corr&pg=0&tp=0\">" . $corr . "</span>";
 				echo "</p>";
 				echo "</div>";
 			}
