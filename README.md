@@ -35,5 +35,8 @@ If you run an instance of SearchTLD and want it placed on the list open an issue
 | [Official Instance](https://search.schizo.gr) | 🇩🇪 DE |
 
 ### Instance Rules
+```
 Don't incorporate any code in JS or code that is closed-source.
 Don't use a CDN.
+Don't Remove the original donation link.
+```
