@@ -95,8 +95,8 @@
 				@$corr = $corr->textContent;
 				
 				echo "<div class=\"correction-div\">";
-				echo "<p class=\"dym\">" . $span . " ";
-				echo "<a class=\"correction\" href=\"/search.php?q=$corr&pg=0&tp=0\">" . $corr . "?" "</span>";
+				echo "<p class=\"dym\">" . $span;
+				echo "<a class=\"correction\" href=\"/search.php?q=$corr&pg=0&tp=0\"> $corr</span>";
 				echo "</p>";
 				echo "</div>";
 			}
