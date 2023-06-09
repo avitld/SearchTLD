@@ -1,0 +1,9 @@
+:root {
+	--bg-color-m: rgb(200, 200, 200);
+	--fg-color-m: #2B2B2B;
+	--ms-color-bg-m: rgb(180, 180, 180);
+	--sb-color-bg-m: rgb(160, 160, 160);
+	--ib-color-bg: rgba(0, 0, 0, 0.08);
+	--a-color: #a509ba;
+	--a-color-h: #7b098a;
+}
