@@ -81,4 +81,26 @@
 		}
 	}
 
+	function send_correction($response) {
+		if ($response) {
+			$dom = new DOMDocument();
+			@$dom->loadHTML($response);
+			$xpath = new DOMXPath($dom);
+
+			$result = $xpath->query('//p[contains(@class, "gqLncc")]');
+			if ($result) {
+				@$span = $result->textContent;
+				$corr = $xpath->query('.//i', $result->item(0))->item(0);
+				@$corr = $corr->textContent;
+				
+				echo "<div class=\"correction-div\">";
+				echo "<p class=\"dym\">" . $span;
+				echo "<a class=\"correction\" href=\"/search?q=\" . $corr . \"&pg=0&tp=0\">" . $corr . "</span>";
+				echo "</p>";
+				echo "<hr>";
+				echo "</div>";
+			}
+		}
+	}
+
 ?>

@@ -35,6 +35,7 @@
 			<?php
 				switch ($type) {
 					case 0:
+						send_correction($response);
 						send_text_response($response);
 						break;
 
