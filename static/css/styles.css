@@ -187,3 +187,9 @@ button[type=submit]:hover {
 hr {
 	color: rgb(183, 81, 255);
 }
+
+.correction-div {
+	margin-left: 10px;
+	padding: 5px;
+	margin-bottom: 4px;
+}
