@@ -8,6 +8,9 @@ Privacy Respecting and Minimal Meta-Search Engine
 If you want to self host then edit the *opensearch.xml* file according to your setup. <br/>
 Not really perfect for self hosting yet, but works.
 
+### Dependencies
+You will need php, php-fpm, php-xml and php-curl to run SearchTLD
+
 ## Instances
 
 If you run an instance of SearchTLD and want it placed on the list open an issue.
