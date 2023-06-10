@@ -2,11 +2,16 @@
 	function getHTML($query, $page) {
 		$fpage = $page . "0";
 		
-		$lang = trim(htmlspecialchars($_COOKIE["lang"]));
+		$url = "https://www.google.com/search?q=" . urlencode($query) . "&start=" . urlencode($fpage) . "&num=12";
 
-		$url = "https://www.google.com/search?q=" . urlencode($query) . "&start=" . urlencode($fpage) . "&hl=" . urlencode($lang) . "&lr" . urlencode($lang) . "&num=12";
+		if (isset($_COOKIE["lang"])) {
+			$lang = trim(htmlspecialchars($_COOKIE["lang"]));
+			$url .= "&hl=" . urlencode($lang) . "&lr=" . urlencode($lang);
+		} else {
+			$url .= "&hl=en&lr=en";
+		}
 
-		if (isset($_COOKIE["disable_safe"])) {
+		if (isset($_COOKIE["safesearch"])) {
 			$url .= "&safe=medium";
 		}
 		
