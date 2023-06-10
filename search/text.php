@@ -62,20 +62,46 @@
 
 			$result = $xpath->query('//div[contains(@class, "I6TXqe")]');
 			if ($result) {
+
+				$bannedQueries = array("Complementary results", "Local results");
+
 				$title = $xpath->query('.//h2', $result->item(0))->item(0);
 				@$title = $title->textContent;
-				$smalltitle = $xpath->query('.//div[contains(@class, "wwUB2c")]//span', $result->item(0))->item(0);
-				@$smalltitle = $smalltitle->textContent;
-				$desc = $xpath->query('.//div[contains(@class, "kno-rdesc")]//span', $result->item(0))->item(0);
-				@$desc = $desc->textContent;
-				
-				if ($title !== "Complementary results" && $title !== "Local results" && $title !== "Web result with site links" && $title !== Null) {			
-					echo "<div class=\"infobox\">";
-					echo "<h2 class=\"infotitle\">" . $title . "</h2>";
-					echo "<span class=\"minititle\">" . $smalltitle . "</span>";
-					echo "<hr>";
-					echo "<p class=\"infodesc\">" . $desc . "</p>";
-					echo "</div>";
+
+				if (in_array($title, $bannedQueries)) {
+					$nextH2 = $title->nextSibling;
+					while ($nextH2 !== null && $nextH2->nodeName !== "h2") {
+						$nextH2 = $nextH2->nextSibling;
+					}
+					
+					if ($nextH2 !== null) {
+						$nextH2Title = $nextH2->textContent;
+					}
+				} else {	
+					$smalltitle = $xpath->query('.//div[contains(@class, "wwUB2c")]//span', $result->item(0))->item(0);
+					@$smalltitle = $smalltitle->textContent;
+					$desc = $xpath->query('.//div[contains(@class, "kno-rdesc")]//span', $result->item(0))->item(0);
+					@$desc = $desc->textContent;
+					
+					if ($desc !== Null) {			
+						echo "<div class=\"infobox\">";
+						echo "<div class=\"txtholder\">";
+						echo "<h2 class=\"infotitle\">" . $title . "</h2>";
+						echo "<span class=\"minititle\">" . $smalltitle . "</span>";
+						echo "</div>";
+						if ($title !== "GNU") {
+							require "search/image.php";
+							$iresponse = getiHTML($title, 0);
+							send_single_image_response($iresponse);
+						} else {
+							echo "<div class=\"simage-container\">";
+							echo "	<img src=\"/static/img/gnu.png\">";
+							echo "</div>";
+						}
+						echo "<hr>";
+						echo "<p class=\"infodesc\">" . $desc . "</p>";
+						echo "</div>";
+					}
 				}
 			}
 		}

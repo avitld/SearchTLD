@@ -194,6 +194,24 @@ hr {
 	margin-bottom: 4px;
 }
 
+.simage-container {
+	max-height: 80px;
+	max-width: 20%;
+	/*display: inline-block;*/
+	text-align: right;
+	float: right;
+	margin-right: 15px;
+}
+
+.txtholder {
+	display: inline-block;
+}
+
+.simage-container img {
+	max-height: 80px;
+	height: 100%;
+}
+
 /* Mobile stuff */
 
 @media screen and (max-width: 840px) {
