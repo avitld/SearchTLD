@@ -193,3 +193,28 @@ hr {
 	padding: 5px;
 	margin-bottom: 4px;
 }
+
+/* Mobile stuff */
+
+@media screen and (max-width: 840px) {
+    body {
+      font-size: 20px;
+    }
+
+	.infobox {
+		width: 100%;
+		max-width: 90%;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+
+	.msearch {
+		height: 100px;
+	}
+
+	.msearch button {
+		font-size: 24px;
+		width: 120px;
+		margin-top: 4%;
+	}
+}

@@ -14,7 +14,7 @@
 		<div class="msearch">
 			<form autocomplete="off" method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 				<label class="mtitle"><a href="/" style="color: white; text-decoration: none;">Search<span id="blue">TLD</span></a></label>
-				<input class="msearch" type="search" name="q" value="<?php echo $query; ?>" required>
+				<input type="search" name="q" value="<?php echo $query; ?>" required>
 				<input type="hidden" name="pg" value="0"> 
 				<div class="sbuttons">
 					<button <?php if ($type == 0) {
