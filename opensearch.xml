@@ -4,6 +4,6 @@
   <Description>Free and privacy respecting meta-search engine</Description>
   <InputEncoding>[UTF-8]</InputEncoding>
   <Image width="16" height="16" type="image/x-icon">https://search.schizo.gr/static/img/favicon.ico</Image>
-  <Url type="text/html" template="https://search.schizo.gr/search.php?q={searchTerms}&pg=0&tp=0"/>
+  <Url type="text/html" template="https://search.schizo.gr/search.php?q={searchTerms}&amp;pg=0&amp;tp=0"/>
   <moz:SearchForm>https://search.schizo.gr/</moz:SearchForm>
 </OpenSearchDescription>
