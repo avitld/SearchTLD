@@ -54,7 +54,7 @@
 				<br/>
 				<br/>
                 <button type="submit" name="save">Save</button>
-                <a href="index.php">Go Back</a>
+                <a href="/">Go Back</a>
 			</form>
 		</div>
 	</body>
