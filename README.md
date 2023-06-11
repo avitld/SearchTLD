@@ -41,7 +41,8 @@ If you run an instance of SearchTLD and want it placed on the list open an issue
 
 | URL | Country |
 | --- | --- |
-| [Official Instance](https://search.schizo.gr) | 🇩🇪 DE |
+| [[Official Instance]](https://searchtld.com) | 🇬🇧 UK |
+| [[schizo.gr]](https://search.schizo.gr) | 🇩🇪 DE |
 
 ### Instance Rules
 ```
