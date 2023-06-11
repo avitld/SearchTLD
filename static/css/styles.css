@@ -35,6 +35,7 @@ a:hover {
 	padding: 5px;
 	margin-left: 10px;
 	max-width: 600px;
+	overflow-x: hidden;
 }
 
 .indexform {
@@ -118,24 +119,50 @@ button[type=submit]:hover {
 
 .sbuttons {
 	padding: 2px;
-	margin: 0;
+	display: flex;
+	margin-left: 4px;
 }
 
 .sbuttons button {
 	margin-bottom: 0;
 	margin-top: 5px;
+	margin-bottom: 5px;
 	border: 0;
+	border-radius: 4px;
 	outline: 0;
 	width: 80px;
-	display: inline-block;
 	padding: 5px;
 	cursor: pointer;
 	background-color: var(--sb-color-bg-m);
 	color: var(--fg-color-m);
-}Ob
+	display: flex;
+  	align-items: center;
+	margin-right: 10px;
+}
+
+.sbuttons button:last-child {
+	margin-right: 4px;
+}
+
+.bimage {
+	max-height: 16px;
+	max-width: 16px;
+	margin-right: 4px;
+	filter: brightness(250%);
+}
 
 #active {
 	color: var(--a-color);
+}
+
+#active img {
+	filter: none;
+}
+
+.vidimg {
+	border-radius: 4px;
+	max-width: 35%;
+	max-height: 35%;
 }
 
 .image-container {
@@ -168,7 +195,7 @@ button[type=submit]:hover {
 	float: right;
 	max-width: 600px;
 	padding: 5px;
-	border-radius: 0;
+	border-radius: 4px;
 	background-color: var(--ib-color-bg);
 	margin-top: 10px;
 	margin-right: 20px;
@@ -196,11 +223,12 @@ hr {
 
 .simage-container {
 	max-height: 80px;
-	max-width: 20%;
+	max-width: 100px;
 	/*display: inline-block;*/
 	text-align: right;
 	float: right;
 	margin-right: 15px;
+	margin-top: 5px;
 	overflow: hidden;
 }
 
@@ -209,15 +237,17 @@ hr {
 }
 
 .simage-container img {
-	max-height: 80px;
+	max-height: 50px;
+	max-width: 100px;
+	border-radius: 4px;
 }
 
 /* Mobile stuff */
 
 @media screen and (max-width: 840px) {
-    body {
-      font-size: 20px;
-    }
+	.a-result {
+		font-size: 20px;
+	}
 
 	.infobox {
 		width: 100%;
@@ -231,7 +261,7 @@ hr {
 	}
 
 	.msearch button {
-		font-size: 24px;
+		font-size: 18px;
 		width: 120px;
 		margin-top: 4%;
 	}

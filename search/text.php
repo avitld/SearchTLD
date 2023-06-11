@@ -68,27 +68,32 @@
 			$result = $xpath->query('//div[contains(@class, "I6TXqe")]');
 			if ($result) {
 
-				$bannedQueries = array("Complementary results", "Local results");
-
 				$title = $xpath->query('.//h2', $result->item(0))->item(0);
 				@$title = $title->textContent;
+				$desc = $xpath->query('.//div[contains(@class, "kno-rdesc")]//span', $result->item(0))->item(0);
+				@$desc = $desc->textContent;
 
-				if (in_array($title, $bannedQueries)) {
+				if (strpos($title, $desc) === false) {
 					$nextH2 = $title->nextSibling;
 					while ($nextH2 !== null && $nextH2->nodeName !== "h2") {
 						$nextH2 = $nextH2->nextSibling;
 					}
 					
 					if ($nextH2 !== null) {
-						$nextH2Title = $nextH2->textContent;
+						$title = $nextH2->textContent;
+					} else {
+						$spanTitle = $xpath->query('.//span[contains(@class, "yKMVIe")]', $result->item(0))->item(0);
+						if ($spanTitle !== null) {
+							$title = $spanTitle->textContent;
+						}
 					}
-				} else {	
+				}
+
+				if ($title !== null && $desc !== null) {	
 					$smalltitle = $xpath->query('.//div[contains(@class, "wwUB2c")]//span', $result->item(0))->item(0);
 					@$smalltitle = $smalltitle->textContent;
-					$desc = $xpath->query('.//div[contains(@class, "kno-rdesc")]//span', $result->item(0))->item(0);
-					@$desc = $desc->textContent;
 					
-					if ($desc !== Null) {			
+					if ($desc !== Null) {	
 						echo "<div class=\"infobox\">";
 						echo "<div class=\"txtholder\">";
 						echo "<h2 class=\"infotitle\">" . $title . "</h2>";
@@ -125,11 +130,13 @@
 				$corr = $xpath->query('.//i', $result->item(0))->item(0);
 				@$corr = $corr->textContent;
 				
-				echo "<div class=\"correction-div\">";
-				echo "<p class=\"dym\">" . $span;
-				echo "<a class=\"correction\" href=\"/search.php?q=$corr&pg=0&tp=0\"> $corr</span>";
-				echo "</p>";
-				echo "</div>";
+				if ($span !== NULL && $corr !== NULL) {
+					echo "<div class=\"correction-div\">";
+					echo "<p class=\"dym\">" . $span;
+					echo "<a class=\"correction\" href=\"/search.php?q=$corr&pg=0&tp=0\"> $corr</span>";
+					echo "</p>";
+					echo "</div>";
+				}
 			}
 		}
 	}

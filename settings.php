@@ -2,17 +2,22 @@
 		<title>Settings - SearchTLD</title>
 	</head>
 	<body>
-		<div>
+		<div align="center">
 		<?php
+            if (isset($_REQUEST["reset"])) {
+                setcookie("lang", "en", time() + (10 * 365 * 24 * 60 * 60));
+                setcookie("theme", "dark", time() + (10 * 365 * 24 * 60 * 60));
+                setcookie("safesearch", "", time() - 1000);
+                header("Location: /");
+                die();
+            }
+
 			if (isset($_REQUEST["save"])) {
             	foreach($_POST as $key=>$value) {
-                	if (!empty($value)) {
-                    	setcookie($key, $value, time() + (86400 * 90), '/');
-                    }
-                    else {
-                    	setcookie($key, "", time() - 1000);
-                    }
+                    setcookie($key, $value, time() + (10 * 365 * 24 * 60 * 60), '/');
                 }
+                header("Location: /");
+                die();
            }
         ?>
 			<h1>SearchTLD Configuration</h1>
@@ -27,34 +32,23 @@
                     if (isset($_COOKIE["theme"]))
                     {
                         $theme_cookie = $_COOKIE["theme"];
-                        $themeValue = isset($_COOKIE["theme"]) ? $_COOKIE["theme"] : '';
-                        echo "Current theme: $theme_cookie";
+                        $themes = str_replace($theme_cookie . "\"", $theme_cookie . "\" selected", $themes);
                     }
 
                     echo $themes;
                 ?>
-                </select><?php $cValue = isset($_COOKIE["theme"]) ? $_COOKIE["theme"] : '';
-                                    echo "Current: $cValue"; ?><br/><br/>
+                </select><br/><br/>
                 <label for="safesearch">Safe Search:</label>
-                <select name="safesearch">
-                <?php
-                    $opts = "<option value=\"off\">Off</option>
-                    <option value=\"on\">On</option>";
-
-                    echo $opts;
-                ?>
-                </select>
-                    <?php $oValue = isset($_COOKIE["safesearch"]) ? $_COOKIE["safesearch"] : '';
-                    echo "Current: $oValue"; ?>
+                <input type="checkbox" name="safesearch" <?php echo isset($_COOKIE["safesearch"]) ? "checked"  : ""; ?>>
 				<br/>
 				<br/>
                 <label for="lang">Search Language:</label>
-                <input type="text" name="lang" placeholder="en, gr, cn, fr, etc." value="en"><?php $eValue = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : '';
-                                    echo "Current: $eValue"; ?>
+                <input type="text" name="lang" placeholder="en, gr, cn, fr, etc." value="<?php $eValue = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : '';
+                                    echo $eValue; ?>">
 				<br/>
 				<br/>
                 <button type="submit" name="save">Save</button>
-                <a href="/">Go Back</a>
+                <button type="submit" name="reset" style="border: 2px solid red;">Reset</button>
 			</form>
 		</div>
 	</body>

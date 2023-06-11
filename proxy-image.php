@@ -8,6 +8,5 @@
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	$thumbnail = curl_exec($ch);
 	header("Content-Type: image/png");
-	
 	echo $thumbnail;
 ?>
