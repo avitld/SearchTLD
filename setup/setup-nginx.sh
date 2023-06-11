@@ -25,16 +25,10 @@ echo "Your chosen domain: $value"
 
 sleep 1
 
-sed -i "s/sample/$value/g" sampleconfig
-mv sampleconfig $value
-
 if [[ ! -d "/etc/nginx/sites-available" ]]; then
 	echo "sites-available does not exist. Exiting.."
 	exit 1
 fi
-
-mv $value /etc/nginx/sites-available/
-ln -s /etc/nginx/sites-available/$value /etc/nginx/sites-enabled
 
 if [[ -f /etc/os-release ]]; then
 	source /etc/os-release
@@ -42,15 +36,35 @@ if [[ -f /etc/os-release ]]; then
 	if [[ $NAME == *"Fedora"* ]]; then
 		echo "Installing dependencies for Fedora GNU/Linux"
 		dnf install php-fpm php-xml php-curl php certbot python3-certbot-nginx
-	elif [[ $NAME == *"Debian"* ]]; then
+		sed -i "s/sample/$value/g" sampleconfig-fedora
+		mv sampleconfig-fedora $value
+		mv $value /etc/nginx/sites-available/
+		ln -s /etc/nginx/sites-available/$value /etc/nginx/sites-enabled
+		systemctl enable --now php-fpm
+	if [[ $NAME == *"Debian"* ]]; then
 		echo "Installing dependencies for Debian GNU/Linux"
 		apt install php-fpm php-xml php-curl php certbot python3-certbot-nginx
+		sed -i "s/sample/$value/g" sampleconfig-debian
+		mv sampleconfig-debian $value
+		mv $value /etc/nginx/sites-available/
+		ln -s /etc/nginx/sites-available/$value /etc/nginx/sites-enabled
+		systemctl enable php8.4-fpm
 	elif [[ $NAME == *"Ubuntu"* ]]; then
 		echo "Installing dependencies for Ubuntu GNU/Linux"
 		apt install php-fpm php-xml php-curl php certbot python3-certbot-nginx
+		sed -i "s/sample/$value/g" sampleconfig-debian
+		mv sampleconfig-debian $value
+		mv $value /etc/nginx/sites-available/
+		ln -s /etc/nginx/sites-available/$value /etc/nginx/sites-enabled
+		systemctl enable php8.4-fpm
 	elif [[ $NAME == *"Rocky"* ]]; then
 		echo "Installing dependencies for Rocky GNU/Linux"
 		dnf install php-fpm php-xml php-curl php certbot python3-certbot-nginx
+		sed -i "s/sample/$value/g" sampleconfig-fedora
+		mv sampleconfig-fedora $value
+		mv $value /etc/nginx/sites-available/
+		ln -s /etc/nginx/sites-available/$value /etc/nginx/sites-enabled
+		systemctl enable --now php-fpm
 	else
 		echo "$NAME not supported yet."
 		exit 1
@@ -86,7 +100,6 @@ mv $dir /var/www/SearchTLD
 
 echo "Setup finished, starting needed services.."
 
-systemctl enable --now php-fpm
 systemctl restart nginx
 
 if [[ $? -eq 0 ]]; then

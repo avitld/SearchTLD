@@ -17,14 +17,23 @@ and set up SearchTLD.
 Supported OS:
 
 ```
-Fedora GNU/Linux
+Fedora GNU/Linux -- Requires some modification in nginx.conf
 Debian GNU/Linux
 Ubuntu GNU/Linux
-Rocky GNU/Linux
+Rocky GNU/Linux -- Requires some modification in nginx.conf
 ```
 
 ### Dependencies
-You will need php, php-fpm, php-xml and php-curl to run SearchTLD
+You will need php 8.4, php-fpm, php-xml and php-curl to run SearchTLD
+
+#### Debian Based:
+```
+apt install php php-fpm php-xml php-curl
+```
+#### RHEL Based:
+```
+dnf install php php-fpm php-xml php-common
+```
 
 ## Instances
 

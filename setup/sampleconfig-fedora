@@ -1,0 +1,28 @@
+server {
+
+	listen 80;
+	listen [::]:80;
+	
+	root /var/www/SearchTLD;
+
+	index index.html index.htm index.php;
+
+	server_name sample;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+	location ~ .php$ {
+		fastcgi_pass 127.0.0.1:9000;
+		fastcgi_index index.php;
+		fastcgi_param SCRIPT_FILENAME /var/www/SearchTLD$fastcgi_script_name;
+		include fastcgi_params;
+	}
+	
+	location ~ /\.ht {
+		deny all;
+	}
+
+
+}
