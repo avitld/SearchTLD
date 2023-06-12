@@ -39,11 +39,11 @@
 
 			foreach ($results as $result) {
 				$title = $xpath->query('.//div[contains(@class, "n0jPhd")]', $result)->item(0);
-				@$title = $title->textContent;
+				@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
 				$link = $xpath->query('.//div[contains(@class, "MgUUmf")]//span', $result)->item(0);
 				@$link = $link->textContent;
 				$description = $xpath->query('.//div[contains(@class, "GI74Re")]', $result)->item(0);
-				@$description = $description->textContent;
+				@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
 				@$href = $result->getAttribute("href");
 
 				if (!in_array($href, $uniqueLinks)) {

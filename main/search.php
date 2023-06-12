@@ -3,13 +3,13 @@
 	require "other/header.php"; 
 	require "search/text/google.php";
 	
-	$query = $_REQUEST["q"];
+	$query = htmlspecialchars($_REQUEST["q"],ENT_QUOTES,'UTF-8');
 	$page = $_REQUEST["pg"];
 	$type = $_REQUEST["tp"];
 
-	$response = getHTML($query, $page);
+	$response = getHTML(htmlspecialchars($query), $page);
 ?>
-		<title><?php echo $query; ?> - SearchTLD</title>
+		<title><?php echo $query ?> - SearchTLD</title>
 	</head>
 	<body>
 		<div class="msearch">
@@ -20,7 +20,7 @@
 				<input type="hidden" name="tp" value="<?php echo $type ?>"> 
 			</form>
 			<form>
-				<input type="hidden" name="q" value="<?php echo $query; ?>">
+				<input type="hidden" name="q" value="<?php echo htmlspecialchars($query); ?>">
 				<input type="hidden" name="pg" value="<?php echo $page; ?>">
 				<div class="sbuttons">
 					<button <?php if ($type == 0) {

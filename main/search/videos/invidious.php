@@ -22,11 +22,11 @@
 		if ($response) {
 			foreach ($response as $vresponse) {
 				if ($vresponse["type"] == "video") {
-					$title = htmlspecialchars($vresponse["title"]);
+					$title = htmlspecialchars($vresponse["title"],ENT_QUOTES,'UTF-8');
 					$vurl = htmlspecialchars("https://yewtu.be/watch?v=" . $vresponse["videoId"]);
-					$uploader = htmlspecialchars($vresponse["author"]);
-					$views = htmlspecialchars($vresponse["viewCount"]);
-					$uploaded = htmlspecialchars($vresponse["publishedText"]);
+					$uploader = htmlspecialchars($vresponse["author"],ENT_QUOTES,'UTF-8');
+					$views = htmlspecialchars($vresponse["viewCount"],ENT_QUOTES,'UTF-8');
+					$uploaded = htmlspecialchars($vresponse["publishedText"],ENT_QUOTES,'UTF-8');
 					$thumbnail = htmlspecialchars($url . "/vi/" . explode("/vi/" ,$vresponse["videoThumbnails"][4]["url"])[1]);
 	
 					echo "<div class=\"a-result\">";

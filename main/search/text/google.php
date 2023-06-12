@@ -40,12 +40,12 @@
 			if ($results) {
 				foreach ($results as $result) {
 					$title = $xpath->query('.//h3', $result)->item(0);
-					@$title = $title->textContent;
+					@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
 					$linkel = $xpath->query('.//div[contains(@class, "yuRUbf")]', $result)->item(0);
 					$link = $xpath->query('.//a', $linkel)->item(0);
 					@$link = $link->getAttribute("href");
 					$description = $xpath->query('.//div[contains(@class, "VwiC3b")]', $result)->item(0);
-					@$description = $description->textContent;
+					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
 	
 					if (!preg_match('/^\/search\?q=/', $link) && !in_array($link, $uniqueLinks)) {
 							echo "<div class=\"a-result\">";

@@ -36,10 +36,10 @@
 					$encoded_url_sp1 = explode("==/", $encoded_url)[1];
 					$encoded_url_sp2 = explode("?position", $encoded_url_sp1)[0];
 					$url = urldecode(base64_decode($encoded_url_sp2));
-					@$url = htmlspecialchars($url);
+					@$url = htmlspecialchars($url,ENT_QUOTES,'UTF-8');
 					
 					$alt = $image->getAttribute("alt");
-					@$alt = htmlspecialchars($alt);
+					@$alt = htmlspecialchars($alt,ENT_QUOTES,'UTF-8');
 					$thumbnail_src = urlencode($image->getAttribute("src"));
 					@$thumbnail_src = urldecode(htmlspecialchars($thumbnail_src));
 					@$thumbnail_src = urlencode($thumbnail_src);
