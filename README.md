@@ -1,8 +1,8 @@
 # SearchTLD
 Privacy Respecting and Minimal Meta-Search Engine
 
-<img src="scr1.png" style="max-height: 50%; max-width: 50%;">
-<img src="scr2.png" style="max-height: 50%; max-width: 50%;">
+<img src=".github/scr1.png" style="max-height: 50%; max-width: 50%;">
+<img src=".github/scr2.png" style="max-height: 50%; max-width: 50%;">
 
 # Self Hosting
 If you want to self host then edit the *opensearch.xml* file according to your setup. <br/>
@@ -17,10 +17,10 @@ and set up SearchTLD.
 Supported OS:
 
 ```
-Fedora GNU/Linux -- Requires some modification in nginx.conf
+Fedora GNU/Linux
 Debian GNU/Linux
 Ubuntu GNU/Linux
-Rocky GNU/Linux -- Requires some modification in nginx.conf
+Rocky GNU/Linux
 ```
 
 ### Dependencies

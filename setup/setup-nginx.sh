@@ -26,8 +26,7 @@ echo "Your chosen domain: $value"
 sleep 1
 
 if [[ ! -d "/etc/nginx/sites-available" ]]; then
-	echo "sites-available does not exist. Exiting.."
-	exit 1
+	echo "sites-available does not exist. Using conf.d instead"
 fi
 
 if [[ -f /etc/os-release ]]; then
@@ -37,9 +36,8 @@ if [[ -f /etc/os-release ]]; then
 		echo "Installing dependencies for Fedora GNU/Linux"
 		dnf install php-fpm php-xml php-curl php certbot python3-certbot-nginx
 		sed -i "s/sample/$value/g" sampleconfig-fedora
-		mv sampleconfig-fedora $value
-		mv $value /etc/nginx/sites-available/
-		ln -s /etc/nginx/sites-available/$value /etc/nginx/sites-enabled
+		mv sampleconfig-fedora "$value.conf"
+		mv $value /etc/nginx/conf.d
 		systemctl enable --now php-fpm
 	if [[ $NAME == *"Debian"* ]]; then
 		echo "Installing dependencies for Debian GNU/Linux"
@@ -48,7 +46,7 @@ if [[ -f /etc/os-release ]]; then
 		mv sampleconfig-debian $value
 		mv $value /etc/nginx/sites-available/
 		ln -s /etc/nginx/sites-available/$value /etc/nginx/sites-enabled
-		systemctl enable php8.4-fpm
+		systemctl enable --now php8.4-fpm
 	elif [[ $NAME == *"Ubuntu"* ]]; then
 		echo "Installing dependencies for Ubuntu GNU/Linux"
 		apt install php-fpm php-xml php-curl php certbot python3-certbot-nginx
@@ -56,14 +54,13 @@ if [[ -f /etc/os-release ]]; then
 		mv sampleconfig-debian $value
 		mv $value /etc/nginx/sites-available/
 		ln -s /etc/nginx/sites-available/$value /etc/nginx/sites-enabled
-		systemctl enable php8.4-fpm
+		systemctl enable --now php8.4-fpm
 	elif [[ $NAME == *"Rocky"* ]]; then
 		echo "Installing dependencies for Rocky GNU/Linux"
 		dnf install php-fpm php-xml php-curl php certbot python3-certbot-nginx
 		sed -i "s/sample/$value/g" sampleconfig-fedora
-		mv sampleconfig-fedora $value
-		mv $value /etc/nginx/sites-available/
-		ln -s /etc/nginx/sites-available/$value /etc/nginx/sites-enabled
+		mv sampleconfig-fedora "$value.conf"
+		mv $value /etc/nginx/conf.d/
 		systemctl enable --now php-fpm
 	else
 		echo "$NAME not supported yet."
@@ -76,6 +73,7 @@ fi
 
 dir="$(dirname "$(readlink -f "$0")")"
 dir="$(dirname "$dir")"
+dir="$dir/main"
 
 read -p "Is $dir the correct location of SearchTLD?" loc
 
@@ -84,6 +82,10 @@ if [[ $loc == [yY] ]]; then
 else
 	read -p "Enter the correct path of SearchTLD: " loc
 fi
+
+mv $dir /var/www/SearchTLD
+echo "Starting nginx..."
+systemctl restart nginx
 
 echo "Generating certificate for $value"
 
@@ -96,11 +98,7 @@ else
 	exit 1
 fi
 
-mv $dir /var/www/SearchTLD
-
-echo "Setup finished, starting needed services.."
-
-systemctl restart nginx
+systemctl reload nginx
 
 if [[ $? -eq 0 ]]; then
 	clear
