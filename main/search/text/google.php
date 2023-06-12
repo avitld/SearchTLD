@@ -104,7 +104,7 @@
 						echo "<span class=\"minititle\">" . $smalltitle . "</span>";
 						echo "</div>";
 						if ($title !== "GNU") {
-							require "search/image.php";
+							require "search/images/qwant.php";
 							$iresponse = getiHTML($title, 0);
 							send_single_image_response($iresponse);
 						} else {

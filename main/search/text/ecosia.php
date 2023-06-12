@@ -42,7 +42,9 @@
 					$title = $xpath->query('.//h2[contains(@class, "result-title__heading")]', $result)->item(0);
 					@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
 					$link = $xpath->query('.//a[contains(@class, "result__link")]', $result)->item(0);
-					@$link = $link->getAttribute("href");
+					if ($link) {
+						@$link = $link->getAttribute("href");
+					}
 					$description = $xpath->query('.//p[@class="web-result__description"]', $result)->item(0);
 					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
 	
