@@ -48,7 +48,7 @@
 			<?php
 				switch ($type) {
 					case 0:
-						if ($page > 0) {
+						if ($page > 2) {
 							require "search/text/ecosia.php";
 							$response = geteHTML($query, $page);
 							send_text_sec_response($response);

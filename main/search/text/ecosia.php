@@ -24,7 +24,8 @@
 		
 		$response = curl_exec($ch);
 
-		curl_close($ch);
+		sleep(5);
+
 		return $response;
 	}
 
