@@ -1,6 +1,10 @@
 # SearchTLD
 Privacy Respecting and Minimal Meta-Search Engine
 
+
+
+<a href="https://github.com/avitld/SearchTLD/blob/main/LICENSE"><img src="https://img.shields.io/github/license/avitld/SearchTLD?color=purple&style=for-the-badge"></a>
+
 <img src=".github/scr1.png" style="max-height: 50%; max-width: 50%;">
 <img src=".github/scr2.png" style="max-height: 50%; max-width: 50%;">
 
