@@ -37,24 +37,28 @@
 			$results = $xpath->query('//div[contains(@class, "g")]');
 			$uniqueLinks = [];
 
-			foreach ($results as $result) {
-				$title = $xpath->query('.//h3', $result)->item(0);
-				@$title = $title->textContent;
-				$linkel = $xpath->query('.//div[contains(@class, "yuRUbf")]', $result)->item(0);
-				$link = $xpath->query('.//a', $linkel)->item(0);
-				@$link = $link->getAttribute("href");
-				$description = $xpath->query('.//div[contains(@class, "VwiC3b")]', $result)->item(0);
-				@$description = $description->textContent;
-
-				if (!preg_match('/^\/search\?q=/', $link) && !in_array($link, $uniqueLinks)) {
-		        		echo "<div class=\"a-result\">";
-		        		echo "	<a href=\"$link\" class=\"title\">$title</a><br>";
-		        		echo "  <a href=\"$link\" class=\"mlink\">$link</a>";
-		        		echo "  <p class=\"description\">$description</a>";
-		        		echo "</div>";
-
-		        		$uniqueLinks[] = $link;
+			if ($results) {
+				foreach ($results as $result) {
+					$title = $xpath->query('.//h3', $result)->item(0);
+					@$title = $title->textContent;
+					$linkel = $xpath->query('.//div[contains(@class, "yuRUbf")]', $result)->item(0);
+					$link = $xpath->query('.//a', $linkel)->item(0);
+					@$link = $link->getAttribute("href");
+					$description = $xpath->query('.//div[contains(@class, "VwiC3b")]', $result)->item(0);
+					@$description = $description->textContent;
+	
+					if (!preg_match('/^\/search\?q=/', $link) && !in_array($link, $uniqueLinks)) {
+							echo "<div class=\"a-result\">";
+							echo "	<a href=\"$link\" class=\"title\">$title</a><br>";
+							echo "  <a href=\"$link\" class=\"mlink\">$link</a>";
+							echo "  <p class=\"description\">$description</a>";
+							echo "</div>";
+	
+							$uniqueLinks[] = $link;
+					}
 				}
+			} else {
+				echo "<p class=\"dym\">No results found.</p>";
 			}
 		}
 	}

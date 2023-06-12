@@ -1,7 +1,7 @@
 
 <?php 
 	require "other/header.php"; 
-	require "search/text.php";
+	require "search/text/google.php";
 	
 	$query = $_REQUEST["q"];
 	$page = $_REQUEST["pg"];
@@ -48,22 +48,27 @@
 			<?php
 				switch ($type) {
 					case 0:
-						send_correction($response);
-						send_text_response($response);
+						if ($page > 0) {
+							require "search/text/ecosia.php";
+							$response = geteHTML($query, $page);
+							send_text_sec_response($response);
+						} else {
+							send_correction($response);
+							send_text_response($response);
+						}
 						break;
-
 					case 1:
-						require "search/image.php";
+						require "search/images/qwant.php";
 						$response = getiHTML($query, $page);
 						send_image_response($response);
 						break;
 					case 2:
-						require "search/video.php";
+						require "search/videos/invidious.php";
 						$response = getvJson($query);
 						send_video_response($response);
 						break;
 					case 3:
-						require "search/news.php";
+						require "search/news/google.php";
 						$response = getnHTML($query, $page);
 						send_title($response);
 						send_news_response($response);
@@ -73,6 +78,22 @@
 						break;
 				}
 			?>
+			<div class="rbuttons">
+				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+					<input name="q" value="<?php echo $query; ?>" type="hidden">
+					<?php
+						if (intval($type) !== 1 && intval($type) !== 2) {
+							if ($page > 0) {
+								echo "<button class=\"pagebtn\" type=\"submit\" name=\"pg\" value=" . intval($page) - 1 . ">Previous Page</button>";
+							}
+							if ($page < 5) {
+								echo "<button class=\"pagebtn\" type=\"submit\" name=\"pg\" value=" . intval($page) + 1 . ">Next Page</button>";
+							}
+						}
+					?>
+					<input name="tp" value="<?php echo $type; ?>" type="hidden">
+				</form>
+			</div>
 		</div>
 
 <?php require "other/footer.php"; ?>

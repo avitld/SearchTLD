@@ -23,7 +23,7 @@
 			foreach ($response as $vresponse) {
 				if ($vresponse["type"] == "video") {
 					$title = htmlspecialchars($vresponse["title"]);
-					$vurl = htmlspecialchars("https://yt.revvy.de/watch?v=" . $vresponse["videoId"]);
+					$vurl = htmlspecialchars("https://yewtu.be/watch?v=" . $vresponse["videoId"]);
 					$uploader = htmlspecialchars($vresponse["author"]);
 					$views = htmlspecialchars($vresponse["viewCount"]);
 					$uploaded = htmlspecialchars($vresponse["publishedText"]);
