@@ -63,6 +63,28 @@
 		}
 	}
 
+	function check_for_fallback($response) {
+		if (!empty($response)) {
+			$dom = new DOMDocument();
+			@$dom->loadHTML($response);
+			$xpath = new DOMXPath($dom);
+	
+			$results = $xpath->query('//div[contains(@class, "g")]');
+	
+			if ($results->length > 0) {
+				$gotresponse = true;
+				return $gotresponse;
+			} else {
+				$gotresponse = false;
+				return $gotresponse;
+			}
+		} else {
+			$gotresponse = false;
+			return $gotresponse;
+		}
+	}
+	
+
 	function send_infobox($response) {
 		if ($response) {
 			$dom = new DOMDocument();

@@ -1,18 +1,20 @@
 <?php
-	function geteHTML($query, $page) {
-		$page = intval($page) - 1;
+	function getdHTML($query, $page) {
+		if (intval($page) > 1) {
+			$page = intval($page) - 1;
+		}
 
-		$url = "https://www.ecosia.org/search?q=" . urlencode($query) . "&p=$page";
+		$url = "https://html.duckduckgo.com/html/?q=" . $query . "&s=" . $page;
 
 		if (isset($_COOKIE["lang"])) {
 			$lang = trim(htmlspecialchars($_COOKIE["lang"]));
-			$url .= "&hl=$lang&sl=$lang";
+			$url .= "&lr=lang_$lang&hl=$lang";
 		} else {
-			$url .= "&hl=en&sl=en&lr=lang_en";
+			$url .= "&lr=lang_en&sl=en&hl=en";
 		}
 
 		if (isset($_COOKIE["safesearch"])) {
-			$url .= "&safe=active";
+			$url .= "&kp=-2";
 		}
 		
 		$ch = curl_init($url);
@@ -24,8 +26,7 @@
 		
 		$response = curl_exec($ch);
 
-		sleep(5);
-
+		curl_close($ch);
 		return $response;
 	}
 
@@ -35,18 +36,18 @@
 			@$dom->loadHTML($response);
 			$xpath = new DOMXPath($dom);
 
-            $results = $xpath->query('//div[contains(@class, "mainline__result-wrapper")]');
+            $results = $xpath->query('//div[contains(@class, "result")]');
             $uniqueLinks = [];
             
 			if ($results) {
 				foreach ($results as $result) {
-					$title = $xpath->query('.//h2[contains(@class, "result-title__heading")]', $result)->item(0);
+					$title = $xpath->evaluate('.//h2[contains(@class, "result__title")]', $result)->item(0);
 					@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
-					$link = $xpath->query('.//a[contains(@class, "result__link")]', $result)->item(0);
+					$link = $xpath->evaluate('.//a[contains(@class, "result__url")]', $result)->item(0);
 					if ($link) { // Required for some reason..?
-						@$link = $link->getAttribute("href");
+						@$link = $link->textContent;
 					}
-					$description = $xpath->query('.//p[@class="web-result__description"]', $result)->item(0);
+					$description = $xpath->evaluate('.//a[@class="result__snippet"]', $result)->item(0);
 					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
 	
 					if (!in_array($link, $uniqueLinks)) {

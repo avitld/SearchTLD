@@ -48,13 +48,25 @@
 			<?php
 				switch ($type) {
 					case 0:
-						if ($page > 2) {
+						if ($page > 5) {
 							require "search/text/brave.php";
 							$response = getbHTML($query, $page);
 							send_text_th_response($response);
+						} elseif ($page < 5 && $page > 1) {
+							require "search/text/ddg.php";
+							$response = getdHTML($query, $page);
+							send_text_sec_response($response);
 						} else {
-							send_correction($response);
-							send_text_response($response);
+							$fallback = check_for_fallback($response);
+							echo $fallback;
+							if ($fallback){
+								send_correction($response);
+								send_text_response($response);
+							} else {
+								require "search/text/ddg.php";
+								$response = getdHTML($query, $page);
+								send_text_sec_response($response);
+							}
 						}
 						break;
 					case 1:
@@ -86,7 +98,7 @@
 							if ($page > 0) {
 								echo "<button class=\"pagebtn\" type=\"submit\" name=\"pg\" value=" . intval($page) - 1 . ">Previous Page</button>";
 							}
-							if ($page < 5) {
+							if ($page < 10) {
 								echo "<button class=\"pagebtn\" type=\"submit\" name=\"pg\" value=" . intval($page) + 1 . ">Next Page</button>";
 							}
 						}
