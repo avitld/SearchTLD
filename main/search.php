@@ -49,9 +49,9 @@
 				switch ($type) {
 					case 0:
 						if ($page > 2) {
-							require "search/text/ecosia.php";
-							$response = geteHTML($query, $page);
-							send_text_sec_response($response);
+							require "search/text/brave.php";
+							$response = getbHTML($query, $page);
+							send_text_th_response($response);
 						} else {
 							send_correction($response);
 							send_text_response($response);

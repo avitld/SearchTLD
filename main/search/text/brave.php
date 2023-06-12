@@ -1,19 +1,21 @@
 <?php
-	function geteHTML($query, $page) {
-		$page = intval($page) - 1;
+	function getbHTML($query, $page) {
+		$page = intval($page) - 2;
 
-		$url = "https://www.ecosia.org/search?q=" . urlencode($query) . "&p=$page";
+		$url = "https://search.brave.com/search?q=" . urlencode($query) . "&offset=$page";
 
 		if (isset($_COOKIE["lang"])) {
 			$lang = trim(htmlspecialchars($_COOKIE["lang"]));
-			$url .= "&hl=$lang&sl=$lang";
+			$url .= "&language=$lang";
 		} else {
-			$url .= "&hl=en&sl=en&lr=lang_en";
+			$url .= "&language=en";
 		}
 
 		if (isset($_COOKIE["safesearch"])) {
-			$url .= "&safe=active";
+			$url .= "&safe=strict";
 		}
+
+        $url .= "&source=web"; // Measure to prevent being blocked
 		
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36');
@@ -29,24 +31,24 @@
 		return $response;
 	}
 
-	function send_text_sec_response($response) {
+	function send_text_th_response($response) {
 		if (!empty($response)) {
 			$dom = new DOMDocument();
 			@$dom->loadHTML($response);
 			$xpath = new DOMXPath($dom);
 
-            $results = $xpath->query('//div[contains(@class, "mainline__result-wrapper")]');
+            $results = $xpath->query('//div[contains(@class, "snippet")]');
             $uniqueLinks = [];
             
 			if ($results) {
 				foreach ($results as $result) {
-					$title = $xpath->query('.//h2[contains(@class, "result-title__heading")]', $result)->item(0);
+					$title = $xpath->query('.//span[contains(@class, "snippet-title")]', $result)->item(0);
 					@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
-					$link = $xpath->query('.//a[contains(@class, "result__link")]', $result)->item(0);
-					if ($link) { // Required for some reason..?
+					$link = $xpath->query('.//a[contains(@class, "result-header")]', $result)->item(0);
+					if ($link) { // Required for some reason... again...
 						@$link = $link->getAttribute("href");
 					}
-					$description = $xpath->query('.//p[@class="web-result__description"]', $result)->item(0);
+					$description = $xpath->query('.//p[@class="snippet-description"]', $result)->item(0);
 					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
 	
 					if (!in_array($link, $uniqueLinks)) {
