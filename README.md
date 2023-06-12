@@ -11,19 +11,13 @@ Privacy Respecting and Minimal Meta-Search Engine
 # Self Hosting
 There are [guides to self hosting on our wiki!](https://github.com/avitld/SearchTLD/wiki)
 
-### Dependencies
-You will need php 8.4, php-fpm, php-xml and php-curl to run SearchTLD
+# Join our IRC!
 
-#### Debian Based:
-```
-apt install php php-fpm php-xml php-curl
-```
-#### RHEL Based:
-```
-dnf install php php-fpm php-xml php-common
-```
+<b>We now have a #IRC channel on Freenode!<br/>
+ Just register an account on Freenode and ``/join #searchtld``
+  </b>
 
-## Instances
+# Instances
 
 If you run an instance of SearchTLD and want it placed on the list open an issue.
 
