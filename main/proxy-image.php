@@ -1,9 +1,4 @@
 <?php
-
-	function startsWith($base, $word) {
-    	return substr($base, 0, strlen($word)) === $word;
-	}
-
 	$url = $_REQUEST["url"];
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_URL, $url);
@@ -13,7 +8,11 @@
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	$thumbnail = curl_exec($ch);
 	header("Content-Type: image/png");
-	if (startsWith($url, 'https') || startsWith($url, 'http')) {
+	if (startsWith($url, 'https://') || startsWith($url, 'http://')) {
 		echo $thumbnail;
+	}
+
+	function startsWith($base, $word) {
+    	return substr($base, 0, strlen($word)) === $word;
 	}
 ?>
