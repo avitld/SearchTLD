@@ -16,7 +16,7 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-git clone https://github.com/avitld/SearchTLD.git tempstld
+git clone https://git.searchtld.com/Avitld/SearchTLD.git tempstld
 rm -rf /var/www/SearchTLD
 mv tempstld/main /var/www/SearchTLD
 rm -rf tempstld
