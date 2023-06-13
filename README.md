@@ -1,11 +1,7 @@
 # SearchTLD
 Privacy Respecting and Minimal Meta-Search Engine
 
-# Moved to gitea
-<b>We have moved to gitea, and now this repo will be inactive.
-  we have included a script in ``setup/`` that replaces 'main' with the active version from gitea, 
-  if you want to continue cloning from git.
-</b>
+
 
 <a href="https://github.com/avitld/SearchTLD/blob/main/LICENSE"><img src="https://img.shields.io/github/license/avitld/SearchTLD?color=purple&style=for-the-badge"></a>
 
@@ -21,14 +17,21 @@ There are [guides to self hosting on our wiki!](https://git.searchtld.com/Avitld
  Just register an account on Freenode and ``/join #searchtld``
   </b>
 
+# Speed comparison: Google vs SearchTLD
+
+|  | SearchTLD | Google |
+| --- | --- | --- |
+| Requests | 14 | 216 |
+| Time till website fully loaded | 2.04s | 42.66 s |
+
 # Instances
 
 If you run an instance of SearchTLD and want it placed on the list open an issue.
 
 | URL | Country |
 | --- | --- |
-| [[Official Instance]](https://searchtld.com) | 🇬🇧 UK |
-| [[schizo.gr]](https://search.schizo.gr) | 🇩🇪 DE |
+| [searchtld.com](https://searchtld.com) | 🇬🇧 UK |
+| [search.schizo.gr](https://search.schizo.gr) | 🇩🇪 DE |
 
 ### Instance Rules
 ```
