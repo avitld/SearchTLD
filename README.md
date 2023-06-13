@@ -17,14 +17,21 @@ There are [guides to self hosting on our wiki!](https://git.searchtld.com/Avitld
  Just register an account on Freenode and ``/join #searchtld``
   </b>
 
+Speed comparison: Google vs SearchTLD
+
+|  | SearchTLD | Google |
+| --- | --- | --- |
+| Requests | 14 | 216 |
+| Time till website fully loaded | 2.04s | 42.66 s |
+
 # Instances
 
 If you run an instance of SearchTLD and want it placed on the list open an issue.
 
 | URL | Country |
 | --- | --- |
-| [[Official Instance]](https://searchtld.com) | 🇬🇧 UK |
-| [[schizo.gr]](https://search.schizo.gr) | 🇩🇪 DE |
+| [searchtld.com](https://searchtld.com) | 🇬🇧 UK |
+| [search.schizo.gr](https://search.schizo.gr) | 🇩🇪 DE |
 
 ### Instance Rules
 ```
