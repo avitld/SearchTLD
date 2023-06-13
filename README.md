@@ -1,6 +1,10 @@
 # SearchTLD
 Privacy Respecting and Minimal Meta-Search Engine
 
+# Migration Notes
+I have transferred over to https://git.searchtld.com/Avitld/SearchTLD and now this repository is just a mirror.
+I recommend you use the gitea repo instead.
+
 
 
 <a href="https://github.com/avitld/SearchTLD/blob/main/LICENSE"><img src="https://img.shields.io/github/license/avitld/SearchTLD?color=purple&style=for-the-badge"></a>
