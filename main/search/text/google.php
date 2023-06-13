@@ -71,16 +71,26 @@
 	
 			$results = $xpath->query('//div[contains(@class, "g")]');
 	
-			if ($results->length > 0) {
-				$gotresponse = true;
-				return $gotresponse;
-			} else {
-				$gotresponse = false;
-				return $gotresponse;
+			if (!$results->length > 0) {
+				return false;
 			}
+
+			foreach ($results as $result) {
+				$linkel = $xpath->query('.//div[contains(@class, "yuRUbf")]', $result)->item(0);
+				$link = $xpath->query('.//a', $linkel)->item(0);
+				@$link = $link->getAttribute("href");
+
+				if ($link == "#") {
+					return false;
+				} else {
+					return true;
+				}
+
+				break;
+			}
+
 		} else {
-			$gotresponse = false;
-			return $gotresponse;
+			return false;
 		}
 	}
 	

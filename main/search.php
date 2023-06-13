@@ -58,7 +58,6 @@
 							send_text_sec_response($response);
 						} else {
 							$fallback = check_for_fallback($response);
-							echo $fallback;
 							if ($fallback){
 								send_correction($response);
 								send_text_response($response);
