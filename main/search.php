@@ -4,8 +4,8 @@
 	require "search/text/google.php";
 	
 	$query = htmlspecialchars($_REQUEST["q"],ENT_QUOTES,'UTF-8');
-	$page = $_REQUEST["pg"];
-	$type = $_REQUEST["tp"];
+	$page = htmlspecialchars($_REQUEST["pg"],ENT_QUOTES,'UTF-8');
+	$type = htmlspecialchars($_REQUEST["tp"],ENT_QUOTES,'UTF-8');
 
 	$response = getHTML(htmlspecialchars($query), $page);
 ?>
