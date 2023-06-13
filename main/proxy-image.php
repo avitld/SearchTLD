@@ -8,7 +8,7 @@
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	$thumbnail = curl_exec($ch);
 	header("Content-Type: image/png");
-	if (startsWith($url, 'https://') || startsWith($url, 'http://')) {
+	if (startsWith($url, 'https') || startsWith($url, 'http')) {
 		echo $thumbnail;
 	}
 
