@@ -9,7 +9,7 @@ Privacy Respecting and Minimal Meta-Search Engine
 <img src=".github/scr2.png" style="max-height: 50%; max-width: 50%;">
 
 # Self Hosting
-There are [guides to self hosting on our wiki!](https://github.com/avitld/SearchTLD/wiki)
+There are [guides to self hosting on our wiki!](https://git.searchtld.com/Avitld/SearchTLD/wiki)
 
 # Join our IRC!
 

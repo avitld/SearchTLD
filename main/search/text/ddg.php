@@ -46,6 +46,7 @@
 					$link = $xpath->evaluate('.//a[contains(@class, "result__url")]', $result)->item(0);
 					if ($link) { // Required for some reason..?
 						@$link = $link->textContent;
+						$link = "https://" . trim($link);
 					}
 					$description = $xpath->evaluate('.//a[@class="result__snippet"]', $result)->item(0);
 					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
