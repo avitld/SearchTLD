@@ -17,7 +17,7 @@ There are [guides to self hosting on our wiki!](https://git.searchtld.com/Avitld
  Just register an account on Freenode and ``/join #searchtld``
   </b>
 
-Speed comparison: Google vs SearchTLD
+# Speed comparison: Google vs SearchTLD
 
 |  | SearchTLD | Google |
 | --- | --- | --- |
