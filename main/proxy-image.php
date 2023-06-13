@@ -11,4 +11,8 @@
 	if (startsWith($url, 'https://') || startsWith($url, 'http://')) {
 		echo $thumbnail;
 	}
+
+	function startsWith($base, $word) {
+    	return substr($base, 0, strlen($word)) === $word;
+	}
 ?>
