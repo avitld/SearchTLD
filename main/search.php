@@ -23,9 +23,9 @@
 				<input type="hidden" name="q" value="<?php echo htmlspecialchars($query); ?>">
 				<input type="hidden" name="pg" value="<?php echo $page; ?>">
 				<div class="sbuttons">
-					<button <?php if ($type == 0) {
+					<button name="tp" <?php if ($type == 0) {
 						echo "id=\"active\"";
-					} ?> name="tp" value="0"><img src="/static/img/text.png" class="bimage"/>Text</button>
+					} ?> value="0"><img src="/static/img/text.png" class="bimage"/>Text</button>
 					<button name="tp" <?php if ($type == 1) {
 						echo "id=\"active\"";
 					} ?> value="1"><img src="/static/img/image.png" class="bimage"/>Images</button>
@@ -35,7 +35,9 @@
 					<button name="tp" <?php if ($type == 3) {
 						echo "id=\"active\"";
 					} ?> value="3"><img src="/static/img/news.png" class="bimage"/>News</button>
-					<!-- <button name="tp" value="4"><img src="/static/img/files.png" class="bimage"/>Files</button> -->
+					<button name="tp" <?php if ($type == 4) {
+						echo "id=\"active\"";
+					} ?> value="4"><img src="/static/img/forums.png" class="bimage"/>Forums</button>
 				</div>
 			</form>
 		</div>
@@ -64,7 +66,14 @@
 							} else {
 								require "search/text/ddg.php";
 								$response = getdHTML($query, $page);
-								send_text_sec_response($response);
+								$fallback = ddgdown($response);
+								if ($fallback) {
+									send_text_sec_response($response);
+								} else {
+									require "search/text/brave.php";
+									$response = getbHTML($query, $page);
+									send_text_th_response($response);
+								}
 							}
 						}
 						break;
@@ -84,6 +93,12 @@
 						send_title($response);
 						send_news_response($response);
 						break;
+					case 4:
+						require "search/forums/reddit.php";
+						$response = getrHTML($query);
+						send_red_response($response);
+						//echo $response;
+						break;
 					default:
 						send_text_response($response);
 						break;
@@ -93,7 +108,7 @@
 				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
 					<input name="q" value="<?php echo $query; ?>" type="hidden">
 					<?php
-						if (intval($type) !== 1 && intval($type) !== 2) {
+						if (intval($type) !== 1 && intval($type) !== 2 && intval($type) !== 4) {
 							if ($page > 0) {
 								echo "<button class=\"pagebtn\" type=\"submit\" name=\"pg\" value=" . intval($page) - 1 . ">Previous Page</button>";
 							}

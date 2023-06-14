@@ -38,6 +38,11 @@ a:hover {
 	overflow-x: hidden;
 }
 
+.flogo {
+	height: 16px;
+	margin-right: 3px;
+}
+
 .indexform {
 	text-align: center;
 	vertical-align: middle;
@@ -286,7 +291,7 @@ hr {
 	}
 
 	.msearch button {
-		font-size: 18px;
+		font-size: 16px;
 		width: 120px;
 		margin-top: 4%;
 	}

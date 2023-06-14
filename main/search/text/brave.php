@@ -1,6 +1,8 @@
 <?php
 	function getbHTML($query, $page) {
-		$page = intval($page) - 2;
+		if (intval($page) > 5) {
+			$page = intval($page) - 5;
+		}
 
 		$url = "https://search.brave.com/search?q=" . urlencode($query) . "&offset=$page";
 

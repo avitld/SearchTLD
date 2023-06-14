@@ -93,7 +93,6 @@
 			return false;
 		}
 	}
-	
 
 	function send_infobox($response) {
 		if ($response) {
@@ -130,23 +129,25 @@
 					@$smalltitle = $smalltitle->textContent;
 					
 					if ($desc !== Null) {	
-						echo "<div class=\"infobox\">";
-						echo "<div class=\"txtholder\">";
-						echo "<h2 class=\"infotitle\">" . $title . "</h2>";
-						echo "<span class=\"minititle\">" . $smalltitle . "</span>";
-						echo "</div>";
-						if ($title !== "GNU") {
-							require "search/images/qwant.php";
-							$iresponse = getiHTML($title, 0);
-							send_single_image_response($iresponse);
-						} else {
-							echo "<div class=\"simage-container\">";
-							echo "	<img src=\"/static/img/gnu.png\">";
+						if (strpos($title, $desc) !== false) {
+							echo "<div class=\"infobox\">";
+							echo "<div class=\"txtholder\">";
+							echo "<h2 class=\"infotitle\">" . $title . "</h2>";
+							echo "<span class=\"minititle\">" . $smalltitle . "</span>";
+							echo "</div>";
+							if ($title !== "GNU") {
+								require "search/images/qwant.php";
+								$iresponse = getiHTML($title, 0);
+								send_single_image_response($iresponse);
+							} else {
+								echo "<div class=\"simage-container\">";
+								echo "	<img src=\"/static/img/gnu.png\">";
+								echo "</div>";
+							}
+							echo "<hr>";
+							echo "<p class=\"infodesc\">" . $desc . "</p>";
 							echo "</div>";
 						}
-						echo "<hr>";
-						echo "<p class=\"infodesc\">" . $desc . "</p>";
-						echo "</div>";
 					}
 				}
 			}

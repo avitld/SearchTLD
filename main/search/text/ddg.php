@@ -51,7 +51,7 @@
 					$description = $xpath->evaluate('.//a[@class="result__snippet"]', $result)->item(0);
 					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
 	
-					if (!in_array($link, $uniqueLinks)) {
+					if (!in_array($link, $uniqueLinks) && $title->length > 0) {
 							echo "<div class=\"a-result\">";
 							echo "	<a href=\"$link\" class=\"title\">$title</a><br>";
 							echo "  <a href=\"$link\" class=\"mlink\">$link</a>";
@@ -64,6 +64,36 @@
 			} else {
 				echo "<p class=\"dym\">No results found.</p>";
 			}
+		}
+	}
+
+	function ddgdown($response) {
+		if (!empty($response)) {
+			$dom = new DOMDocument();
+			@$dom->loadHTML($response);
+			$xpath = new DOMXPath($dom);
+	
+			$results = $xpath->query('//div[contains(@class, "result")]');
+	
+			if (!$results->length > 0) {
+				return false;
+			}
+
+			foreach ($results as $result) {
+				$title = $xpath->evaluate('.//h2[contains(@class, "result__title")]', $result)->item(0);
+				@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
+
+				if ($title->length > 1) {
+					return true;
+				} else {
+					return false;
+				}
+
+				break;
+			}
+
+		} else {
+			return false;
 		}
 	}
 ?>
