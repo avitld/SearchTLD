@@ -1,0 +1,50 @@
+body {
+	background-color: rgb(15,15,15);
+	color: rgb(255, 255, 255);
+}
+
+h1, h2, h3 {
+	filter: drop-shadow(0px 0px 0.06em white);
+}
+
+.title {
+	text-decoration: none;
+}
+
+.desc {
+	margin-bottom: 0;
+}
+
+.note {
+	color: purple;
+	opacity: 0.6;
+}
+
+hr {
+	color: purple;
+	opacity: 0.2;
+}
+
+.vdiv {
+	max-width: 200px;
+	padding: 10px;
+	height: 300px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: rgba(255, 255, 255, 0.03);
+}
+
+a {
+	color: white;
+}
+
+.vdiv ul {
+	text-align: center;
+	padding: 0;
+	list-style-type: none;
+}
+
+ul {
+	list-style: disc;
+}
