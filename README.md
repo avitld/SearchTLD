@@ -8,6 +8,10 @@ Privacy Respecting and Minimal Meta-Search Engine
 <img src=".github/scr1.png" style="max-height: 50%; max-width: 50%;">
 <img src=".github/scr2.png" style="max-height: 50%; max-width: 50%;">
 
+# Moved to gitea
+SearchTLD has moved it's repo from <a href="https://git.searchtld.com/Avitld/SearchTLD">github to gitea</a>, please use the gitea repo as this will stop receiving updates.
+We have provided a script in ``setup/`` which will replace the ``main/`` folder with the one from gitea.
+
 # Self Hosting
 There are [guides to self hosting on our wiki!](https://git.searchtld.com/Avitld/SearchTLD/wiki)
 
