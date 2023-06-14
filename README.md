@@ -24,6 +24,10 @@ There are [guides to self hosting on our wiki!](https://git.searchtld.com/Avitld
 | Requests | 14 | 216 |
 | Time till website fully loaded | 2.04s | 42.66 s |
 
+# Read our news!
+We now have a page dedicated to news about the website, including the source code of how we make the pages.
+It's available [here!](https://blog.searchtld.com)
+
 # Instances
 
 If you run an instance of SearchTLD and want it placed on the list open an issue.
