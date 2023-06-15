@@ -19,10 +19,10 @@ There are [guides to self hosting on our wiki!](https://git.searchtld.com/Avitld
 
 # Speed comparison: Google vs SearchTLD
 
-|  | SearchTLD | Google |
-| --- | --- | --- |
-| Requests | 14 | 216 |
-| Time till website fully loaded | 2.04s | 42.66 s |
+|  | SearchTLD | Google | DuckDuckGo | Bing | Yahoo | Yandex |
+| --- | --- | --- | --- | --- | --- | --- |
+| Requests | 14 | 216 | 50 | 330 | 50 | 139 |
+| Time till website fully loaded | 2.04s | 42.66 s | 2.27s | 5.91s | 5.63s | 46.62 |
 
 # Read our news!
 We now have a page dedicated to news about the website, including the source code of how we make the pages.
