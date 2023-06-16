@@ -14,8 +14,16 @@ There are [guides to self hosting on our wiki!](https://git.searchtld.com/Avitld
 # Join our IRC!
 
 <b>We now have a #IRC channel on Freenode!<br/>
- Just register an account on Freenode and ``/join #searchtld``
-  </b>
+ Just register an account on Freenode and ``/join #searchtld`
+</b>
+
+## Rules for IRC
+<ul>
+  <li><b>Be nice to each other.</b></li>
+  <li><b>Do not say/use any racial, sexist, homophobic/transphobic, antisemetic, xenophobic... slurs. </b></li>
+  <li><b>If you have any questions, feel free to ask</b></li>
+  <li><b>Do not spam the channel.</b></li>
+</ul>
 
 # Speed comparison: Google vs SearchTLD
 
