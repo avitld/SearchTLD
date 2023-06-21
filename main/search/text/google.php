@@ -2,7 +2,7 @@
 	function getHTML($query, $page) {
 		$fpage = $page . "0";
 		
-		$url = "https://www.google.com/search?q=" . urlencode($query) . "&start=" . urlencode($fpage) . "&num=12";
+		$url = "https://www.google.com/search?q=" . urlencode($query) . "&start=" . urlencode($fpage) . "&num=12&filter=0&nfpr=1";
 
 		if (isset($_COOKIE["lang"])) {
 			$lang = trim(htmlspecialchars($_COOKIE["lang"]));
@@ -13,6 +13,8 @@
 
 		if (isset($_COOKIE["safesearch"])) {
 			$url .= "&safe=medium";
+		} else {
+			$url .= "&safe=off  ";
 		}
 		
 		$ch = curl_init($url);
