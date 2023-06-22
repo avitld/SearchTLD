@@ -14,7 +14,7 @@
 		if (isset($_COOKIE["safesearch"])) {
 			$url .= "&safe=medium";
 		} else {
-			$url .= "&safe=off  ";
+			$url .= "&safe=off";
 		}
 		
 		$ch = curl_init($url);
