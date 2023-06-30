@@ -14,7 +14,7 @@ There are [guides to self hosting on our wiki!](https://git.searchtld.com/Avitld
 # Join our IRC!
 
 <b>We now have a #IRC channel on Freenode!<br/>
- Just register an account on Freenode and ``/join #searchtld`
+ Just register an account on Freenode and ``/join #searchtld``
 </b>
 
 ## Rules for IRC
