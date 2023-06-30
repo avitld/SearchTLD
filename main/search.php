@@ -2,6 +2,7 @@
 <?php 
 	require "other/header.php"; 
 	require "search/text/google.php";
+	require "search/infobox/wikipedia.php";
 	
 	$query = htmlspecialchars($_REQUEST["q"],ENT_QUOTES,'UTF-8');
 	$page = htmlspecialchars($_REQUEST["pg"],ENT_QUOTES,'UTF-8');
@@ -43,7 +44,7 @@
 		</div>
 		<?php 
 			if ($type == 0) {
-				send_infobox($response);
+				send_infobox($query);
 			}
 		?>
 		<div class="results">
@@ -95,9 +96,13 @@
 						break;
 					case 4:
 						require "search/forums/reddit.php";
+						require "search/forums/stackexchange.php";
 						$response = getrHTML($query);
 						send_red_response($response);
-						//echo $response;
+
+						$response = getstHTML($query);
+						send_stack_response($response);
+						echo $response;
 						break;
 					default:
 						send_text_response($response);

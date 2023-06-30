@@ -96,66 +96,6 @@
 		}
 	}
 
-	function send_infobox($response) {
-		if ($response) {
-			$dom = new DOMDocument();
-			@$dom->loadHTML($response);
-			$xpath = new DOMXPath($dom);
-
-			$result = $xpath->query('//div[contains(@class, "I6TXqe")]');
-			if ($result) {
-
-				$title = $xpath->query('.//h2', $result->item(0))->item(0);
-				@$title = $title->textContent;
-				$desc = $xpath->query('.//div[contains(@class, "kno-rdesc")]//span', $result->item(0))->item(0);
-				@$desc = $desc->textContent;
-
-				if (strpos($title, $desc) === false) {
-					$nextH2 = $title->nextSibling;
-					while ($nextH2 !== null && $nextH2->nodeName !== "h2") {
-						$nextH2 = $nextH2->nextSibling;
-					}
-					
-					if ($nextH2 !== null) {
-						$title = $nextH2->textContent;
-					} else {
-						$spanTitle = $xpath->query('.//span[contains(@class, "yKMVIe")]', $result->item(0))->item(0);
-						if ($spanTitle !== null) {
-							$title = $spanTitle->textContent;
-						}
-					}
-				}
-
-				if ($title !== null && $desc !== null) {	
-					$smalltitle = $xpath->query('.//div[contains(@class, "wwUB2c")]//span', $result->item(0))->item(0);
-					@$smalltitle = $smalltitle->textContent;
-					
-					if ($desc !== Null) {	
-						if (strpos($title, $desc) !== false) {
-							echo "<div class=\"infobox\">";
-							echo "<div class=\"txtholder\">";
-							echo "<h2 class=\"infotitle\">" . $title . "</h2>";
-							echo "<span class=\"minititle\">" . $smalltitle . "</span>";
-							echo "</div>";
-							if ($title !== "GNU") {
-								require "search/images/qwant.php";
-								$iresponse = getiHTML($title, 0);
-								send_single_image_response($iresponse);
-							} else {
-								echo "<div class=\"simage-container\">";
-								echo "	<img src=\"/static/img/gnu.png\">";
-								echo "</div>";
-							}
-							echo "<hr>";
-							echo "<p class=\"infodesc\">" . $desc . "</p>";
-							echo "</div>";
-						}
-					}
-				}
-			}
-		}
-	}
-
 	function send_correction($response) {
 		if ($response) {
 			$dom = new DOMDocument();

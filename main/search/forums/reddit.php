@@ -23,6 +23,7 @@
 
             $results = $xpath->query('//div[contains(@class, "_2mO8vClBdPxiJ30y_C6od2")]//div//div');
             $uniqueLinks = [];
+			$num = 0;
 			if ($results) {
 				foreach ($results as $result) {
 					$title = $xpath->query('.//h3[contains(@class, "_eYtD2XCVieq6emjKBH3m")]', $result)->item(0);
@@ -42,13 +43,14 @@
                         $sublink = "https://reddit.com/" . $sub;
                     }
 
-                    if ($title && strpos($link, "reddit.com") !== false && !in_array($link, $uniqueLinks)) {
+                    if ($title && strpos($link, "reddit.com") !== false && !in_array($link, $uniqueLinks) && !($num >= 7)) {
 					    echo "<div class=\"a-result\">";
                         echo "  <a href=\"$link\" class=\"mlink\"><img src=\"/static/img/reddit.png\" class=\"flogo\" />Reddit</a><br/>";
 				    	echo "	<a href=\"$link\" class=\"title\">$title</a><br>";
                         echo "  <a href=\"$sublink\" class=\"mlink\">$sub</a>";
 				    	echo "</div>";
                         $uniqueLinks[] = $link;
+						$num++;
                     }
 				}
 			} else {
