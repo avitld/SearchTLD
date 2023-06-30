@@ -102,7 +102,6 @@
 
 						$response = getstHTML($query);
 						send_stack_response($response);
-						echo $response;
 						break;
 					default:
 						send_text_response($response);
