@@ -1,13 +1,15 @@
 <?php
 	function getHTML($query, $page) {
+		$config = readJSON('/internalconfig.json');
+
 		$fpage = $page . "0";
 		
 		$url = "https://www.google.com/search?q=" . urlencode($query) . "&start=" . urlencode($fpage) . "&num=12&filter=0&nfpr=1";
 
-		if (isset($_COOKIE["lang"])) {
+		if (isset($_COOKIE["lang"]) && !(strlen($config['hardlang']) < 2)) {
 			$lang = trim(htmlspecialchars($_COOKIE["lang"]));
 			$url .= "&hl=" . urlencode($lang) . "&lr=" . urlencode($lang);
-		} else {
+		} else if (strlen($config['hardlang'] == 2)) {
 			$url .= "&hl=en&lr=en";
 		}
 

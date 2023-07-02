@@ -7,6 +7,7 @@
             if (isset($_REQUEST["reset"])) {
                 setcookie("lang", "en", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("theme", "dark", time() + (10 * 365 * 24 * 60 * 60));
+                setcookie("gpost", "get", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("safesearch", "", time() - 1000);
                 header("Location: /");
                 die();

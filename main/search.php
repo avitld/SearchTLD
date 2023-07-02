@@ -3,6 +3,9 @@
 	require "other/header.php"; 
 	require "search/text/google.php";
 	require "search/infobox/wikipedia.php";
+	require "other/functions.php";
+
+	//$config = readJSON("internalconfig.json");
 	
 	$query = htmlspecialchars($_REQUEST["q"],ENT_QUOTES,'UTF-8');
 	$page = htmlspecialchars($_REQUEST["pg"],ENT_QUOTES,'UTF-8');
@@ -14,13 +17,13 @@
 	</head>
 	<body>
 		<div class="msearch">
-			<form autocomplete="off" method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+			<form autocomplete="off" method="<?php echo $config['querymethod']; ?>" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 				<label class="mtitle"><a href="/" style="color: var(--fg-color-m); text-decoration: none;">Search<span id="blue">TLD</span></a></label>
 				<input type="search" name="q" value="<?php echo $query; ?>" required>
 				<input type="hidden" name="pg" value="0"> 
 				<input type="hidden" name="tp" value="<?php echo $type ?>"> 
 			</form>
-			<form>
+			<form method="<?php echo $config['querymethod']; ?>">
 				<input type="hidden" name="q" value="<?php echo htmlspecialchars($query); ?>">
 				<input type="hidden" name="pg" value="<?php echo $page; ?>">
 				<div class="sbuttons">
@@ -109,7 +112,7 @@
 				}
 			?>
 			<div class="rbuttons">
-				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="<?php echo $config['querymethod']; ?>">
 					<input name="q" value="<?php echo $query; ?>" type="hidden">
 					<?php
 						if (intval($type) !== 1 && intval($type) !== 2 && intval($type) !== 4) {

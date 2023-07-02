@@ -1,5 +1,7 @@
 <?php
     function send_infobox($query) {
+        $config = readJSON("/internalconfig.json");
+
         if (isset($_COOKIE["lang"])) {
 			$lang = trim(htmlspecialchars($_COOKIE["lang"]));
 		} else {
