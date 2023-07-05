@@ -40,14 +40,17 @@ body {
 	max-width: 500px;
 	width: 100%;
 	outline: 0;
-	border-radius: 18px;
+	margin-right: 0;
+	border-radius: 18px 0 0 18px;
 	background-color: var(--search-bg-color);
 	border: 1px solid var(--search-border-color);
+	border-right: none;
 	color: var(--fg-color-m);
 }
 
 .indexform input[type="search"]:focus {
 	border: 1px solid var(--search-border-color-h);
+	border-right: none;
 }
 
 .indexform button {
@@ -57,8 +60,22 @@ body {
 	outline: 0;
 	border: 1px solid var(--search-border-color);
 	padding: 10px 20px 10px 20px;
-	border-radius: 5px;
-	margin: 10px;
+	border-radius: 0 18px 18px 0;
+	margin-left: 0;
+	display: flex;
+	align-items: center;
+}
+
+.search-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.indexform button img {
+	width: 16px;
+	height: 16px;
+	margin-right: 3px;
 }
 
 .indexform button:hover {
@@ -104,6 +121,11 @@ hr {
 	padding: 15px;
 }
 
+.a-result p {
+	margin-top: 1px;
+	padding-top: 0;
+}
+
 .a-result span {
 	color: gray;
 	font-weight: normal;
@@ -112,6 +134,8 @@ hr {
 .a-result h2 {
 	font-size: 20px;
 	margin-top: 0;
+	margin-bottom: 0;
+	padding-bottom: 0;
 }
 
 .a-result h2:hover {
