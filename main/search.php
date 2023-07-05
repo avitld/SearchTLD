@@ -15,7 +15,7 @@
 	<body>
 		<div class="msearch">
 			<form autocomplete="off" method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-				<label class="mtitle"><a href="/" style="color: var(--fg-color-m); text-decoration: none;">Search<span id="blue">TLD</span></a></label>
+				<h1><a href="/" style="color: var(--fg-color-m); text-decoration: none;">Search<span id="purple">TLD</span></a></h1>
 				<input type="search" name="q" value="<?php echo $query; ?>" required>
 				<input type="hidden" name="pg" value="0"> 
 				<input type="hidden" name="tp" value="<?php echo $type ?>"> 

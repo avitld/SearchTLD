@@ -41,14 +41,10 @@ function send_infobox($query) {
                 }
 
                 echo "<div class=\"infobox\">";
-                echo "<div class=\"txtholder\">";
-                echo "<h2 class=\"infotitle\"><a href=\"https://$lang.wikipedia.org/wiki/$query\">" . $title . "</a></h2>";
-                echo "</div>";
-                echo "<div class=\"simage-container\">";
-                echo "    <img src=\"$thumbnailUrl\">";
-                echo "</div>";
+                echo "<img src=\"$thumbnailUrl\">";
                 echo "<hr>";
-                echo "<p class=\"infodesc\">" . $description . "</p>";
+                echo "<p>" . $description . "</p>";
+                echo "<a href=\"https://$lang.wikipedia.org/wiki/$query\">$title at https://$lang.wikipedia.org/wiki/$query</a>";
                 echo "</div>";
             }
         }

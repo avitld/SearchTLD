@@ -45,9 +45,11 @@
 
                     if ($title && strpos($link, "reddit.com") !== false && !in_array($link, $uniqueLinks) && !($num >= 7)) {
 					    echo "<div class=\"a-result\">";
-                        echo "  <a href=\"$link\" class=\"mlink\"><img src=\"/static/img/reddit.png\" class=\"flogo\" />Reddit</a><br/>";
-				    	echo "	<a href=\"$link\" class=\"title\">$title</a><br>";
-                        echo "  <a href=\"$sublink\" class=\"mlink\">$sub</a>";
+						echo "  <span><a href=\"$sublink\">$sub</a></span><br/>";
+						echo "	<a href=\"$link\">";
+                        echo "  	<span><img src=\"/static/img/reddit.png\" class=\"flogo\" />Reddit</span>";
+				    	echo "		<h2>$title</h2>";
+						echo "	</a>";
 				    	echo "</div>";
                         $uniqueLinks[] = $link;
 						$num++;

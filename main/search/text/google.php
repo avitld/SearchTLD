@@ -51,9 +51,11 @@
 	
 					if (!preg_match('/^\/search\?q=/', $link) && !in_array($link, $uniqueLinks)) {
 							echo "<div class=\"a-result\">";
-							echo "	<a href=\"$link\" class=\"title\">$title</a><br>";
-							echo "  <a href=\"$link\" class=\"mlink\">$link</a>";
-							echo "  <p class=\"description\">$description</a>";
+							echo "	<a href=\"$link\">";
+							echo "  	<span>$link</span>";
+							echo "		<h2>$title</h2>";
+							echo "	</a>";
+							echo "  <p>$description</p>";
 							echo "</div>";
 	
 							$uniqueLinks[] = $link;
