@@ -33,17 +33,28 @@
         $query = ucfirst($query);
         $result = json_decode($response, true);
         if ($result && isset($result['matches'])) {
-            $match = $result['matches'][0];
-            if (isset($match['replacements'][0]['value'])) {
+            $replacements = [];
+
+            foreach ($result['matches'] as $match) {
                 $suggestedCorrection = $match['replacements'][0]['value'];
 
                 $offset = $match['offset'];
                 $length = $match['length'];
                 $misspelledWord = substr($query, $offset, $length);
-
-                $updatedSentence = str_replace($misspelledWord, $suggestedCorrection, $query);
-                echo "<div class=\"dym\"><small>Did you mean: <strong><a href=\"/search.php?q=" . urlencode($updatedSentence) . "&pg=0&tp=0\">$updatedSentence</a></strong></small></div>";
+                $replacement = $match['replacements'][0]['value'];
+                $replacements[$misspelledWord] = $replacement; 
             }
+
+            $words = explode(" ", $query);
+            $correctedQuery = [];
+            foreach ($words as $word) {
+                $correctedWord = $replacements[$word] ?? $word;
+                $correctedQuery[] = $correctedWord;
+            }
+
+            $updatedSentence = implode(" ", $correctedQuery);
+
+            echo "<div class=\"dym\"><small>Did you mean: <strong><a href=\"/search.php?q=" . urlencode($updatedSentence) . "&pg=0&tp=0\">$updatedSentence</a></strong></small></div>";
         }
     }
 ?>
