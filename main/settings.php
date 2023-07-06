@@ -1,28 +1,36 @@
 <?php require "other/header.php"; ?>
 		<title>Settings - SearchTLD</title>
 	</head>
+    <?php require "other/background.php"; ?>
 	<body>
 		<div align="center">
 		<?php
             if (isset($_REQUEST["reset"])) {
                 setcookie("lang", "en", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("theme", "dark", time() + (10 * 365 * 24 * 60 * 60));
+                setcookie("border", "on", time() + (10 * 365 * 24 * 60 * 60));
+                setcookie("querymethod", "GET", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("safesearch", "", time() - 1000);
-                header("Location: /");
+                header("Location: /settings.php");
                 die();
+            }
+
+            if (isset($_REQUEST["home"])) {
+                header("Location: /");
             }
 
 			if (isset($_REQUEST["save"])) {
             	foreach($_POST as $key=>$value) {
                     setcookie($key, $value, time() + (10 * 365 * 24 * 60 * 60), '/');
                 }
-                header("Location: /");
+                header("Location: /settings.php");
                 die();
            }
         ?>
 			<h1>SearchTLD Configuration</h1>
 			<hr>
 			<form method="post" enctype="multipart/form-data">
+                <h2>Appearance</h2>
 				<label for="theme">Theme:</label>
 				<select name="theme">
 				<?php
@@ -38,6 +46,37 @@
                     echo $themes;
                 ?>
                 </select><br/><br/>
+                <label for="border">Result Border:</label>
+				<select name="border">
+				<?php
+                    $borders = "<option value=\"on\">Enabled</option>
+                    <option value=\"off\">Disabled</option>";
+
+                    if (isset($_COOKIE["border"]))
+                    {
+                        $border_cookie = $_COOKIE["border"];
+                        $borders = str_replace($border_cookie . "\"", $border_cookie . "\" selected", $borders);
+                    }
+
+                    echo $borders;
+                ?>
+                </select><br/><br/>
+                <h2>Usage</h2>
+                <label for="querymethod">Query Method:</label>
+                <select name="querymethod">
+				<?php
+                    $methods = "<option value=\"GET\">GET</option>
+                    <option value=\"POST\">POST</option>";
+
+                    if (isset($_COOKIE["querymethod"]))
+                    {
+                        $method_cookie = $_COOKIE["querymethod"];
+                        $methods = str_replace($method_cookie . "\"", $method_cookie . "\" selected", $methods);
+                    }
+
+                    echo $methods;
+                ?>
+                </select><br/><br/>
                 <label for="safesearch">Safe Search:</label>
                 <input type="checkbox" name="safesearch" <?php echo isset($_COOKIE["safesearch"]) ? "checked"  : ""; ?>>
 				<br/>
@@ -47,8 +86,10 @@
                                     echo $eValue; ?>">
 				<br/>
 				<br/>
-                <button type="submit" name="save">Save</button>
-                <button type="submit" name="reset" style="border: 2px solid red;">Reset</button>
+                <button type="submit" name="save" id="save">Save</button>
+                <button type="submit" name="reset" id="reset">Reset</button>
+                <br/>
+                <button name="home" id="home">Go Back</button>
 			</form>
 		</div>
 	</body>

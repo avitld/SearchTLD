@@ -8,25 +8,37 @@ Privacy Respecting and Minimal Meta-Search Engine
 <img src=".github/scr1.png" style="max-height: 50%; max-width: 50%;">
 <img src=".github/scr2.png" style="max-height: 50%; max-width: 50%;">
 
-# Moved to gitea
-SearchTLD has moved it's repo from <a href="https://git.searchtld.com/Avitld/SearchTLD">github to gitea</a>, please use the gitea repo as this will stop receiving updates.
-We have provided a script in ``setup/`` which will replace the ``main/`` folder with the one from gitea.
-
 # Self Hosting
 There are [guides to self hosting on our wiki!](https://git.searchtld.com/Avitld/SearchTLD/wiki)
 
-# Join our IRC!
+# Join our Matrix Server!
+<b>We now also have a Matrix server which is preferred over IRC.<br/>
+You can join manually join ``#searchtld:schizo.gr`` or through <a href="https://matrix.to/#/#searchtld:schizo.gr">this link</a></b>
 
-<b>We now have a #IRC channel on Freenode!<br/>
+## Join our IRC!
+
+<b>We also have a #IRC channel on Freenode!<br/>
  Just register an account on Freenode and ``/join #searchtld``
-  </b>
+</b>
 
-# Speed comparison: Google vs SearchTLD
+## Rules for IRC & Matrix
+<ul>
+  <li><b>Be nice to each other.</b></li>
+  <li><b>Do not say/use any racial, sexist, homophobic/transphobic, antisemetic, xenophobic... slurs. </b></li>
+  <li><b>If you have any questions, feel free to ask</b></li>
+  <li><b>Do not spam the channel.</b></li>
+</ul>
 
-|  | SearchTLD | Google |
-| --- | --- | --- |
-| Requests | 14 | 216 |
-| Time till website fully loaded | 2.04s | 42.66 s |
+# Speed comparison: SearchTLD vs Other Search Engines
+
+|  | SearchTLD | Google | DuckDuckGo | Bing | Yahoo | Yandex |
+| --- | --- | --- | --- | --- | --- | --- |
+| Requests | 14 | 216 | 50 | 330 | 50 | 139 |
+| Time till website fully loaded | 2.04s | 42.66 s | 2.27s | 5.91s | 5.63s | 46.62 |
+
+# Read our news!
+We now have a page dedicated to news about the website, including the source code of how we make the pages.
+It's available [here!](https://blog.searchtld.com)
 
 # Instances
 

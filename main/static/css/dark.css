@@ -1,9 +1,14 @@
 :root {
-	--bg-color-m: rgb(27, 18, 35, 1);
-	--fg-color-m: rgb(180, 180, 180);
-	--ms-color-bg-m: rgb(22, 13, 30);
-	--sb-color-bg-m: rgb(19, 10, 27);
-	--ib-color-bg: rgba(255, 255, 255, 0.08);
+	--bg-color-m: rgb(26, 26, 26);
+	--fg-color-m: rgb(255, 255, 255);
+	--f-bg: rgb(20, 20, 20);
+	--border-color: rgb(56, 56, 56);
+	--search-bg-color: rgb(34, 34, 34);
+	--search-border-color: rgb(51, 51, 51);
+	--search-border-color-h: rgb(60, 60, 60);
+	--sbutton-bg: rgb(17, 17, 17);
+	--info-bg: rgb(20, 20, 20);
 	--a-color: rgb(183, 81, 255);
 	--a-color-h: rgb(163, 61, 235);
+	color-scheme: dark;
 }

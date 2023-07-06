@@ -1,6 +1,8 @@
 <?php
 	function getbHTML($query, $page) {
-		$page = intval($page) - 2;
+		if (intval($page) > 5) {
+			$page = intval($page) - 5;
+		}
 
 		$url = "https://search.brave.com/search?q=" . urlencode($query) . "&offset=$page";
 
@@ -51,11 +53,13 @@
 					$description = $xpath->query('.//p[@class="snippet-description"]', $result)->item(0);
 					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
 	
-					if (!in_array($link, $uniqueLinks)) {
+					if ($title && !in_array($link, $uniqueLinks)) {
 							echo "<div class=\"a-result\">";
-							echo "	<a href=\"$link\" class=\"title\">$title</a><br>";
-							echo "  <a href=\"$link\" class=\"mlink\">$link</a>";
-							echo "  <p class=\"description\">$description</a>";
+							echo " <a href=\"$link\">";
+							echo "  	<span>$link</span>";
+							echo "		<h2>$title</h2>";
+							echo "	</a>";
+							echo "  <p>$description</a>";
 							echo "</div>";
 	
 							$uniqueLinks[] = $link;

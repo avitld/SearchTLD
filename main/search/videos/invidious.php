@@ -30,8 +30,10 @@
 					$thumbnail = htmlspecialchars($url . "/vi/" . explode("/vi/" ,$vresponse["videoThumbnails"][4]["url"])[1]);
 	
 					echo "<div class=\"a-result\">";
-					echo "	<a href=\"$vurl\" class=\"title\">$title</a><br/>";
-					echo "	<img class=\"vidimg\" src=\"proxy-image.php?url=$thumbnail\" />";
+					echo "	<a href=\"$vurl\">";
+					echo "		<h2 style=\"padding-bottom: 0; margin-bottom: 0;\">$title</h2><br/>";
+					echo "		<img class=\"vidimg\" src=\"proxy-image.php?url=$thumbnail\" />";
+					echo "	</a>";
 					echo "  <p class=\"mlink\" style=\"margin-top: 0; padding-top: 0;\">$uploader - $views views - uploaded $uploaded</a>";
 					echo "</div><br/>";
 				}

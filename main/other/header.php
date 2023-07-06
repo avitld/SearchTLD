@@ -11,12 +11,10 @@
 		<link rel="search" type="application/opensearchdescription+xml" title="SearchTLD" href="/opensearch.xml">
 
 		<link rel="stylesheet" type="text/css" href="<?php
-			echo "static/css/"; 
-			$cookieValue = isset($_COOKIE["theme"]) ? $_COOKIE["theme"] : '';
-			if (isset($_COOKIE["theme"])) {
-				echo $cookieValue . ".css";
+			$theme = isset($_COOKIE["theme"]) ? $_COOKIE["theme"] : 'dark';
+			if ($theme === 'light') {
+				echo 'static/css/light.css';
 			} else {
-				echo "dark.css";
+				echo 'static/css/dark.css';
 			}
-			
 				?>">
