@@ -53,7 +53,7 @@
 					$description = $xpath->query('.//p[@class="snippet-description"]', $result)->item(0);
 					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
 	
-					if (!in_array($link, $uniqueLinks)) {
+					if ($title->length > 0 && !in_array($link, $uniqueLinks)) {
 							echo "<div class=\"a-result\">";
 							echo " <a href=\"$link\">";
 							echo "  	<span>$link</span>";

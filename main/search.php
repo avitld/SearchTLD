@@ -3,6 +3,8 @@
 	require "other/header.php"; 
 	require "search/text/google.php";
 	require "search/infobox/wikipedia.php";
+	require "search/special/grammar.php";
+	require "other/functions.php";
 	
 	$query = htmlspecialchars($_REQUEST["q"],ENT_QUOTES,'UTF-8');
 	$page = htmlspecialchars($_REQUEST["pg"],ENT_QUOTES,'UTF-8');
@@ -57,6 +59,19 @@
 		<?php 
 			if ($type == 0) {
 				send_infobox($query);
+				$gresponse = getGrammar($query);
+				if ($gresponse) {
+					echoCorrection($gresponse, $query);
+				}
+
+				$special_result = detect_special_query($query);
+				if ($special_result == 1) {
+					require "search/special/ip.php";
+					echoIP();
+				} else if ($special_result == 2) {
+					require "search/special/useragent.php";
+					echoUA();
+				}
 			}
 		?>
 		<div class="results">
@@ -74,7 +89,6 @@
 						} else {
 							$fallback = check_for_fallback($response);
 							if ($fallback){
-								send_correction($response);
 								send_text_response($response);
 							} else {
 								require "search/text/ddg.php";
