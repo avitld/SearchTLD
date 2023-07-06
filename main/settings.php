@@ -9,6 +9,7 @@
                 setcookie("lang", "en", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("theme", "dark", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("border", "on", time() + (10 * 365 * 24 * 60 * 60));
+                setcookie("querymethod", "GET", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("safesearch", "", time() - 1000);
                 header("Location: /settings.php");
                 die();
@@ -29,6 +30,7 @@
 			<h1>SearchTLD Configuration</h1>
 			<hr>
 			<form method="post" enctype="multipart/form-data">
+                <h2>Appearance</h2>
 				<label for="theme">Theme:</label>
 				<select name="theme">
 				<?php
@@ -57,6 +59,22 @@
                     }
 
                     echo $borders;
+                ?>
+                </select><br/><br/>
+                <h2>Usage</h2>
+                <label for="querymethod">Query Method:</label>
+                <select name="querymethod">
+				<?php
+                    $methods = "<option value=\"GET\">GET</option>
+                    <option value=\"POST\">POST</option>";
+
+                    if (isset($_COOKIE["querymethod"]))
+                    {
+                        $method_cookie = $_COOKIE["querymethod"];
+                        $methods = str_replace($method_cookie . "\"", $method_cookie . "\" selected", $methods);
+                    }
+
+                    echo $methods;
                 ?>
                 </select><br/><br/>
                 <label for="safesearch">Safe Search:</label>

@@ -28,7 +28,8 @@
 		 }
 		?>
 		<div class="msearch">
-			<form autocomplete="off" method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+			<form autocomplete="off" <?php $method = isset($_COOKIE["querymethod"]) ? $_COOKIE["querymethod"] : 'GET';
+			echo "method=\"$method\""; ?> action="<?php echo $_SERVER['PHP_SELF']; ?>">
 				<h1><a href="/" style="color: var(--fg-color-m); text-decoration: none;">Search<span id="purple">TLD</span></a></h1>
 				<input type="search" name="q" value="<?php echo $query; ?>" required>
 				<input type="hidden" name="pg" value="0"> 

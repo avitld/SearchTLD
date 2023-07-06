@@ -6,7 +6,10 @@
 	<body>
 		<div class="indexform">
 			<h1>Search<span id="purple">TLD</span></h1>
-			<form method="get" autocomplete="off" action="search.php">
+			<form <?php
+			$method = isset($_COOKIE["querymethod"]) ? $_COOKIE["querymethod"] : 'GET';
+			echo "method=\"$method\"";
+			?> autocomplete="off" action="search.php">
 				<div class="search-container">
 					<input type="search" name="q" autofocus required placeholder="<?php $numb = pickRand(); returnArray($numb, $searchPlaceholders); ?> " value="<?php echo htmlspecialchars($_GET['q'] ?? '', ENT_QUOTES); ?>"><button type="submit">
 					<?php
