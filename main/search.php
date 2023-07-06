@@ -13,6 +13,18 @@
 		<title><?php echo $query ?> - SearchTLD</title>
 	</head>
 	<body>
+		<?php
+		 $border = isset($_COOKIE["border"]) ? $_COOKIE["border"] : 'on';
+		 if ($border == 'on') {
+			echo "<style>";
+			echo ".a-result {";
+			echo "background: var(--info-bg);";
+			echo "border: 1px solid var(--border-color);";
+			echo "border-radius: 8px;";
+			echo "}";
+			echo "</style>";
+		 }
+		?>
 		<div class="msearch">
 			<form autocomplete="off" method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 				<h1><a href="/" style="color: var(--fg-color-m); text-decoration: none;">Search<span id="purple">TLD</span></a></h1>

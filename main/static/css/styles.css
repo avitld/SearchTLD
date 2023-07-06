@@ -115,9 +115,6 @@ hr {
 	max-width: 600px;
 	margin-bottom: 20px;
 	margin-left: 80px;
-	background: var(--info-bg);
-	border: 1px solid var(--border-color);
-	border-radius: 8px;
 	padding: 15px;
 }
 
@@ -287,6 +284,40 @@ hr {
 .pagebtn:last-child {
 	margin-right: 0;
 	margin-left: 0;
+}
+
+select {
+	color: var(--fg-color-m);
+	font-size: 16px;
+	background-color: var(--search-bg-color);
+	outline: 0;
+	border: 1px solid var(--search-border-color);
+	padding: 5px 15px 5px 15px;
+	border-radius: 18px;
+}
+
+#save, #reset, #home {
+	color: var(--fg-color-m);
+	font-size: 16px;
+	background-color: var(--search-bg-color);
+	outline: 0;
+	border: 1px solid var(--search-border-color);
+	padding: 10px 20px 10px 20px;
+	border-radius: 5px;
+	margin: 10px;
+}
+
+input[type="text"] {
+	padding: 5px;
+	font-size: 16px;
+	max-width: 200px;
+	width: 100%;
+	outline: 0;
+	border-radius: 18px;
+	background-color: var(--search-bg-color);
+	border: 1px solid var(--search-border-color);
+	border-right: none;
+	color: var(--fg-color-m);
 }
 
 @media only screen and (max-width: 750px) {
