@@ -326,6 +326,21 @@ hr {
 		font-size: 14px;
 		width: 70px;
 	}
+
+	.indexform button img {
+		width: 14px;
+		height: 14px;
+		margin-right: 3px;
+	}	
+
+	.indexform button {
+		font-size: 14px;
+	}
+
+	.msearch .sbuttons {
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
 @media only screen and (max-width: 1280px) {
