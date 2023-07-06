@@ -32,14 +32,14 @@
     function echoCorrection($response, $query) {
         $query = ucfirst($query);
         $result = json_decode($response, true);
-        $match = $result['matches'][0];
         if ($result && isset($result['matches'])) {
+            $match = $result['matches'][0];
             if (isset($match['replacements'][0]['value'])) {
                 $suggestedCorrection = $match['replacements'][0]['value'];
 
                 $offset = $match['offset'];
                 $length = $match['length'];
-                $misspelledWord = mb_substr($query, $offset, $length);
+                $misspelledWord = substr($query, $offset, $length);
 
                 $updatedSentence = str_replace($misspelledWord, $suggestedCorrection, $query);
                 echo "<div class=\"dym\"><small>Did you mean: <strong><a href=\"/search.php?q=" . urlencode($updatedSentence) . "&pg=0&tp=0\">$updatedSentence</a></strong></small></div>";

@@ -41,8 +41,10 @@ function send_infobox($query) {
                 }
 
                 echo "<div class=\"infobox\">";
-                echo "<img src=\"$thumbnailUrl\">";
-                echo "<hr>";
+                if ($thumbnailUrl) {
+                    echo "<img src=\"$thumbnailUrl\">";
+                    echo "<hr>";
+                }
                 echo "<p>" . $description . "</p>";
                 echo "<a href=\"https://$lang.wikipedia.org/wiki/$query\">$title at https://$lang.wikipedia.org/wiki/$query</a>";
                 echo "</div>";
