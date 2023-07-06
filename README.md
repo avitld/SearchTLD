@@ -11,13 +11,17 @@ Privacy Respecting and Minimal Meta-Search Engine
 # Self Hosting
 There are [guides to self hosting on our wiki!](https://git.searchtld.com/Avitld/SearchTLD/wiki)
 
-# Join our IRC!
+# Join our Matrix Server!
+<b>We now also have a Matrix server which is preferred over IRC.<br/>
+You can join manually join ``#searchtld:schizo.gr`` or through <a href="https://matrix.to/#/#searchtld:schizo.gr">this link</a></b>
 
-<b>We now have a #IRC channel on Freenode!<br/>
+## Join our IRC!
+
+<b>We also have a #IRC channel on Freenode!<br/>
  Just register an account on Freenode and ``/join #searchtld``
 </b>
 
-## Rules for IRC
+## Rules for IRC & Matrix
 <ul>
   <li><b>Be nice to each other.</b></li>
   <li><b>Do not say/use any racial, sexist, homophobic/transphobic, antisemetic, xenophobic... slurs. </b></li>
@@ -25,7 +29,7 @@ There are [guides to self hosting on our wiki!](https://git.searchtld.com/Avitld
   <li><b>Do not spam the channel.</b></li>
 </ul>
 
-# Speed comparison: Google vs SearchTLD
+# Speed comparison: SearchTLD vs Other Search Engines
 
 |  | SearchTLD | Google | DuckDuckGo | Bing | Yahoo | Yandex |
 | --- | --- | --- | --- | --- | --- | --- |
