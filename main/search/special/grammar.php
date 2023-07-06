@@ -54,7 +54,9 @@
 
             $updatedSentence = implode(" ", $correctedQuery);
 
-            echo "<div class=\"dym\"><small>Did you mean: <strong><a href=\"/search.php?q=" . urlencode($updatedSentence) . "&pg=0&tp=0\">$updatedSentence</a></strong></small></div>";
+            if ($updatedSentence !== $query) {
+                echo "<div class=\"dym\"><small>Did you mean: <strong><a href=\"/search.php?q=" . urlencode($updatedSentence) . "&pg=0&tp=0\">$updatedSentence</a></strong></small></div>";
+            }
         }
     }
 ?>
