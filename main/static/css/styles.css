@@ -311,7 +311,7 @@ select {
 	border-radius: 18px;
 }
 
-#save, #reset, #home {
+#save, #reset, #home, #verify {
 	color: var(--fg-color-m);
 	font-size: 16px;
 	background-color: var(--search-bg-color);

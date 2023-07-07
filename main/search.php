@@ -5,6 +5,12 @@
 	require "search/infobox/wikipedia.php";
 	require "search/special/grammar.php";
 	require "other/functions.php";
+
+	$config = readJson('config.json');
+
+	if ($config['ratelimit'] === "enabled") {
+		require "other/ratelimit.php";
+	}
 	
 	$query = htmlspecialchars($_REQUEST["q"],ENT_QUOTES,'UTF-8');
 	$page = htmlspecialchars($_REQUEST["pg"],ENT_QUOTES,'UTF-8');
@@ -72,6 +78,12 @@
 				} else if ($special_result == 2) {
 					require "search/special/useragent.php";
 					echoUA();
+				} else if ($special_result == 3) {
+					require "search/special/base64.php";
+					encodeBase64($query);
+				} else if ($special_result == 4) {
+					require "search/special/base64.php";
+					decodeBase64($query);
 				}
 			}
 		?>
