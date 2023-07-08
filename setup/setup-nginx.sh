@@ -34,14 +34,14 @@ if [[ -f /etc/os-release ]]; then
 
 	if [[ $NAME == *"Fedora"* ]]; then
 		echo "Installing dependencies for Fedora GNU/Linux"
-		dnf install php-fpm php-xml php-curl php certbot python3-certbot-nginx
+		dnf install php-fpm php-xml php-curl php certbot python3-certbot-nginx nginx-all-modules
 		sed -i "s/sample/$value/g" sampleconfig-fedora
 		mv sampleconfig-fedora "$value.conf"
 		mv $value /etc/nginx/conf.d
 		systemctl enable --now php-fpm
 	if [[ $NAME == *"Debian"* ]]; then
 		echo "Installing dependencies for Debian GNU/Linux"
-		apt install php-fpm php-xml php-curl php certbot python3-certbot-nginx
+		apt install php-fpm php-xml php-curl php certbot python3-certbot-nginx nginx-extras
 		sed -i "s/sample/$value/g" sampleconfig-debian
 		mv sampleconfig-debian $value
 		mv $value /etc/nginx/sites-available/
@@ -49,7 +49,7 @@ if [[ -f /etc/os-release ]]; then
 		systemctl enable --now php8.4-fpm
 	elif [[ $NAME == *"Ubuntu"* ]]; then
 		echo "Installing dependencies for Ubuntu GNU/Linux"
-		apt install php-fpm php-xml php-curl php certbot python3-certbot-nginx
+		apt install php-fpm php-xml php-curl php certbot python3-certbot-nginx nginx-extras
 		sed -i "s/sample/$value/g" sampleconfig-debian
 		mv sampleconfig-debian $value
 		mv $value /etc/nginx/sites-available/
@@ -57,7 +57,7 @@ if [[ -f /etc/os-release ]]; then
 		systemctl enable --now php8.4-fpm
 	elif [[ $NAME == *"Rocky"* ]]; then
 		echo "Installing dependencies for Rocky GNU/Linux"
-		dnf install php-fpm php-xml php-curl php certbot python3-certbot-nginx
+		dnf install php-fpm php-xml php-curl php certbot python3-certbot-nginx nginx-all-modules
 		sed -i "s/sample/$value/g" sampleconfig-fedora
 		mv sampleconfig-fedora "$value.conf"
 		mv $value /etc/nginx/conf.d/

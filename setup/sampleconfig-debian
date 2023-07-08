@@ -10,18 +10,26 @@ server {
 	server_name sample;
 
 	location / {
-		try_files $uri $uri/ =404;
+		try_files $uri $uri/ @extensionless-php;
+
+		add_header Last-Modified $date_gmt;
+        add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+        if_modified_since off;
+        expires off;
+        etag off;
 	}
 
 	location ~ \.php$ {
 		include snippets/fastcgi-php.conf;
-	
-		fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+
+		fastcgi_pass unix:/run/php/php8.2-fpm.sock;
 	}
-	
+
 	location ~ /\.ht {
 		deny all;
 	}
-
-
+	
+	location @extensionless-php {
+	       rewrite ^(.*)$ $1.php last;
+	}
 }

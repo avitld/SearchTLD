@@ -1,9 +1,9 @@
 
 <?php 
 	require "other/header.php"; 
-	require "search/text/google.php";
-	require "search/infobox/wikipedia.php";
-	require "search/special/grammar.php";
+	require "engines/text/google.php";
+	require "engines/infobox/wikipedia.php";
+	require "engines/special/grammar.php";
 	require "other/functions.php";
 
 	$config = readJson('config.json');
@@ -35,8 +35,15 @@
 		?>
 		<div class="msearch">
 			<form autocomplete="off" <?php $method = isset($_COOKIE["querymethod"]) ? $_COOKIE["querymethod"] : 'GET';
-			echo "method=\"$method\""; ?> action="<?php echo $_SERVER['PHP_SELF']; ?>">
-				<h1><a href="/" style="color: var(--fg-color-m); text-decoration: none;">Search<span id="purple">TLD</span></a></h1>
+			echo "method=\"$method\""; ?>>
+				<a href="/"><img class="mobimg" <?php
+					$theme = isset($_COOKIE["theme"]) ? $_COOKIE["theme"] : 'dark';
+					if ($theme === 'light') {
+						echo 'src="/static/img/logo_light.png"';
+					} else {
+						echo 'src="/static/img/logo_dark.png"';
+					}
+				?>></a>
 				<input type="search" name="q" value="<?php echo $query; ?>" required>
 				<input type="hidden" name="pg" value="0"> 
 				<input type="hidden" name="tp" value="<?php echo $type ?>"> 
@@ -73,16 +80,16 @@
 
 				$special_result = detect_special_query($query);
 				if ($special_result == 1) {
-					require "search/special/ip.php";
+					require "engines/special/ip.php";
 					echoIP();
 				} else if ($special_result == 2) {
-					require "search/special/useragent.php";
+					require "engines/special/useragent.php";
 					echoUA();
 				} else if ($special_result == 3) {
-					require "search/special/base64.php";
+					require "engines/special/base64.php";
 					encodeBase64($query);
 				} else if ($special_result == 4) {
-					require "search/special/base64.php";
+					require "engines/special/base64.php";
 					decodeBase64($query);
 				}
 			}
@@ -92,11 +99,11 @@
 				switch ($type) {
 					case 0:
 						if ($page > 5) {
-							require "search/text/brave.php";
+							require "engines/text/brave.php";
 							$response = getbHTML($query, $page);
 							send_text_th_response($response);
 						} elseif ($page < 5 && $page > 1) {
-							require "search/text/ddg.php";
+							require "engines/text/ddg.php";
 							$response = getdHTML($query, $page);
 							send_text_sec_response($response);
 						} else {
@@ -104,13 +111,13 @@
 							if ($fallback){
 								send_text_response($response);
 							} else {
-								require "search/text/ddg.php";
+								require "engines/text/ddg.php";
 								$response = getdHTML($query, $page);
 								$fallback = ddgdown($response);
 								if ($fallback) {
 									send_text_sec_response($response);
 								} else {
-									require "search/text/brave.php";
+									require "engines/text/brave.php";
 									$response = getbHTML($query, $page);
 									send_text_th_response($response);
 								}
@@ -118,24 +125,24 @@
 						}
 						break;
 					case 1:
-						require "search/images/qwant.php";
+						require "engines/images/qwant.php";
 						$response = getiHTML($query, $page);
 						send_image_response($response);
 						break;
 					case 2:
-						require "search/videos/invidious.php";
+						require "engines/videos/invidious.php";
 						$response = getvJson($query);
 						send_video_response($response);
 						break;
 					case 3:
-						require "search/news/google.php";
+						require "engines/news/google.php";
 						$response = getnHTML($query, $page);
 						send_title($response);
 						send_news_response($response);
 						break;
 					case 4:
-						require "search/forums/reddit.php";
-						require "search/forums/stackexchange.php";
+						require "engines/forums/reddit.php";
+						require "engines/forums/stackexchange.php";
 						$response = getrHTML($query);
 						send_red_response($response);
 

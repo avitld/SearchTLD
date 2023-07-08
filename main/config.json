@@ -1,3 +1,4 @@
 {
-    "ratelimit": "enabled"
+    "ratelimit": "enabled",
+    "hide_extension": "enabled"
 }

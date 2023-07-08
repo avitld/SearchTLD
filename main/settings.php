@@ -2,16 +2,29 @@
 		<title>Settings - SearchTLD</title>
 	</head>
     <?php require "other/background.php"; ?>
+    <?php require "other/functions.php"; ?>
 	<body>
 		<div align="center">
 		<?php
+
+            $config = readJson("config.json");
+
             if (isset($_REQUEST["reset"])) {
                 setcookie("lang", "en", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("theme", "dark", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("border", "on", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("querymethod", "GET", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("safesearch", "", time() - 1000);
-                header("Location: /settings.php");
+
+                global $config;
+
+                $extension = '';
+
+                if ($config['hide_extension'] !== 'enabled') {
+                    $extension = '.php';
+                }
+
+                header("Location: /settings$extension");
                 die();
             }
 
@@ -23,7 +36,15 @@
             	foreach($_POST as $key=>$value) {
                     setcookie($key, $value, time() + (10 * 365 * 24 * 60 * 60), '/');
                 }
-                header("Location: /settings.php");
+                global $config;
+
+                $extension = '';
+
+                if ($config['hide_extension'] !== 'enabled') {
+                    $extension = '.php';
+                }
+
+                header("Location: /settings$extension");
                 die();
            }
         ?>
@@ -82,14 +103,35 @@
 				<br/>
 				<br/>
                 <label for="lang">Search Language:</label>
-                <input type="text" name="lang" placeholder="en, gr, cn, fr, etc." value="<?php $eValue = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : '';
-                                    echo $eValue; ?>">
+                <select name="lang">
+                <?php
+                    require "other/language.php";
+                    foreach ($languages as $language) { 
+                        $name = $language['name'];
+                        $code = $language['code'];
+
+                        $selected = '';
+                        if (isset($_COOKIE['lang'])) {
+                            if ($_COOKIE['lang'] === $code) {
+                                $selected = 'selected';
+                            }
+                        } else {
+                            if ($code === 'en') {
+                                $selected = 'selected';
+                            }
+                        }
+
+                        echo "<option value=\"$code\" $selected>$name</option>";
+                    }
+                ?>
+                </select>
 				<br/>
 				<br/>
                 <button type="submit" name="save" id="save">Save</button>
                 <button type="submit" name="reset" id="reset">Reset</button>
                 <br/>
                 <button name="home" id="home">Go Back</button>
+                <br/><br/><br/><br/>
 			</form>
 		</div>
 	</body>

@@ -34,6 +34,18 @@ body {
 	font-size: 58px;
 }
 
+.title-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.title-container img {
+	height: 58px;
+	width: 58px;
+	margin-right: 10px;
+}
+
 .indexform input[type="search"] {
 	padding: 10px;
 	font-size: inherit;
@@ -83,7 +95,7 @@ body {
 }
 
 #purple {
-	color: rgb(197, 52, 255);
+	color: rgb(86, 22, 135);
 }
 
 a {
@@ -182,18 +194,11 @@ hr {
 	margin-bottom: 10px;
 }
 
-.msearch h1 {
-	margin-top: 0;
-	position: absolute;
-	top: 20px;
-	left: 20px;
-}
-
 .msearch input[type="search"] {
 	padding: 10px;
 	font-size: inherit;
 	position: relative;
-	left: 200px;
+	left: 60px;
 	margin: 20px;
 	margin-bottom: 5px;
 	max-width: 550px;
@@ -209,6 +214,15 @@ hr {
 	margin-left: 20px;
 	display: flex;
 	padding: 2px;
+}
+
+.msearch .mobimg {
+	max-width: 40px;
+	max-height: 40px;
+	margin-top: 0;
+	position: absolute;
+	top: 20px;
+	left: 20px;
 }
 
 .msearch .sbuttons button {
@@ -340,15 +354,16 @@ input[type="text"] {
 		font-size: 14px;
 	}
 
-	.msearch h1 {
-		opacity: 0;
+	.msearch .mobimg {
+		max-width: 30px;
+		max-height: 30px;
+		top: 15px;
 	}
 
 	.msearch input[type="search"] {
 		left: 20px;
 		margin: 10px;
-		margin-left: auto;
-		margin-right: auto;
+		margin-left: 40px;
 		width: 80%;
 	}
 

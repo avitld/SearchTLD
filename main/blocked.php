@@ -1,18 +1,19 @@
 <?php
-session_start();
+    require "other/functions.php";
+    session_start();
 
-if (isset($_SESSION['rate_limit_triggered']) && $_SESSION['rate_limit_triggered']) {
-    if (isset($_POST['submit'])) {
-        $captcha_challenge = $_POST['captcha_challenge'];
-        if ($captcha_challenge === $_SESSION['captcha_text']) {
-            unset($_SESSION['rate_limit_triggered']);
-            unset($_SESSION['request_count']);
-            header("Location: /");
-            exit();
-        } else {
-            header("Location: /blocked.php");
+    if (isset($_SESSION['rate_limit_triggered']) && $_SESSION['rate_limit_triggered']) {
+        if (isset($_POST['submit'])) {
+            $captcha_challenge = $_POST['captcha_challenge'];
+            if ($captcha_challenge === $_SESSION['captcha_text']) {
+                unset($_SESSION['rate_limit_triggered']);
+                unset($_SESSION['request_count']);
+                header("Location: /");
+                exit();
+            } else {
+                header("Location: /blocked.php");
+            }
         }
-    }
 ?>
 
 <?php require "other/header.php"; ?>
