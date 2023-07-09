@@ -2,7 +2,7 @@
 Privacy Respecting and Minimal Meta-Search Engine
 
 <div align=center>
-  <a href="https://github.com/avitld/SearchTLD/blob/main/LICENSE"><img src="https://img.shields.io/ github/license/avitld/SearchTLD?color=purple&style=for-the-badge"></a>
+  <a href="https://github.com/avitld/SearchTLD/blob/main/LICENSE"><img src="https://img.shields.io/github/license/avitld/SearchTLD?color=purple&style=for-the-badge"></a>
 </div>
 
 <div align=center>
