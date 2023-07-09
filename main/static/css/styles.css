@@ -41,8 +41,8 @@ body {
 }
 
 .title-container img {
-	height: 58px;
-	width: 58px;
+	height: 70px;
+	width: 70px;
 	margin-right: 10px;
 }
 
@@ -94,10 +94,6 @@ body {
 	border: 1px solid var(--search-border-color-h);
 }
 
-#purple {
-	color: rgb(86, 22, 135);
-}
-
 a {
 	color: var(--a-color);
 	text-decoration: none;
@@ -129,6 +125,14 @@ hr {
 	margin-left: 80px;
 	padding: 15px;
 	word-break: break-word;
+}
+
+.credit {
+	margin-top: 15%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: bolder;
 }
 
 .dym {
@@ -217,11 +221,11 @@ hr {
 }
 
 .msearch .mobimg {
-	max-width: 40px;
-	max-height: 40px;
+	max-width: 50px;
+	max-height: 50px;
 	margin-top: 0;
 	position: absolute;
-	top: 20px;
+	top: 15px;
 	left: 20px;
 }
 
@@ -365,9 +369,10 @@ input[type="text"] {
 	}
 
 	.msearch .mobimg {
-		max-width: 30px;
-		max-height: 30px;
-		top: 15px;
+		max-width: 40px;
+		max-height: 40px;
+		top: 10px;
+		left: 10px;
 	}
 
 	.msearch input[type="search"] {

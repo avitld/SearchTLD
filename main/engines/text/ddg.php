@@ -47,11 +47,14 @@
 					if ($link) { // Required for some reason..?
 						@$link = $link->textContent;
 						$link = "https://" . trim($link);
+						$link = cleanUrl($link);
 					}
 					$description = $xpath->evaluate('.//a[@class="result__snippet"]', $result)->item(0);
 					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
-	
-					if (!in_array($link, $uniqueLinks) && $title !== null) {
+					
+					$blacklist = isDomainBlacklisted($link);
+
+					if (!in_array($link, $uniqueLinks) && $title !== null && $blacklist === false) {
 							echo "<div class=\"a-result\">";
 							echo "	<a href=\"$link\">";
 							echo "  	<span>$link</span>";

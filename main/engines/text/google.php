@@ -48,8 +48,11 @@
 					@$link = $link->getAttribute("href");
 					$description = $xpath->query('.//div[contains(@class, "VwiC3b")]', $result)->item(0);
 					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
-	
-					if (!preg_match('/^\/search\?q=/', $link) && !in_array($link, $uniqueLinks)) {
+					
+					$link = cleanUrl($link);
+					$blacklist = isDomainBlacklisted($link);
+
+					if (!preg_match('/^\/search\?q=/', $link) && !in_array($link, $uniqueLinks) && $blacklist === false) {
 							echo "<div class=\"a-result\">";
 							echo "	<a href=\"$link\">";
 							echo "  	<span>$link</span>";

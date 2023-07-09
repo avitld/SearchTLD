@@ -30,6 +30,7 @@
 					@$title = htmlspecialchars($link->textContent,ENT_QUOTES,'UTF-8');
                     if ($link) { // Required for some reason..?
 						@$link = $link->getAttribute('href');
+						$link = cleanUrl($link);
 					}
                     $date = $xpath->query('.//span[contains(@class, "relativetime")]', $result)->item(0);
                     @$date = htmlspecialchars($date->textContent);

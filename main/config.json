@@ -1,4 +1,6 @@
 {
     "ratelimit": "enabled",
-    "hide_extension": "enabled"
+    "hide_extension": "enabled",
+    "cleanURLs": "enabled",
+    "blockHarmfulUrls": "enabled"
 }

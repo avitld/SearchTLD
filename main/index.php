@@ -39,6 +39,9 @@
 				<input type="hidden" name="pg" value="0">
 				<input type="hidden" name="tp" value="0">
 			</form>
-		</div>
+			<div class="credit">
+				<p>Logo by <b><a href="https://github.com/snowfoxsh" target="_blank">snowfoxsh</a></b></p>
+			</div>
+			</div>
 	</body>
 <?php require "other/footer.php"; ?>

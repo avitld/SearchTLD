@@ -46,6 +46,8 @@
 				@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
 				@$href = $result->getAttribute("href");
 
+				$link = cleanUrl($link);
+
 				if (!in_array($href, $uniqueLinks)) {
 		        		echo "<div class=\"a-result\">";
 		        		echo "	<a href=\"$href\" class=\"title\">$title</a>";

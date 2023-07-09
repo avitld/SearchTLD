@@ -49,11 +49,14 @@
 					$link = $xpath->query('.//a[contains(@class, "result-header")]', $result)->item(0);
 					if ($link) { // Required for some reason... again...
 						@$link = $link->getAttribute("href");
+						$link = cleanUrl($link);
 					}
 					$description = $xpath->query('.//p[@class="snippet-description"]', $result)->item(0);
 					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
-	
-					if ($title && !in_array($link, $uniqueLinks)) {
+					
+					$blacklist = isDomainBlacklisted($link);
+
+					if ($title && !in_array($link, $uniqueLinks) && $blacklist === false) {
 							echo "<div class=\"a-result\">";
 							echo " <a href=\"$link\">";
 							echo "  	<span>$link</span>";

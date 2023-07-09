@@ -9,14 +9,7 @@
 		<meta name="referrer" content="no-referrer">
 		<link rel="search" type="application/opensearchdescription+xml" title="SearchTLD" href="/opensearch.xml">
 
-		<link rel="icon" type="image/png" href="<?php 
-			$theme = isset($_COOKIE["theme"]) ? $_COOKIE["theme"] : 'dark';
-			if ($theme === 'light') {
-				echo 'static/img/logo_light.png';
-			} else {
-				echo 'static/img/logo_dark.png';
-			}
-		?>">
+		<link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
 
 		<link rel="stylesheet" type="text/css" href="<?php
 			$theme = isset($_COOKIE["theme"]) ? $_COOKIE["theme"] : 'dark';

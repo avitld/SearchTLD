@@ -43,6 +43,8 @@
                         $sublink = "https://reddit.com/" . $sub;
                     }
 
+					$link = cleanUrl($link);
+
                     if ($title && strpos($link, "reddit.com") !== false && !in_array($link, $uniqueLinks) && !($num >= 7)) {
 					    echo "<div class=\"a-result\">";
 						echo "  <span><a href=\"$sublink\">$sub</a></span><br/>";
