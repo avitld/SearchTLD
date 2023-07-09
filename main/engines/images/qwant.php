@@ -26,12 +26,11 @@
 			$xpath = new DOMXPath($dom);
 
 			$results = $xpath->query("//a[@rel='noopener']");
-			echo "<div class=\"image-container\">";
+			echo "<div class=\"image-container\" id=\"imageContainer\">";
 			foreach ($results as $result) {
 				$image = $xpath->evaluate(".//img", $result)[0];
 				
 				if ($image) {
-					// Method from LibreX
 					$encoded_url = $result->getAttribute("href");
 					$encoded_url_sp1 = explode("==/", $encoded_url)[1];
 					$encoded_url_sp2 = explode("?position", $encoded_url_sp1)[0];
@@ -45,7 +44,7 @@
 					@$thumbnail_src = urlencode($thumbnail_src);
 					
 					echo "<div class=\"i-result\">";
-					echo "	<a title=\"$alt\" href=\"$url\" target=\"_blank\">";
+					echo "	<a title=\"$alt\" href=\"preview.php?link=$thumbnail_src&title=$alt&href=$url\" target=\"_blank\">";
 					echo "		<img src=\"proxy-image.php?url=$thumbnail_src\">";
 					echo "	</a>";
 					echo "</div>";

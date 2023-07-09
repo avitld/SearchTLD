@@ -235,6 +235,7 @@ hr {
 	color: var(--fg-color-m);
 	display: flex;
   	align-items: center;
+	justify-content: center;
 	margin: 15px;
 	margin-bottom: 5px;
 }
@@ -293,6 +294,15 @@ hr {
 	filter: brightness(80%);
 }
 
+.preview {
+	margin-top: 5%;
+}
+
+.preview img {
+	max-width: 800px;
+	max-height: 900px;
+}
+
 .rbuttons {
 	margin-bottom: 35px;
 	margin-left: 20px;
@@ -325,7 +335,7 @@ select {
 	border-radius: 18px;
 }
 
-#save, #reset, #home, #verify {
+#save, #reset, #home, #verify, #download {
 	color: var(--fg-color-m);
 	font-size: 16px;
 	background-color: var(--search-bg-color);
@@ -380,6 +390,11 @@ input[type="text"] {
 		width: 90%;
 		margin-left: auto;
 		margin-right: auto;
+	}
+
+	.msearch .sbuttons {
+		align-items: center;
+		justify-content: center;
 	}
 
 	.msearch .sbuttons button {

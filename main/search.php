@@ -137,14 +137,17 @@
 					case 3:
 						require "engines/news/google.php";
 						$response = getnHTML($query, $page);
-						send_title($response);
 						send_news_response($response);
 						break;
 					case 4:
 						require "engines/forums/reddit.php";
 						require "engines/forums/stackexchange.php";
+						require "engines/forums/quora.php";
 						$response = getrHTML($query);
 						send_red_response($response);
+						
+						$response = getQuetreRes($query);
+						echoQResponse($response);
 
 						$response = getstHTML($query);
 						send_stack_response($response);

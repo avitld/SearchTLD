@@ -58,20 +58,4 @@
 			}
 		}
 	}
-
-	function send_title($response) {
-		if ($response) {
-			$dom = new DOMDocument();
-			@$dom->loadHTML($response);
-			$xpath = new DOMXPath($dom);
-
-			$result = $xpath->query('//span[contains(@class, "mgAbYb")]');
-			if ($result) {
-				$span = $xpath->query('.//span[contains(@class, "QXROIe")]', $result->item(0))->item(0);
-				@$span = $span->textContent;
-				echo "<p class=\"dym\" style=\"margin-left: 15px;\">" . $span . ": </p>";
-			}
-		}
-	}
-
 ?>
