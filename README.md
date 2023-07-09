@@ -1,5 +1,7 @@
-# SearchTLD 
-Privacy Respecting and Minimal Meta-Search Engine
+<div align=center>
+<h1>SearchTLD </h1>
+<h3>Privacy Respecting and Fast Meta-Search Engine</h3>
+</div>
 
 <div align=center>
   <a href="https://github.com/avitld/SearchTLD/blob/main/LICENSE"><img src="https://img.shields.io/github/license/avitld/SearchTLD?color=purple&style=for-the-badge"></a>
@@ -33,10 +35,14 @@ You can join manually join ``#searchtld:schizo.gr`` or through <a href="https://
 
 # Speed comparison: SearchTLD vs Other Search Engines
 
+<div align=center>
+
 |  | SearchTLD | Google | DuckDuckGo | Bing | Yahoo | Yandex |
 | --- | --- | --- | --- | --- | --- | --- |
 | Requests | 14 | 216 | 50 | 330 | 50 | 139 |
 | Time till website fully loaded | 2.04s | 42.66 s | 2.27s | 5.91s | 5.63s | 46.62 |
+
+</div>
 
 # Read our news!
 We now have a page dedicated to news about the website, including the source code of how we make the pages.
