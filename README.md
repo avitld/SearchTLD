@@ -1,8 +1,9 @@
 # SearchTLD 
 Privacy Respecting and Minimal Meta-Search Engine
 
-
-<a href="https://github.com/avitld/SearchTLD/blob/main/LICENSE"><img src="https://img.shields.io/github/license/avitld/SearchTLD?color=purple&style=for-the-badge"></a>
+<div align=center>
+  <a href="https://github.com/avitld/SearchTLD/blob/main/LICENSE"><img src="https://img.shields.io/ github/license/avitld/SearchTLD?color=purple&style=for-the-badge"></a>
+</div>
 
 <div align=center>
   <img src=".github/scr1.png" width="80%" height="80%">
@@ -10,7 +11,7 @@ Privacy Respecting and Minimal Meta-Search Engine
 </div>
 
 # Self Hosting
-There are [guides to self hosting on our wiki!](https://git.searchtld.com/Avitld/SearchTLD/wiki)
+There are [guides to self hosting on our wiki!](https://git.schizo.gr/Avitld/SearchTLD/wiki)
 
 # Join our Matrix Server!
 <b>We now also have a Matrix server which is preferred over IRC.<br/>
@@ -48,11 +49,10 @@ If you run an instance of SearchTLD and want it placed on the list open an issue
 | URL | Country |
 | --- | --- |
 | [searchtld.com](https://searchtld.com) | 🇬🇧 UK |
-| [search.schizo.gr](https://search.schizo.gr) | 🇩🇪 DE |
 
 ### Instance Rules
-```
-Don't incorporate any code in JS or code that is closed-source.
-Don't use a CDN.
-Don't Remove the original donation link.
-```
+<ul>
+  <li><b>Do not incorporate any proprietary code.</b></li>
+  <li><b>Do not use cloudflare.</b></li>
+  <li><b>Do not remove the original donation link.</b></li>
+</ul>
