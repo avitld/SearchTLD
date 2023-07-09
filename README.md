@@ -15,6 +15,22 @@
 # Self Hosting
 There are [guides to self hosting on our wiki!](https://git.schizo.gr/Avitld/SearchTLD/wiki)
 
+# Benefits of SearchTLD
+<ul>
+  <b>
+  <li>Cleans URLs of tracking elements.</li>
+  <li>Blocks harmful domains.</li>
+  <li>Fallbacks to multiple search engines to ensure uptime.</li>
+  <li>Rate Limiting for instances to protect against DDOS and Spam attacks.</li>
+  <li>Very easy to self-host using prepared install scripts.</li>
+  <li>Special queries (IP, UserAgent, Base64 Encoding, etc.).</li>
+  <li>Easy to use and beautiful UI.</li>
+  <li>No JavaScript, not a single line.</li>
+  <li>Works perfectly through tor.</li>
+  <li>Fully open-source and protected under the AGPL v3.0.</li>
+  </b>
+</ul>
+
 # Join our Matrix Server!
 <b>We now also have a Matrix server which is preferred over IRC.<br/>
 You can join manually join ``#searchtld:schizo.gr`` or through <a href="https://matrix.to/#/#searchtld:schizo.gr">this link</a></b>
