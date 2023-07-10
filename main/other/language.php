@@ -14,6 +14,8 @@
         if (isset($country['languages'])) {
             $code = trim($country['languages'][0]['iso639_1']);
             $name = trim($country['languages'][0]['name']);
+            $tld = trim(str_replace('.', '', $country['topLevelDomain'][0]));
+            $cname = trim($country['name']);
 
             $existingName = array_column($languages, 'name');
             if (in_array($name, $existingName)) {
@@ -22,7 +24,9 @@
 
             $languages[] = array(
                 'code' => $code,
-                'name' => $name
+                'name' => $name,
+                'tld' => $tld,
+                'cname' => $cname
             );
         }
     }

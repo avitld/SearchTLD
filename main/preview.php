@@ -1,31 +1,28 @@
 <?php require "other/header.php";
-	$url = $_GET["link"];
-	$title = htmlspecialchars($_REQUEST["title"], ENT_QUOTES, 'UTF-8');
-	$href = $_REQUEST["href"];
 
-
-	function proxyImage($url) {
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36');
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		$thumbnail = curl_exec($ch);
-		header("Content-Type: image/png");
-		echo $thumbnail;
-	}
+$url = trim($_GET["link"]);
+$title = htmlspecialchars($_REQUEST["title"], ENT_QUOTES, 'UTF-8');
+$href = htmlspecialchars($_REQUEST["href"], ENT_QUOTES, 'UTF-8');
 ?>
-		<title><?php echo $title ?> - SearchTLD</title>
-	</head>
-	<?php require "other/functions.php";
-		$config = readJson("config.json");
-	?>
-	<body>
-		<div class="preview" align=center>
-			<?php echo "<img src=\"$url\" />" ?>
-			<h2><?php echo $title ?></h2>
-			<?php echo "<a href=\"$url\" download title=\"$title.png\">"; ?><button id="download">Download</button></a>
-			<a href="<?php echo $href ?>" ><button id="download">Visit Original Webpage</button></a>
-		</div>
+
+<title><?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?> - SearchTLD</title>
+
+<?php require "other/functions.php";
+$config = readJson("config.json");
+$url = cleanUrl($url);
+$url = urlencode($url);
+?>
+
+<body>
+    <div class="preview" align=center>
+        <?php echo "<img src=\"/proxy-image.php?url=$url\" />"; ?>
+        <h2><?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?></h2>
+        <?php echo "<a href=\"/proxy-image.php?url=$url&alt=$title\" download>"; ?><button id="download">Download (Proxy)</button></a>
+        <?php echo "<a href=\"". urldecode($url) . "\" download>"; ?><button id="download">Download (Original)</button></a>
+        <br/>
+        <a href="<?php echo htmlspecialchars($href, ENT_QUOTES, 'UTF-8'); ?>"><button id="download">Visit Original Webpage</button></a>
+    </div>
+    
 <?php require "other/footer.php"; ?>
+
+

@@ -127,6 +127,35 @@
                 </select>
 				<br/>
 				<br/>
+                <label for="tld">Search Region:</label>
+                <select name="tld">
+                    <option value="com" 
+                    <?php
+                        if (!isset($_COOKIE['tld'])) {
+                            echo "selected";
+                        }
+                    ?>>All</option>
+                <?php
+                    require "other/language.php";
+                    foreach ($languages as $language) { 
+                        if ($tld) {
+                            $name = $language['cname'];
+                            $tld = $language['tld'];
+    
+                            $selected = '';
+                            if (isset($_COOKIE['tld'])) {
+                                if ($_COOKIE['tld'] === $tld) {
+                                    $selected = 'selected';
+                                }
+                            }
+    
+                            echo "<option value=\"$tld\" $selected>$name</option>";
+                        }
+                    }
+                ?>
+                </select>
+                <br/>
+                <br/>
                 <button type="submit" name="save" id="save">Save</button>
                 <button type="submit" name="reset" id="reset">Reset</button>
                 <br/>

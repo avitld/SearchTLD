@@ -45,45 +45,13 @@
 					
 					echo "<div class=\"i-result\">";
 					echo "	<a title=\"$alt\" href=\"preview.php?link=$thumbnail_src&title=$alt&href=$url\" target=\"_blank\">";
-					echo "		<img src=\"proxy-image.php?url=$thumbnail_src\">";
+					echo "		<img src=\"proxy-image.php?url=$thumbnail_src&alt=$alt\">";
 					echo "	</a>";
 					echo "</div>";
 					
 				}
 			}
 			echo "</div>";
-		}
-	}
-
-	function send_single_image_response($response) {
-		if (!empty($response)) {
-			$dom = new DOMDocument();
-			@$dom->loadHTML($response);
-			$xpath = new DOMXPath($dom);
-
-			$results = $xpath->query("//a[@rel='noopener']");
-			$counter = 0;
-
-			foreach ($results as $result) {
-				$image = $xpath->evaluate(".//img", $result)[0];
-			
-				if ($image) {
-					$thumbnail_src = urlencode($image->getAttribute("src"));
-					@$thumbnail_src = urldecode(htmlspecialchars($thumbnail_src));
-					@$thumbnail_src = urlencode($thumbnail_src);
-			
-					echo "<div class=\"simage-container\">";
-					echo "		<img src=\"proxy-image.php?url=$thumbnail_src\">";
-					echo "</div>";
-			
-					$counter++; // Increment the counter
-			
-					if ($counter >= 1) {
-						break; // Break the loop after the first iteration
-					}
-				}
-			}
-			
 		}
 	}
 

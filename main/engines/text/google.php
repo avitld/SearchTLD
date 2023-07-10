@@ -2,7 +2,13 @@
 	function getHTML($query, $page) {
 		$fpage = $page . "0";
 		
-		$url = "https://www.google.com/search?q=" . urlencode($query) . "&start=" . urlencode($fpage) . "&num=12&filter=0&nfpr=1";
+		if (isset($_COOKIE["tld"])) {
+			$tld = $_COOKIE["tld"];
+		} else {
+			$tld = "com";
+		}
+
+		$url = "https://www.google.$tld/search?q=" . urlencode($query) . "&start=" . urlencode($fpage) . "&num=12&filter=0&nfpr=1";
 
 		if (isset($_COOKIE["lang"])) {
 			$lang = trim(htmlspecialchars($_COOKIE["lang"]));
@@ -15,6 +21,14 @@
 			$url .= "&safe=medium";
 		} else {
 			$url .= "&safe=off";
+		}
+
+		// Check if URL exists usinjg headers.
+
+		$headers = @get_headers($url);
+
+		if(strpos( $headers[0], '200') === false) {
+			$url = str_replace($tld, "com", $url);
 		}
 		
 		$ch = curl_init($url);

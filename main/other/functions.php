@@ -35,7 +35,7 @@
     }
 
     function cleanUrl($url) {
-        global $config;
+        $config = readJson('config.json');
 
         if ($config['cleanURLs'] == 'enabled') {
             $api = "https://api.cleanlinks.ai/v1/urlclean";
