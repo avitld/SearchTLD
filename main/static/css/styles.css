@@ -17,12 +17,15 @@ body {
 	padding: 10px;
 	background-color: var(--f-bg);
 	border-top: 1px solid var(--border-color);
+	user-select: none;
 }
 
 .footer a {
 	color: var(--a-f-color);
 	font-weight: normal;
 	margin: 10px;
+	user-select: text;
+	
 }
 
 .indexform {
@@ -108,6 +111,12 @@ button {
 	margin-bottom: 45px;
 }
 
+.nores {
+	margin-left: 80px;
+	font-weight: bolder;
+	font-size: 24px;
+}
+
 .flogo {
 	height: 16px;
 	margin-right: 3px;
@@ -128,10 +137,11 @@ hr {
 }
 
 .credit {
-	margin-top: 15%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	position: absolute;
+	bottom: 30px;
+	text-align: center;
+	left: 0;
+	width: 100%;
 	font-weight: bolder;
 }
 
@@ -382,12 +392,24 @@ input[type="text"] {
 		width: 80%;
 	}
 
+	.pagebtn {
+		margin-left: 0;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
 	.infobox {
 		position: relative;
 		width: 80%;
 		margin-left: auto;
 		margin-right: auto;
 		margin-bottom: 10px;
+	}
+
+	.nores {
+		text-align: center;
+		margin: 0;
 	}
 
 	.a-result {
@@ -446,5 +468,17 @@ input[type="text"] {
 	.dym {
 		margin-left: auto;
 		margin-right: auto;
+	}
+
+	.pagebtn {
+		margin-left: 0;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.nores {
+		margin: 0;
+		text-align: center;
 	}
 }

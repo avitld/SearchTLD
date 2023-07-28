@@ -2,5 +2,13 @@
     "ratelimit": "enabled",
     "hide_extension": "enabled",
     "cleanURLs": "enabled",
-    "blockHarmfulUrls": "enabled"
+    "blockHarmfulUrls": "enabled",
+    "googleAPI": {
+    	"enabled": "disabled",
+    	"apiKey": "your-api-key"
+    },
+    "tor": {
+        "enabled": "disabled",
+        "instanceURL": "http://example.onion"
+    }
 }

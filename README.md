@@ -13,7 +13,7 @@
 </div>
 
 # Self Hosting
-There are [guides to self hosting on our wiki!](https://git.schizo.gr/Avitld/SearchTLD/wiki)
+There are [guides to self hosting on our wiki!](https://codeberg.org/avitld/SearchTLD/wiki)
 
 # Benefits of SearchTLD
 <ul>
@@ -33,7 +33,7 @@ There are [guides to self hosting on our wiki!](https://git.schizo.gr/Avitld/Sea
 
 # Join our Matrix Server!
 <b>We now also have a Matrix server which is preferred over IRC.<br/>
-You can join manually join ``#searchtld:schizo.gr`` or through <a href="https://matrix.to/#/#searchtld:schizo.gr">this link</a></b>
+You can join manually join ``#schizos:schizo.gr`` or through <a href="https://matrix.to/#/#schizos:schizo.gr">this link</a></b>
 
 ## Join our IRC!
 

@@ -1,5 +1,6 @@
 <?php
 	function getHTML($query, $page) {
+		global $config;
 		$fpage = $page . "0";
 		
 		if (isset($_COOKIE["tld"])) {
@@ -10,6 +11,11 @@
 
 		$url = "https://www.google.$tld/search?q=" . urlencode($query) . "&start=" . urlencode($fpage) . "&num=12&filter=0&nfpr=1";
 
+		if ($config['googleAPI']['enabled'] == 'enabled') {
+			$apikey = $config['googleAPI']['apiKey'];
+			$url = "https://www.googleapis.com/customsearch/v1?key=$apikey&q=" . urlencode($query);
+		}
+		
 		if (isset($_COOKIE["lang"])) {
 			$lang = trim(htmlspecialchars($_COOKIE["lang"]));
 			$url .= "&hl=" . urlencode($lang) . "&lr=" . urlencode($lang);
@@ -45,41 +51,68 @@
 	}
 
 	function send_text_response($response) {
-		if (!empty($response)) {
-			$dom = new DOMDocument();
-			@$dom->loadHTML($response);
-			$xpath = new DOMXPath($dom);
+		global $config;
+		if ($config['googleAPI']['enabled'] !== 'enabled') {
+			if (!empty($response)) {
+				$dom = new DOMDocument();
+				@$dom->loadHTML($response);
+				$xpath = new DOMXPath($dom);
 
-			$results = $xpath->query('//div[contains(@class, "g")]');
-			$uniqueLinks = [];
+				$results = $xpath->query('//div[contains(@class, "g")]');
+				$uniqueLinks = [];
+				$resultNum = 0;
 
-			if ($results) {
-				foreach ($results as $result) {
-					$title = $xpath->query('.//h3', $result)->item(0);
-					@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
-					$linkel = $xpath->query('.//div[contains(@class, "yuRUbf")]', $result)->item(0);
-					$link = $xpath->query('.//a', $linkel)->item(0);
-					@$link = $link->getAttribute("href");
-					$description = $xpath->query('.//div[contains(@class, "VwiC3b")]', $result)->item(0);
-					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
-					
-					$link = cleanUrl($link);
-					$blacklist = isDomainBlacklisted($link);
+				if ($results) {
+					foreach ($results as $result) {
+						$title = $xpath->query('.//h3', $result)->item(0);
+						@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
+						$linkel = $xpath->query('.//div[contains(@class, "yuRUbf")]', $result)->item(0);
+						$link = $xpath->query('.//a', $linkel)->item(0);
+						@$link = $link->getAttribute("href");
+						$description = $xpath->query('.//div[contains(@class, "VwiC3b")]', $result)->item(0);
+						@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
+						
+						$link = cleanUrl($link);
+						$blacklist = isDomainBlacklisted($link);
 
-					if (!preg_match('/^\/search\?q=/', $link) && !in_array($link, $uniqueLinks) && $blacklist === false) {
-							echo "<div class=\"a-result\">";
-							echo "	<a href=\"$link\">";
-							echo "  	<span>$link</span>";
-							echo "		<h2>$title</h2>";
-							echo "	</a>";
-							echo "  <p>$description</p>";
-							echo "</div>";
-	
-							$uniqueLinks[] = $link;
+						if (!preg_match('/^\/search\?q=/', $link) && !in_array($link, $uniqueLinks) && $blacklist === false) {
+								echo "<div class=\"a-result\">";
+								echo "	<a href=\"$link\">";
+								echo "  	<span>$link</span>";
+								echo "		<h2>$title</h2>";
+								echo "	</a>";
+								echo "  <p>$description</p>";
+								echo "</div>";
+		
+								$uniqueLinks[] = $link;
+								$resultNum++;
+						}
 					}
+
+					if ($resultNum == 0) {
+						echo "<p class=\"nores\">No results found, try a different query.</p>";
+					}
+				} else {
+					echo "<p class=\"nores\">No results found, try a different query.</p>";
 				}
+			}
+		} else {
+			if (isset($data['items'])) {
+			    foreach ($data['items'] as $item) {
+			        $title = htmlspecialchars($item['title']);
+			        $link = $item['link'];
+			        $description = htmlspecialchars($item['snippet']);
+			
+			        echo "<div class=\"a-result\">";
+					echo "	<a href=\"$link\">";
+					echo "  	<span>$link</span>";
+					echo "		<h2>$title</h2>";
+					echo "	</a>";
+					echo "  <p>$description</p>";
+					echo "</div>";
+			    }
 			} else {
-				echo "<p class=\"dym\">No results found.</p>";
+			    echo "<p class=\"nores\">No results found, try a different query.</p>";
 			}
 		}
 	}

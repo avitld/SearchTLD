@@ -3,11 +3,18 @@
 ?>
 
 		<div class="footer">
-			<a href="https://git.schizo.gr/Avitld/SearchTLD">Source</a>
+			<a href="https://codeberg.org/avitld/SearchTLD">Source Code</a>
 			<a href="/settings<?php if ($config['hide_extension'] !== 'enabled') {
 				echo ".php";
-			}?>">Config</a>
-			<a target="_blank" href="https://schizo.gr/support/">Donate</a>
+			}?>">Settings</a>
+			<a target="_blank" href="https://schizo.gr/support/">Support Us</a>
+			<a target="_blank" href="https://blog.searchtld.com">Changelog</a>
+			<?php
+				if ($config["tor"]["enabled"] == "enabled") {
+					$torInstance = $config["tor"]["instanceURL"];
+					echo "<a href=\"$torInstance\">Tor</a>";
+				}
+			?>
 		</div>
 	</body>
 </html>

@@ -27,7 +27,7 @@
 			'image/apng',
 			'image/x-icon',
 			'image/webp',
-			'image/svg',
+			'image/svg+xml',
 			'image/gif',
 			'image/bmp'
 		);

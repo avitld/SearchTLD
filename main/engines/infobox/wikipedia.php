@@ -32,6 +32,8 @@ function send_infobox($query) {
 
                 if (isset($page['thumbnail'])) {
                     $thumbnailUrl = $page['thumbnail']['source'];
+                } else {
+                	$thumbnailUrl = false;
                 }
 
                 $description = substr($page['extract'], 0, 450);

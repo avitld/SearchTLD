@@ -38,6 +38,7 @@
 
             $results = $xpath->query('//div[contains(@class, "result")]');
             $uniqueLinks = [];
+			$resultNum = 0;
             
 			if ($results) {
 				foreach ($results as $result) {
@@ -64,10 +65,15 @@
 							echo "</div>";
 	
 							$uniqueLinks[] = $link;
+							$resultNum++;
 					}
 				}
+
+				if ($resultNum == 0) {
+					echo "<p class=\"nores\">No results found, try a different query.</p>";
+				}
 			} else {
-				echo "<p class=\"dym\">No results found.</p>";
+				echo "<p class=\"nores\">No results found, try a different query.</p>";
 			}
 		}
 	}
