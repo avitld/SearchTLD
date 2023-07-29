@@ -62,6 +62,7 @@
 							echo "		<h2>$title</h2>";
 							echo "	</a>";
 							echo "  <p>$description</p>";
+							echo "  <span id=\"engine\">DuckDuckGo</span>";
 							echo "</div>";
 	
 							$uniqueLinks[] = $link;
@@ -70,41 +71,11 @@
 				}
 
 				if ($resultNum == 0) {
-					echo "<p class=\"nores\">No results found, try a different query.</p>";
+					echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
 				}
 			} else {
-				echo "<p class=\"nores\">No results found, try a different query.</p>";
+				echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
 			}
-		}
-	}
-
-	function ddgdown($response) {
-		if (!empty($response)) {
-			$dom = new DOMDocument();
-			@$dom->loadHTML($response);
-			$xpath = new DOMXPath($dom);
-	
-			$results = $xpath->query('//div[contains(@class, "result")]');
-	
-			if (!$results->length > 0) {
-				return false;
-			}
-
-			foreach ($results as $result) {
-				$title = $xpath->evaluate('.//h2[contains(@class, "result__title")]', $result)->item(0);
-				@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
-
-				if ($title->length > 1) {
-					return true;
-				} else {
-					return false;
-				}
-
-				break;
-			}
-
-		} else {
-			return false;
 		}
 	}
 ?>

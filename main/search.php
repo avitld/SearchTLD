@@ -72,7 +72,9 @@
 		</div>
 		<?php 
 			if ($type == 0) {
+			
 				send_infobox($query);
+				
 				$gresponse = getGrammar($query);
 				if ($gresponse) {
 					echoCorrection($gresponse, $query);
@@ -94,49 +96,40 @@
 				}
 			}
 		?>
-		<div class="results">
+		<div class="results" id="results">
 			<?php
 				switch ($type) {
 					case 0:
 						if ($page > 5) {
 							require "engines/text/brave.php";
 							$response = getbHTML($query, $page);
+							
 							send_text_th_response($response);
 						} elseif ($page < 5 && $page > 1) {
 							require "engines/text/ddg.php";
 							$response = getdHTML($query, $page);
+							
 							send_text_sec_response($response);
 						} else {
-							$fallback = check_for_fallback($response);
-							if ($fallback){
-								send_text_response($response);
-							} else {
-								require "engines/text/ddg.php";
-								$response = getdHTML($query, $page);
-								$fallback = ddgdown($response);
-								if ($fallback) {
-									send_text_sec_response($response);
-								} else {
-									require "engines/text/brave.php";
-									$response = getbHTML($query, $page);
-									send_text_th_response($response);
-								}
-							}
+							send_text_response($response);
 						}
 						break;
 					case 1:
 						require "engines/images/qwant.php";
 						$response = getiHTML($query, $page);
+						
 						send_image_response($response);
 						break;
 					case 2:
 						require "engines/videos/invidious.php";
 						$response = getvJson($query);
+						
 						send_video_response($response);
 						break;
 					case 3:
 						require "engines/news/google.php";
 						$response = getnHTML($query, $page);
+						
 						send_news_response($response);
 						break;
 					case 4:
@@ -144,6 +137,7 @@
 						require "engines/forums/stackexchange.php";
 						require "engines/forums/quora.php";
 						$response = getrHTML($query);
+						 
 						send_red_response($response);
 						
 						$response = getQuetreRes($query);
@@ -157,7 +151,9 @@
 						break;
 				}
 			?>
-			<div class="rbuttons">
+			<script src="scripts/fallback-text.js"></script>
+		</div>
+		<div class="rbuttons">
 				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
 					<input name="q" value="<?php echo $query; ?>" type="hidden">
 					<?php
@@ -172,7 +168,6 @@
 					?>
 					<input name="tp" value="<?php echo $type; ?>" type="hidden">
 				</form>
-			</div>
 		</div>
 
 <?php require "other/footer.php"; ?>

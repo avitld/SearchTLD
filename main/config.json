@@ -1,6 +1,6 @@
 {
     "ratelimit": "enabled",
-    "hide_extension": "enabled",
+    "hide_extension": "disabled",
     "cleanURLs": "enabled",
     "blockHarmfulUrls": "enabled",
     "googleAPI": {

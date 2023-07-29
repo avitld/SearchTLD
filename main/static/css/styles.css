@@ -373,6 +373,12 @@ input[type="text"] {
 	color: var(--fg-color-m);
 }
 
+#fallbacking {
+	margin-left: 80px;
+	font-weight: bolder;
+	font-size: 24px;
+}
+
 @media only screen and (max-width: 750px) {
 	body {
 		font-size: 14px;
@@ -408,6 +414,11 @@ input[type="text"] {
 	}
 
 	.nores {
+		text-align: center;
+		margin: 0;
+	}
+
+	#fallbacking {
 		text-align: center;
 		margin: 0;
 	}
@@ -480,5 +491,10 @@ input[type="text"] {
 	.nores {
 		margin: 0;
 		text-align: center;
+	}
+
+	#fallbacking {
+		text-align: center;
+		margin: 0;
 	}
 }

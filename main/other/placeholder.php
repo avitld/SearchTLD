@@ -1,6 +1,6 @@
 <?php
 
-//by chadgpt
+// placeholders by chadgpt
 $searchPlaceholders = array(
     "What will you search for today?",
     "Looking for something specific?",

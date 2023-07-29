@@ -63,7 +63,8 @@
 							echo "  	<span>$link</span>";
 							echo "		<h2>$title</h2>";
 							echo "	</a>";
-							echo "  <p>$description</a>";
+							echo "  <p>$description</p>";
+							echo "  <span id=\"engine\">Brave</span>";
 							echo "</div>";
 	
 							$uniqueLinks[] = $link;
@@ -72,10 +73,10 @@
 				}
 
 				if ($resultNum == 0) {
-					echo "<p class=\"nores\">No results found, try a different query.</p>";
+					echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
 				}
 			} else {
-				echo "<p class=\"nores\">No results found, try a different query.</p>";
+				echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
 			}
 		}
 	}

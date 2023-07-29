@@ -25,7 +25,7 @@ There are [guides to self hosting on our wiki!](https://codeberg.org/avitld/Sear
   <li>Very easy to self-host using prepared install scripts.</li>
   <li>Special queries (IP, UserAgent, Base64 Encoding, etc.).</li>
   <li>Easy to use and beautiful UI.</li>
-  <li>No JavaScript, not a single line.</li>
+  <li>Libre JavaScript. (Not required)</li>
   <li>Works perfectly through tor.</li>
   <li>Fully open-source and protected under the AGPL v3.0.</li>
   </b>

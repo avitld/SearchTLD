@@ -82,6 +82,7 @@
 								echo "		<h2>$title</h2>";
 								echo "	</a>";
 								echo "  <p>$description</p>";
+								echo "<span id=\"engine\">Google</span>";
 								echo "</div>";
 		
 								$uniqueLinks[] = $link;
@@ -90,10 +91,10 @@
 					}
 
 					if ($resultNum == 0) {
-						echo "<p class=\"nores\">No results found, try a different query.</p>";
+						echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
 					}
 				} else {
-					echo "<p class=\"nores\">No results found, try a different query.</p>";
+					echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
 				}
 			}
 		} else {
@@ -112,39 +113,8 @@
 					echo "</div>";
 			    }
 			} else {
-			    echo "<p class=\"nores\">No results found, try a different query.</p>";
+			    echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
 			}
-		}
-	}
-
-	function check_for_fallback($response) {
-		if (!empty($response)) {
-			$dom = new DOMDocument();
-			@$dom->loadHTML($response);
-			$xpath = new DOMXPath($dom);
-	
-			$results = $xpath->query('//div[contains(@class, "g")]');
-	
-			if (!$results->length > 0) {
-				return false;
-			}
-
-			foreach ($results as $result) {
-				$linkel = $xpath->query('.//div[contains(@class, "yuRUbf")]', $result)->item(0);
-				$link = $xpath->query('.//a', $linkel)->item(0);
-				@$link = $link->getAttribute("href");
-
-				if ($link == "#") {
-					return false;
-				} else {
-					return true;
-				}
-
-				break;
-			}
-
-		} else {
-			return false;
 		}
 	}
 

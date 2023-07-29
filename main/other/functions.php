@@ -9,16 +9,12 @@
     
     function detect_special_query($q)
     {
-        // Code by pafefs
+        // Original code by pafefs, modified by avitld
         $modified_query = str_replace(" ","",strtolower($q));
-        if(strpos($modified_query,"my") !== false)
-        {
-            if(strpos($modified_query, "ip"))
-            {
+        if (strpos($modified_query,"my") !== false && strpos($modified_query,"what") !== false && strpos($modified_query,"is") !== false ){
+            if (strpos($modified_query, "ip")) {
                 return 1;
-            }
-            elseif(strpos($modified_query, "useragent") || strpos($modified_query, "user-agent") || strpos($modified_query, "ua"))
-            {
+            } elseif (strpos($modified_query, "useragent") || strpos($modified_query, "user-agent") || strpos($modified_query, "ua")) {
                 return 2;
             }
         }
@@ -35,7 +31,7 @@
     }
 
     function cleanUrl($url) {
-        $config = readJson('config.json');
+        global $config;
 
         if ($config['cleanURLs'] == 'enabled') {
             $api = "https://api.cleanlinks.ai/v1/urlclean";

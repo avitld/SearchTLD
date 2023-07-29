@@ -16,9 +16,29 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-git clone https://codeberg.org/avitld/SearchTLD.git tempstld
+echo "Pick a mirror"
+echo "Options: "
+echo "Codeberg (Most stable)"
+echo "CodeAtomic (Most up to date)"
+echo "GitHub (Fastest)"
+read -p "Choice: " mirror
+mirror_lower=$(echo $mirror | tr '[:upper:]' '[:lower:]')
+
+read -p "Clone blog aswell? " blogc
+
+if [ $mirror_lower == "codeberg" ]; then
+    git clone https://codeberg.org/avitld/SearchTLD tempstld
+elif [ $mirror_lower == "codeatomic" ]; then
+    git clone https://codeatomic.net/avitld/SearchTLD tempstld
+else
+    git clone https://github.com/avitld/SearchTLD tempstld
+fi
 rm -rf /var/www/SearchTLD
 mv tempstld/main /var/www/SearchTLD
+if [[ $blogc == [Yy] ]]; then
+    rm -rf /var/www/blog
+    mv tempstld/blog /var/www/blog
+fi
 rm -rf tempstld
 
 sleep 0.5

@@ -1,0 +1,65 @@
+let method;
+const resultsContainer = document.getElementById('results');
+const noRes = document.getElementById('nores');
+let interval = 0;
+
+function countResults() {
+    return document.querySelectorAll('.a-result').length;
+}
+
+function fetchFallbackResults() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('q');
+    const page = urlParams.get('pg');
+
+    if (query && page) {
+        const url = `../other/fallback.php?q=${encodeURIComponent(query)}&pg=${encodeURIComponent(page)}&me=${encodeURIComponent(method)}`;
+
+        fetch(url)
+        .then(response => response.text())
+        .then(html => {
+            resultsContainer.innerHTML += html;
+        })
+        .catch(error => {
+            console.error('Error executing fallback:', error);
+        })
+        .finally(() => {
+            setInterval(() => {
+                const fallbackingMessage = document.getElementById('fallbacking');
+                if (fallbackingMessage) {
+                    fallbackingMessage.remove();
+                }
+            }, 10000);
+        });
+    }
+}
+
+function runFallbackCheck() {
+    if ( countResults() < 2 && !noRes) {
+        if (method !== "duck") {
+            method = "duck";
+        } else {
+            method = "brave";
+        }
+    
+        fetchFallbackResults();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    if ( countResults() < 2 ) {
+        const fallbackingMessage = document.createElement('p');
+        fallbackingMessage.id = 'fallbacking';
+        fallbackingMessage.textContent = 'Results failed, testing fallbacks. Please wait';
+        resultsContainer.appendChild(fallbackingMessage);
+
+        runFallbackCheck();
+        setInterval(() => {
+            if (interval < 1) {
+                runFallbackCheck();
+                interval++
+            }
+        }, 5000);
+    }
+
+});
