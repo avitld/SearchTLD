@@ -70,7 +70,7 @@ If you run an instance of SearchTLD and want it placed on the list open an issue
 
 | URL | Country |
 | --- | --- |
-| [searchtld.com](https://searchtld.com) | 🇬🇧 UK |
+| [searchtld.com](https://searchtld.com) | 🇩🇪 DE |
 
 ### Instance Rules
 <ul>

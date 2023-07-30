@@ -15,8 +15,6 @@
 	$query = htmlspecialchars($_REQUEST["q"],ENT_QUOTES,'UTF-8');
 	$page = htmlspecialchars($_REQUEST["pg"],ENT_QUOTES,'UTF-8');
 	$type = htmlspecialchars($_REQUEST["tp"],ENT_QUOTES,'UTF-8');
-
-	$response = getHTML(htmlspecialchars($query), $page);
 ?>
 		<title><?php echo $query ?> - SearchTLD</title>
 	</head>
@@ -111,7 +109,26 @@
 							
 							send_text_sec_response($response);
 						} else {
-							send_text_response($response);
+							if (isset($_COOKIE['searcher'])) {
+								$searcher = $_COOKIE['searcher'];
+								if ($searcher == "ddg") {
+									require "engines/text/ddg.php";
+									$response = getdHTML($query, $page);
+									
+									send_text_sec_response($response);
+								} elseif ($searcher == "brave") {
+									require "engines/text/brave.php";
+									$response = getbHTML($query, $page);
+									
+									send_text_th_response($response);
+								} else {
+									$response = getHTML(htmlspecialchars($query), $page);
+									send_text_response($response);
+								}
+							} else {
+								$response = getHTML(htmlspecialchars($query), $page);
+								send_text_response($response);
+							}
 						}
 						break;
 					case 1:

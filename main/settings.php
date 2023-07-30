@@ -14,6 +14,7 @@
                 setcookie("theme", "dark", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("border", "on", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("querymethod", "GET", time() + (10 * 365 * 24 * 60 * 60));
+                setcookie("searcher", "google", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("safesearch", "", time() - 1000);
 
                 global $config;
@@ -58,8 +59,7 @@
                     $themes = "<option value=\"dark\">Night</option>
                     <option value=\"light\">Light</option>";
 
-                    if (isset($_COOKIE["theme"]))
-                    {
+                    if (isset($_COOKIE["theme"])) {
                         $theme_cookie = $_COOKIE["theme"];
                         $themes = str_replace($theme_cookie . "\"", $theme_cookie . "\" selected", $themes);
                     }
@@ -73,8 +73,7 @@
                     $borders = "<option value=\"on\">Enabled</option>
                     <option value=\"off\">Disabled</option>";
 
-                    if (isset($_COOKIE["border"]))
-                    {
+                    if (isset($_COOKIE["border"])) {
                         $border_cookie = $_COOKIE["border"];
                         $borders = str_replace($border_cookie . "\"", $border_cookie . "\" selected", $borders);
                     }
@@ -89,8 +88,7 @@
                     $methods = "<option value=\"GET\">GET</option>
                     <option value=\"POST\">POST</option>";
 
-                    if (isset($_COOKIE["querymethod"]))
-                    {
+                    if (isset($_COOKIE["querymethod"])) {
                         $method_cookie = $_COOKIE["querymethod"];
                         $methods = str_replace($method_cookie . "\"", $method_cookie . "\" selected", $methods);
                     }
@@ -152,6 +150,23 @@
                             echo "<option value=\"$tld\" $selected>$name</option>";
                         }
                     }
+                ?>
+                </select>
+                <br/>
+                <br/>
+                <label for="searcher">Primary Search Engine:</label>
+				<select name="searcher">
+				<?php
+                    $engines = "<option value=\"google\">Google</option>
+                    <option value=\"ddg\">DuckDuckGo</option>
+                    <option value=\"brave\">Brave Search</option>";
+
+                    if (isset($_COOKIE["searcher"])) {
+                        $search_cookie = $_COOKIE["searcher"];
+                        $engines = str_replace($search_cookie . "\"", $search_cookie . "\" selected", $engines);
+                    }
+
+                    echo $engines;
                 ?>
                 </select>
                 <br/>
