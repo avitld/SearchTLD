@@ -6,6 +6,7 @@
 		
 		if (!function_exists('cleanUrl')) {
 			require 'other/functions.php';
+			$config = readJson('config.json');
 		}
 
 		$url = cleanUrl($url);

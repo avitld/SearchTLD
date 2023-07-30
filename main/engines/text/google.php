@@ -1,6 +1,7 @@
 <?php
 	function getHTML($query, $page) {
 		global $config;
+		
 		$fpage = $page . "0";
 		
 		if (isset($_COOKIE["tld"])) {
@@ -43,6 +44,17 @@
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		if ($config['proxyIP'] !== 'disabled') {
+			$port = $config['proxyPort'];
+			$ip = $config['proxyIP'];
+			if ($config['proxyLogIn'] !== "user:password") {
+				$userpass = $config['proxyLogIn'];
+				curl_setopt($ch, CURLOPT_PROXYUSERPWD, $userpass);
+			}
+
+			curl_setopt($ch, CURLOPT_PROXY, $ip);
+			curl_setopt($ch, CURLOPT_PROXYPORT, $config);
+		}
 		
 		$response = curl_exec($ch);
 
@@ -98,6 +110,7 @@
 				}
 			}
 		} else {
+			$data = $response;
 			if (isset($data['items'])) {
 			    foreach ($data['items'] as $item) {
 			        $title = htmlspecialchars($item['title']);

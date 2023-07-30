@@ -3,6 +3,9 @@
     "hide_extension": "disabled",
     "cleanURLs": "enabled",
     "blockHarmfulUrls": "enabled",
+    "proxyIP": "disabled",
+    "proxyPort": "49155",
+    "proxyLogIn": "user:password",
     "googleAPI": {
     	"enabled": "disabled",
     	"apiKey": "your-api-key"

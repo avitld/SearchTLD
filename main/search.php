@@ -113,7 +113,6 @@
 						} else {
 							send_text_response($response);
 						}
-						echo "<script src=\"scripts/fallback-text.js\"></script>";
 						break;
 					case 1:
 						require "engines/images/qwant.php";
@@ -152,6 +151,7 @@
 						break;
 				}
 			?>
+			<script src="scripts/fallback-text.js"></script>"
 		</div>
 		<div class="rbuttons">
 				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">

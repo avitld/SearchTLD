@@ -1,5 +1,7 @@
 <?php
 	function getbHTML($query, $page) {
+		global $config;
+			
 		if (intval($page) > 5) {
 			$page = intval($page) - 5;
 		}
@@ -25,6 +27,17 @@
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		if ($config['proxyIP'] !== 'disabled') {
+			$port = $config['proxyPort'];
+			$ip = $config['proxyIP'];
+			if ($config['proxyLogIn'] !== "user:password") {
+				$userpass = $config['proxyLogIn'];
+				curl_setopt($ch, CURLOPT_PROXYUSERPWD, $userpass);
+			}
+
+			curl_setopt($ch, CURLOPT_PROXY, $ip);
+			curl_setopt($ch, CURLOPT_PROXYPORT, $config);
+		}
 		
 		$response = curl_exec($ch);
 
