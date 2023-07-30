@@ -17,7 +17,7 @@
                 setcookie("searcher", "google", time() + (10 * 365 * 24 * 60 * 60));
                 setcookie("safesearch", "", time() - 1000);
 
-                global $config;
+                
 
                 $extension = '';
 
@@ -159,6 +159,7 @@
 				<?php
                     $engines = "<option value=\"google\">Google</option>
                     <option value=\"ddg\">DuckDuckGo</option>
+                    <option value=\"bing\">Bing</option>
                     <option value=\"brave\">Brave Search</option>";
 
                     if (isset($_COOKIE["searcher"])) {

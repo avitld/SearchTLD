@@ -39,10 +39,12 @@ function fetchFallbackResults() {
 
 function runFallbackCheck() {
     if ( countResults() < 2 && !noRes && type == 0) {
-        if (method !== "duck") {
+        if (method !== "duck" && method !== "brave" && method !== "bing") {
             method = "duck";
-        } else {
+        } else if (method !== "brave" && method !== "bing") {
             method = "brave";
+        } else {
+            method = "bing";
         }
 
         fetchFallbackResults();
@@ -57,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         resultsContainer.appendChild(fallbackingMessage);
         runFallbackCheck();
         setInterval(() => {
-            if (interval < 1) {
+            if (interval < 2) {
                 runFallbackCheck();
                 interval++
             }

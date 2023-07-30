@@ -121,6 +121,11 @@
 									$response = getbHTML($query, $page);
 									
 									send_text_th_response($response);
+								} elseif ($searcher == "bing") {
+									require "engines/text/bing.php";
+									$response = getbgHTML($query, $page);
+
+									send_text_bing_response($response);
 								} else {
 									$response = getHTML(htmlspecialchars($query), $page);
 									send_text_response($response);

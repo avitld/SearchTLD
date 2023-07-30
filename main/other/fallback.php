@@ -16,6 +16,11 @@
         $response = getdHTML($query, $page);
                                     
         send_text_sec_response($response);
+    } elseif ($method == "bing") {
+        require "../engines/text/bing.php";
+        $response = getbgHTML($query, $page);
+
+        send_text_bing_response($response);
     } else {
         echo "Invalid method. (JS Fallback)";
     }
