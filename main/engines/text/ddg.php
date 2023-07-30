@@ -44,7 +44,10 @@
 	}
 
 	function send_text_sec_response($response) {
+		global $config;
+
 		if (!empty($response)) {
+
 			$dom = new DOMDocument();
 			@$dom->loadHTML($response);
 			$xpath = new DOMXPath($dom);
@@ -68,6 +71,11 @@
 					
 					$blacklist = isDomainBlacklisted($link);
 
+					if ($config["debugMode"] == "enabled") {
+						echo $link;
+						echo $title;
+					}
+
 					if (!in_array($link, $uniqueLinks) && $title !== null && $blacklist === false) {
 							echo "<div class=\"a-result\">";
 							echo "	<a href=\"$link\">";
@@ -84,10 +92,12 @@
 				}
 
 				if ($resultNum == 0) {
+					if ($config["debugMode"] == "enabled") {
+						echo $resultNum;
+						echo $uniqueLinks;
+					}
 					echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
 				}
-			} else {
-				echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
 			}
 		}
 	}

@@ -64,8 +64,14 @@
 
 	function send_text_response($response) {
 		global $config;
+
 		if ($config['googleAPI']['enabled'] !== 'enabled') {
 			if (!empty($response)) {
+
+				if ($config['debugMode'] == 'enabled') {
+					echo $response;
+				}
+
 				$dom = new DOMDocument();
 				@$dom->loadHTML($response);
 				$xpath = new DOMXPath($dom);
@@ -75,6 +81,7 @@
 				$resultNum = 0;
 
 				if ($results) {
+					$insTag = $xpath->query('//ins');
 					foreach ($results as $result) {
 						$title = $xpath->query('.//h3', $result)->item(0);
 						@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
@@ -86,6 +93,11 @@
 						
 						$link = cleanUrl($link);
 						$blacklist = isDomainBlacklisted($link);
+
+						if ($config["debugMode"] == "enabled") {
+							echo $link;
+							echo $title;
+						}
 
 						if (!preg_match('/^\/search\?q=/', $link) && !in_array($link, $uniqueLinks) && $blacklist === false) {
 								echo "<div class=\"a-result\">";
@@ -102,11 +114,13 @@
 						}
 					}
 
-					if ($resultNum == 0) {
+					if ($resultNum == 0 && !$insTag) {
+						if ($config["debugMode"] == "enabled") {
+							echo $resultNum;
+							echo $uniqueLinks;
+						}
 						echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
 					}
-				} else {
-					echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
 				}
 			}
 		} else {

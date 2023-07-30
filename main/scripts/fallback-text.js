@@ -50,17 +50,11 @@ function runFallbackCheck() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    if ( countResults() < 2 && type == 0) {
+    if ( countResults() < 2 && type == 0 && !noRes) {
         const fallbackingMessage = document.createElement('p');
         fallbackingMessage.id = 'fallbacking';
         fallbackingMessage.textContent = 'Results failed, testing fallbacks. Please wait';
         resultsContainer.appendChild(fallbackingMessage);
-        console.log(type);
-        console.log(type);
-        console.log(type);
-        console.log(type);
-        console.log(type);
-        console.log(type);
         runFallbackCheck();
         setInterval(() => {
             if (interval < 1) {

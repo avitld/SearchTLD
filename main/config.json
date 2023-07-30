@@ -6,6 +6,7 @@
     "proxyIP": "disabled",
     "proxyPort": "49155",
     "proxyLogIn": "user:password",
+    "debugMode": "disabled",
     "googleAPI": {
     	"enabled": "disabled",
     	"apiKey": "your-api-key"
