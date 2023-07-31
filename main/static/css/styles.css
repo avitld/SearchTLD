@@ -47,6 +47,12 @@ body {
 	height: 70px;
 	width: 70px;
 	margin-right: 10px;
+	transition-duration: 1s;
+	transition-delay: 10s;
+}
+
+.title-container img:hover {
+	filter: invert();
 }
 
 .indexform input[type="search"] {
@@ -407,11 +413,15 @@ input[type="text"] {
 }
 
 #card-purple {
-	background-color: rgb(115, 86, 153);
+	/* background-color: rgb(115, 86, 153); */
+	background: rgb(136,129,255);
+	background: linear-gradient(-352deg, rgba(136,129,255,1) 0%, rgba(0,7,255,1) 100%);
 }
 
 #card-blue {
-	background-color: rgb(51, 51, 255);
+	/* background-color: rgb(51, 51, 255); */
+	background: rgb(136,129,255);
+	background: linear-gradient(172deg, rgba(136,129,255,1) 0%, rgba(0,7,255,1) 100%);
 	height: 300px;
 }
 
@@ -428,6 +438,14 @@ input[type="text"] {
 @media only screen and (max-width: 750px) {
 	body {
 		font-size: 14px;
+	}
+
+	.credit {
+		bottom: 50px;
+	}
+
+	.cards .card, #card-white, #card-blue {
+		height: 100%;
 	}
 
 	.msearch .mobimg {

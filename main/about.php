@@ -5,10 +5,12 @@
 		$config = readJson("config.json");
 	?>
 	<body style="background-image: url(/static/img/background_dark.png); background-size: contain;">
-        <div class="title-container" style="margin-top: 45px;">
-            <img src="/static/img/logo_dark.png">
-            <h1 style="font-size: 58px; user-select: none; margin: 0;"><a href="/" style="color: white;">Search<span id="purple">TLD</span></a></h1>
-        </div>
+        <a href="/" style="color: white;">
+            <div class="title-container" style="margin-top: 45px;">
+                <img src="/static/img/logo_dark.png">
+                <h1 style="font-size: 58px; user-select: none; margin: 0;">Search<span id="purple">TLD</span></a></h1>
+            </div>
+        </a>
         <p id="descriptor" style="margin-top: 0;">The Search Engine That Doesn't Track You.</p>
         <div class="cards">
             <div class="card" id="card-normal">
