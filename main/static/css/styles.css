@@ -379,6 +379,52 @@ input[type="text"] {
 	font-size: 24px;
 }
 
+#descriptor {
+	font-weight: lighter;
+	font-size: 24px;
+	text-align: center;
+}
+
+#abtLogo {
+	height: 58px;
+	width: 58px;
+}
+
+.cards {
+	text-align: center;
+	margin-top: 90px;
+}
+
+.cards .card {
+	display: block;
+	height: 200px;
+	padding: 20px;
+	margin: 0 0;
+}
+
+#card-normal {
+	background-color: rgb(26, 26, 26);
+}
+
+#card-purple {
+	background-color: rgb(115, 86, 153);
+}
+
+#card-blue {
+	background-color: rgb(51, 51, 255);
+	height: 300px;
+}
+
+#card-white {
+	background: url("/static/img/background_light.png");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	color: black;
+	margin: 0 0 40px 0;
+	height: 450px;
+}
+
 @media only screen and (max-width: 750px) {
 	body {
 		font-size: 14px;

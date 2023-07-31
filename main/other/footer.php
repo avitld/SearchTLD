@@ -8,6 +8,16 @@
 				echo ".php";
 			}?>">Settings</a>
 			<a target="_blank" href="https://schizo.gr/support/">Support Us</a>
+			<?php
+				if ($config["aboutPage"] == "enabled") {;
+					if ($config['hide_extension'] !== 'enabled') {
+						$ext = ".php";
+					} else {
+						$ext = '';
+					}
+					echo "<a href=\"/about$ext\">About Us</a>";
+				}
+			?>
 			<a target="_blank" href="https://blog.searchtld.com">Changelog</a>
 			<?php
 				if ($config["tor"]["enabled"] == "enabled") {
