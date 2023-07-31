@@ -3,7 +3,7 @@
 ?>
 
 		<div class="footer">
-			<a href="https://codeberg.org/avitld/SearchTLD">Source Code</a>
+			<a href="https://codeatomic.net/SearchTLD/SearchTLD">Source Code</a>
 			<a href="/settings<?php if ($config['hide_extension'] !== 'enabled') {
 				echo ".php";
 			}?>">Settings</a>
