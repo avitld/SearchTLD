@@ -8,19 +8,13 @@
 
     if ($method == "brave") {
         require "../engines/text/brave.php";
-        $response = getbHTML($query, $page);
-                                    
-        send_text_th_response($response);
+        braveText($query, $page);
     } elseif ($method == "duck") {
         require "../engines/text/ddg.php";
-        $response = getdHTML($query, $page);
-                                    
-        send_text_sec_response($response);
+        ddgText($query, $page);
     } elseif ($method == "bing") {
         require "../engines/text/bing.php";
-        $response = getbgHTML($query, $page);
-
-        send_text_bing_response($response);
+        bingText($query, $page);
     } else {
         echo "Invalid method. (JS Fallback)";
     }

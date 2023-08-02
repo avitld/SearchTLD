@@ -1,5 +1,5 @@
 <?php
-	function getrHTML($query) {
+	function reddit($query) {
 		global $config;
 
 		$url = "https://www.reddit.com/search/?q=" . urlencode($query);
@@ -25,10 +25,11 @@
 		$response = curl_exec($ch);
 
 		curl_close($ch);
-		return $response;
+		
+		redditResponse($response);
 	}
 
-	function send_red_response($response) {
+	function redditResponse($response) {
 		if (!empty($response)) {
 			$dom = new DOMDocument();
 			@$dom->loadHTML($response);
@@ -59,7 +60,7 @@
 					$link = cleanUrl($link);
 
                     if ($title && strpos($link, "reddit.com") !== false && !in_array($link, $uniqueLinks) && !($num >= 7)) {
-					    echo "<div class=\"a-result\">";
+					    echo "<div class=\"text-result\">";
 						echo "  <span><a href=\"$sublink\">$sub</a></span><br/>";
 						echo "	<a href=\"$link\">";
                         echo "  	<span><img src=\"/static/img/reddit.png\" class=\"flogo\" />Reddit</span>";

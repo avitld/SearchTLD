@@ -1,5 +1,5 @@
 <?php
-	function getbHTML($query, $page) {
+	function braveText($query, $page) {
 		global $config;
 			
 		if (intval($page) > 5) {
@@ -41,12 +41,10 @@
 		
 		$response = curl_exec($ch);
 
-		sleep(5);
-
-		return $response;
+		braveTextResponse($response);
 	}
 
-	function send_text_th_response($response) {
+	function braveTextResponse($response) {
 		global $config;
 
 		if (!empty($response)) {
@@ -78,7 +76,7 @@
 					}
 
 					if ($title && !in_array($link, $uniqueLinks) && $blacklist === false) {
-							echo "<div class=\"a-result\">";
+							echo "<div class=\"text-result\">";
 							echo " <a href=\"$link\">";
 							echo "  	<span>$link</span>";
 							echo "		<h2>$title</h2>";
@@ -97,7 +95,7 @@
 						echo $resultNum;
 						echo $uniqueLinks;
 					}
-					echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
+					echo "<p class=\"noResults\" id=\"noResults\">No results found, try a different query.</p>";
 				}
 			}
 		}

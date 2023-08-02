@@ -1,5 +1,5 @@
 <?php
-    function getvJson($query) {
+    function invidious($query) {
         $url = "https://invidious.tiekoetter.com/api/v1/search?q=" . urlencode($query);
         
 		$ch = curl_init($url);
@@ -9,15 +9,15 @@
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		
-		$raw_response = curl_exec($ch);
+		$rawResponse = curl_exec($ch);
 
 		curl_close($ch);
 
-		return $raw_response;
+		invidiousVideoResponse($rawResponse);
     }
 
-    function send_video_response($raw_response) {
-        $response = json_decode($raw_response, true);
+    function invidiousVideoResponse($rawResponse) {
+        $response = json_decode($rawResponse, true);
 		$url = "https://yt.revvy.de";
 		if ($response) {
 			foreach ($response as $vresponse) {
@@ -29,10 +29,10 @@
 					$uploaded = htmlspecialchars($vresponse["publishedText"],ENT_QUOTES,'UTF-8');
 					$thumbnail = htmlspecialchars($url . "/vi/" . explode("/vi/" ,$vresponse["videoThumbnails"][4]["url"])[1]);
 	
-					echo "<div class=\"a-result\">";
+					echo "<div class=\"text-result\">";
 					echo "	<a href=\"$vurl\">";
 					echo "		<h2 style=\"padding-bottom: 0; margin-bottom: 0;\">$title</h2><br/>";
-					echo "		<img class=\"vidimg\" src=\"proxy-image.php?url=$thumbnail\" />";
+					echo "		<img class=\"thumbnail\" src=\"proxy-image.php?url=$thumbnail\" />";
 					echo "	</a>";
 					echo "  <p class=\"mlink\" style=\"margin-top: 0; padding-top: 0;\">$uploader - $views views - uploaded $uploaded</a>";
 					echo "</div><br/>";

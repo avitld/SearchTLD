@@ -1,5 +1,5 @@
 <?php
-	function getstHTML($query) {
+	function stackEx($query) {
 		global $config;
 
 		$url = "https://stackexchange.com/search?q=" . urlencode($query);
@@ -25,10 +25,11 @@
 		$response = curl_exec($ch);
 
 		curl_close($ch);
-		return $response;
+		
+		stackExResponse($response);
 	}
 
-	function send_stack_response($response) {
+	function stackExResponse($response) {
 		if (!empty($response)) {
 			$dom = new DOMDocument();
 			@$dom->loadHTML($response);
@@ -51,7 +52,7 @@
                     @$desc = htmlspecialchars($desc->textContent);
 
                     if (!in_array($link, $uniqueLinks) && !($num >= 3)) {
-					    echo "<div class=\"a-result\">";
+					    echo "<div class=\"text-result\">";
                         echo "  <a href=\"$link\" class=\"mlink\"><img src=\"/static/img/stackex.png\" class=\"flogo\" />StackExchange</a><br/>";
 				    	echo "	<a href=\"$link\" class=\"title\">$title</a><br>";
                         echo "  <p class=\"mlink\">$date</p>";

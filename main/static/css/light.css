@@ -1,19 +1,35 @@
 :root {
-	--bg-color-m: rgb(255, 255, 255);
-	--fg-color-m: rgb(0, 0, 0);
-	--f-bg: rgb(182, 182, 182);
-	--border-color: rgb(0, 0, 0);
-	--search-bg-color: rgb(225, 225, 225);
-	--search-border-color: rgb(14, 14, 14);
-	--search-border-color-h: rgb(24, 24, 24);
-	--sbutton-bg: rgb(17, 17, 17);
-	--info-bg: rgb(199, 199, 199);
-	--a-color: rgb(176, 66, 255);
-	--a-f-color: rgb(29, 29, 29);
-	--a-color-h: rgb(148, 31, 231);
-	color-scheme: light;
+    --background: hsl(0, 0%, 95%);
+    --background-secondary: hsl(0, 0%, 90%);
+    --foreground: hsl(0, 0%, 15%);
+    --foreground-secondary: hsl(0, 0%, 25%);
+
+    --element-background: hsl(0, 0%, 90%);
+
+    --link: hsl(210, 60%, 40%);
+    --link-hover: hsl(210, 60%, 35%);
+    --link-secondary: hsl(0, 0%, 50%);
+    --link-secondary-hover: hsl(0, 0%, 40%);
+
+    --border-color: hsl(0, 0%, 80%);
+    --card-border: hsl(210, 30%, 85%);
+    --border-color-hover: hsl(0, 0%, 75%);
+
+    color-scheme: light;
 }
 
 #purple {
 	color: rgb(135, 93, 189);
+}
+
+#has-background {
+	background-image: url('/static/img/background_light.png');
+}
+
+.type-selectors img {
+    filter: brightness(0);
+}
+
+.type-selectors #active img {
+    filter: none;
 }

@@ -7,7 +7,7 @@
         return $config;
     }
     
-    function detect_special_query($q)
+    function detectSpecialQuery($q)
     {
         // Original code by pafefs, modified by avitld
         $modified_query = str_replace(" ","",strtolower($q));
@@ -86,5 +86,18 @@
                 return false;
             }
         }
+    }
+
+    function showLogo() {
+		$theme = isset($_COOKIE["theme"]) ? $_COOKIE["theme"] : 'dark';
+		$lightThemes = array(
+            "light",
+            "candy"
+        );
+        if (in_array($theme, $lightThemes)) {
+			echo '/static/img/logo_light.png';
+		} else {
+			echo '/static/img/logo_dark.png';
+		}
     }
 ?>

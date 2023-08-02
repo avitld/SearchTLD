@@ -5,7 +5,7 @@
 	if (strpos($url, 'localhost') === false && strpos($url, '127.0.0.1') === false) {
 		
 		if (!function_exists('cleanUrl')) {
-			require 'other/functions.php';
+			require 'misc/functions.php';
 			$config = readJson('config.json');
 		}
 

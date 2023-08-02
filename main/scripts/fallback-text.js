@@ -1,7 +1,7 @@
 // @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-3.0
 let method;
 const resultsContainer = document.getElementById('results');
-const noRes = document.getElementById('nores');
+const noRes = document.getElementById('noResults');
 let interval = 0;
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -10,13 +10,13 @@ const page = urlParams.get('pg');
 const type = urlParams.get('tp');
 
 function countResults() {
-    return document.querySelectorAll('.a-result').length;
+    return document.querySelectorAll('.text-result').length;
 }
 
 function fetchFallbackResults() {
 
     if (query && page) {
-        const url = `../other/fallback.php?q=${encodeURIComponent(query)}&pg=${encodeURIComponent(page)}&me=${encodeURIComponent(method)}`;
+        const url = `../misc/fallback.php?q=${encodeURIComponent(query)}&pg=${encodeURIComponent(page)}&me=${encodeURIComponent(method)}`;
 
         fetch(url)
         .then(response => response.text())

@@ -1,5 +1,5 @@
 <?php
-	function getiHTML($query, $page) {
+	function qwantImage($query, $page) {
 		global $config;
 
 		$fpage = $page / 10 + 1;
@@ -29,10 +29,11 @@
 		$response = curl_exec($ch);
 
 		curl_close($ch);
-		return $response;
+		
+		qwantImageResponse($response);
 	}
 
-	function send_image_response($response) {
+	function qwantImageResponse($response) {
 		if (!empty($response)) {
 			$dom = new DOMDocument();
 			@$dom->loadHTML($response);
@@ -56,9 +57,9 @@
 					@$thumbnail_src = urldecode(htmlspecialchars($thumbnail_src));
 					@$thumbnail_src = urlencode($thumbnail_src);
 					
-					echo "<div class=\"i-result\">";
-					echo "	<a title=\"$alt\" href=\"preview.php?link=$thumbnail_src&title=$alt&href=$url\" target=\"_blank\">";
-					echo "		<img src=\"proxy-image.php?url=$thumbnail_src&alt=$alt\">";
+					echo "<div class=\"image-result\">";
+					echo "	<a title=\"$alt\" alt=\"$url\" target=\"_blank\">";
+					echo "		<img src=\"proxy-image.php?url=$thumbnail_src&alt=$alt\" alt=\"$alt\">";
 					echo "	</a>";
 					echo "</div>";
 					

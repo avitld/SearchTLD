@@ -1,9 +1,11 @@
-<?php require "other/header.php"; ?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <?php require "misc/header.php"; ?>
 		<title>Settings - SearchTLD</title>
 	</head>
-    <?php require "other/background.php"; ?>
-    <?php require "other/functions.php"; ?>
-	<body>
+    <?php require "misc/functions.php"; ?>
+	<body id="has-background cover">
 		<div align="center">
 		<?php
 
@@ -57,7 +59,13 @@
 				<select name="theme">
 				<?php
                     $themes = "<option value=\"dark\">Night</option>
-                    <option value=\"light\">Light</option>";
+                    <option value=\"light\">Light</option>
+                    <option value=\"midnight\">Midnight</option>
+                    <option value=\"pitchblack\">Pitch-Black</option>
+                    <option value=\"alien\">Alien</option>
+                    <option value=\"deep\">Deep Sea</option>
+                    <option value=\"candy\">Candy</option>
+                    <option value=\"galactic\">Galactic</option>";
 
                     if (isset($_COOKIE["theme"])) {
                         $theme_cookie = $_COOKIE["theme"];
@@ -103,7 +111,7 @@
                 <label for="lang">Search Language:</label>
                 <select name="lang">
                 <?php
-                    require "other/language.php";
+                    require "misc/language.php";
                     foreach ($languages as $language) { 
                         $name = $language['name'];
                         $code = $language['code'];
@@ -134,7 +142,7 @@
                         }
                     ?>>All</option>
                 <?php
-                    require "other/language.php";
+                    require "misc/language.php";
                     foreach ($languages as $language) { 
                         if ($tld) {
                             $name = $language['cname'];
@@ -176,8 +184,8 @@
                 <button type="submit" name="reset" id="reset">Reset</button>
                 <br/>
                 <button name="home" id="home">Go Back</button>
-                <br/><br/><br/><br/>
 			</form>
 		</div>
+        <?php require "misc/footer.php"; ?>
 	</body>
-<?php require "other/footer.php"; ?>
+</html>

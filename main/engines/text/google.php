@@ -1,5 +1,5 @@
 <?php
-	function getHTML($query, $page) {
+	function googleText($query, $page) {
 		global $config;
 		
 		$fpage = $page . "0";
@@ -59,10 +59,11 @@
 		$response = curl_exec($ch);
 
 		curl_close($ch);
-		return $response;
+		
+		googleTextResponse($response);
 	}
 
-	function send_text_response($response) {
+	function googleTextResponse($response) {
 		global $config;
 
 		if ($config['googleAPI']['enabled'] !== 'enabled') {
@@ -100,7 +101,7 @@
 						}
 
 						if (!preg_match('/^\/search\?q=/', $link) && !in_array($link, $uniqueLinks) && $blacklist === false) {
-								echo "<div class=\"a-result\">";
+								echo "<div class=\"text-result\">";
 								echo "	<a href=\"$link\">";
 								echo "  	<span>$link</span>";
 								echo "		<h2>$title</h2>";
@@ -119,7 +120,7 @@
 							echo $resultNum;
 							echo $uniqueLinks;
 						}
-						echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
+						echo "<p class=\"noResults\" id=\"noResults\">No results found, try a different query.</p>";
 					}
 				}
 			}
@@ -131,7 +132,7 @@
 			        $link = $item['link'];
 			        $description = htmlspecialchars($item['snippet']);
 			
-			        echo "<div class=\"a-result\">";
+			        echo "<div class=\"text-result\">";
 					echo "	<a href=\"$link\">";
 					echo "  	<span>$link</span>";
 					echo "		<h2>$title</h2>";
@@ -140,7 +141,7 @@
 					echo "</div>";
 			    }
 			} else {
-			    echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
+			    echo "<p class=\"noResults\" id=\"noResults\">No results found, try a different query.</p>";
 			}
 		}
 	}

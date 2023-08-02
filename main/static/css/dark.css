@@ -1,19 +1,35 @@
 :root {
-	--bg-color-m: rgb(26, 26, 26);
-	--fg-color-m: rgb(255, 255, 255);
-	--f-bg: rgb(20, 20, 20);
-	--border-color: rgb(56, 56, 56);
-	--search-bg-color: rgb(34, 34, 34);
-	--search-border-color: rgb(51, 51, 51);
-	--search-border-color-h: rgb(60, 60, 60);
-	--sbutton-bg: rgb(17, 17, 17);
-	--info-bg: rgb(20, 20, 20);
-	--a-color: rgb(183, 81, 255);
-	--a-f-color: rgb(185, 185, 185);
-	--a-color-h: rgb(163, 61, 235);
-	color-scheme: dark;
+    --background: hsl(0, 0%, 15%);
+    --background-secondary: hsl(0, 0%, 8%);
+    --foreground: hsl(0, 100%, 100%);
+    --foreground-secondary: hsl(0, 100%, 90%);
+
+    --element-background: hsl(0, 0%, 15%);
+
+    --link: hsl(266, 73%, 74%);
+    --link-hover: hsl(266, 73%, 68%);
+    --link-secondary: hsl(0, 0%, 75%);
+    --link-secondary-hover: hsl(0, 0%, 65%);
+
+    --border-color: hsl(0, 0%, 25%);
+    --card-border: hsl(257, 50%, 15%);
+    --border-color-hover: hsl(0, 0%, 30%);
+
+    color-scheme: dark;
 }
 
 #purple {
 	color: rgb(182, 139, 237);
+}
+
+#has-background {
+	background-image: url('/static/img/background_dark.png');
+}
+
+.type-selectors img {
+    filter: brightness(400);
+}
+
+.type-selectors #active {
+    filter: none;
 }

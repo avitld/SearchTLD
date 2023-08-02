@@ -1,9 +1,7 @@
 {
     "ratelimit": "enabled",
-    "hide_extension": "disabled",
     "cleanURLs": "enabled",
     "blockHarmfulUrls": "enabled",
-    "aboutPage": "enabled",
     "proxyIP": "disabled",
     "proxyPort": "49155",
     "proxyLogIn": "user:password",

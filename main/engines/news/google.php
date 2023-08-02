@@ -1,5 +1,5 @@
 <?php
-	function getnHTML($query, $page) {
+	function googleNews($query, $page) {
 		global $config;
 
 		$fpage = $page . "0";
@@ -38,10 +38,10 @@
 		$response = curl_exec($ch);
 
 		curl_close($ch);
-		return $response;
+		googleNewsResponse($response);
 	}
 
-	function send_news_response($response) {
+	function googleNewsResponse($response) {
 		if (!empty($response)) {
 			$dom = new DOMDocument();
 			@$dom->loadHTML($response);
@@ -62,7 +62,7 @@
 				$link = cleanUrl($link);
 
 				if (!in_array($href, $uniqueLinks)) {
-		        		echo "<div class=\"a-result\">";
+		        		echo "<div class=\"text-result\">";
 		        		echo "	<a href=\"$href\" class=\"title\">$title</a>";
 		        		echo "  <p class=\"mlink\" style=\"margin-top: 0; padding-top: 0;\">$link</a>";
 		        		echo "  <p class=\"description\">$description</a>";

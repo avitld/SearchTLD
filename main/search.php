@@ -1,84 +1,109 @@
+<!DOCTYPE html>
 
 <?php 
-	require "other/header.php"; 
-	require "engines/text/google.php";
-	require "engines/infobox/wikipedia.php";
-	require "engines/special/grammar.php";
-	require "other/functions.php";
-
-	$config = readJson('config.json');
-
-	if ($config['ratelimit'] === "enabled") {
-		require "other/ratelimit.php";
-	}
-	
 	$query = htmlspecialchars($_REQUEST["q"],ENT_QUOTES,'UTF-8');
 	$page = htmlspecialchars($_REQUEST["pg"],ENT_QUOTES,'UTF-8');
 	$type = htmlspecialchars($_REQUEST["tp"],ENT_QUOTES,'UTF-8');
 ?>
-		<title><?php echo $query ?> - SearchTLD</title>
-	</head>
-	<body>
+
+<html lang="en">
+	<head>
+		<?php require "misc/header.php"; ?>
+
 		<?php
 		 $border = isset($_COOKIE["border"]) ? $_COOKIE["border"] : 'on';
 		 if ($border == 'on') {
 			echo "<style>";
-			echo ".a-result {";
-			echo "background: var(--info-bg);";
+			echo ".text-result {";
+			echo "background: var(--background-secondary);";
 			echo "border: 1px solid var(--border-color);";
 			echo "border-radius: 8px;";
 			echo "}";
 			echo "</style>";
 		 }
 		?>
-		<div class="msearch">
+
+		<title><?php echo $query; ?> - SearchTLD</title>
+	</head>
+
+<?php 
+	require "engines/text/google.php";
+	require "engines/infobox/wikipedia.php";
+	require "engines/special/grammar.php";
+	require "misc/functions.php";
+
+	$config = readJson('config.json');
+
+	if ($config['ratelimit'] === "enabled") {
+		require "misc/ratelimit.php";
+	}
+?>
+	<body>
+		<header>
 			<form autocomplete="off" <?php $method = isset($_COOKIE["querymethod"]) ? $_COOKIE["querymethod"] : 'GET';
 			echo "method=\"$method\""; ?>>
-				<a href="/"><img class="mobimg" <?php
-					$theme = isset($_COOKIE["theme"]) ? $_COOKIE["theme"] : 'dark';
-					if ($theme === 'light') {
-						echo 'src="/static/img/logo_light.png"';
-					} else {
-						echo 'src="/static/img/logo_dark.png"';
-					}
-				?>></a>
+				<a href="/"><img id="image-mobile" src="<?php showLogo(); ?>"></a>
 				<input type="search" name="q" value="<?php echo $query; ?>" required>
 				<input type="hidden" name="pg" value="0"> 
 				<input type="hidden" name="tp" value="<?php echo $type ?>"> 
 			</form>
+			<a href="/settings">
+				<button class="settings">
+					<img src="/static/img/cog.png" />
+				</button>
+			</a>
 			<form>
 				<input type="hidden" name="q" value="<?php echo htmlspecialchars($query); ?>">
 				<input type="hidden" name="pg" value="<?php echo $page; ?>">
-				<div class="sbuttons">
-					<button name="tp" <?php if ($type == 0) {
+				<div class="type-selectors">
+					<button name="tp"
+					<?php if ($type == 0) {
 						echo "id=\"active\"";
-					} ?> value="0"><img src="/static/img/text.png" class="bimage"/>Text</button>
-					<button name="tp" <?php if ($type == 1) {
+					} ?>
+					value="0"><img src="/static/img/text.png" />Text</button>
+					<button name="tp"
+					<?php if ($type == 1) {
 						echo "id=\"active\"";
-					} ?> value="1"><img src="/static/img/image.png" class="bimage"/>Images</button>
-					<button name="tp" <?php if ($type == 2) {
+					} ?>
+					value="1"><img src="/static/img/image.png" />Images</button>
+					<button name="tp"
+					<?php if ($type == 2) {
 						echo "id=\"active\"";
-					} ?> value="2"><img src="/static/img/video.png" class="bimage"/>Videos</button>
-					<button name="tp" <?php if ($type == 3) {
+					} ?>
+					value="2"><img src="/static/img/video.png" />Videos</button>
+					<button name="tp"
+					<?php if ($type == 3) {
 						echo "id=\"active\"";
-					} ?> value="3"><img src="/static/img/news.png" class="bimage"/>News</button>
-					<button name="tp" <?php if ($type == 4) {
+					} ?>
+					value="3"><img src="/static/img/news.png" />News</button>
+					<button name="tp"
+					<?php if ($type == 4) {
 						echo "id=\"active\"";
-					} ?> value="4"><img src="/static/img/forums.png" class="bimage"/>Forums</button>
+					} ?>
+					value="4"><img src="/static/img/forums.png" />Forums</button>
 				</div>
 			</form>
+		</header>
+		<div class="overlay" id="overlay">
+			<div class="main-image-holder">
+				<button id="close-button" onclick="hideOverlay()">X</button>
+				<a id="visitLink"><h2>Image Title</h2></a>
+				<img src="/static/img/mag_dark.png" />
+				<hr>
+				<a id="downloader" download><button id="download">Download</button></a><br/>
+			</div>
 		</div>
 		<?php 
 			if ($type == 0) {
 			
-				send_infobox($query);
+				wikipediaInfo($query);
 				
 				$gresponse = getGrammar($query);
 				if ($gresponse) {
 					echoCorrection($gresponse, $query);
 				}
 
-				$special_result = detect_special_query($query);
+				$special_result = detectSpecialQuery($query);
 				if ($special_result == 1) {
 					require "engines/special/ip.php";
 					echoIP();
@@ -100,96 +125,78 @@
 					case 0:
 						if ($page > 5) {
 							require "engines/text/brave.php";
-							$response = getbHTML($query, $page);
-							
-							send_text_th_response($response);
+							braveText($query, $page);
 						} elseif ($page < 5 && $page > 1) {
 							require "engines/text/ddg.php";
-							$response = getdHTML($query, $page);
-							
-							send_text_sec_response($response);
+							ddgText($query, $page);
 						} else {
 							if (isset($_COOKIE['searcher'])) {
 								$searcher = $_COOKIE['searcher'];
 								if ($searcher == "ddg") {
 									require "engines/text/ddg.php";
-									$response = getdHTML($query, $page);
-									
-									send_text_sec_response($response);
+									ddgText($query, $page);
 								} elseif ($searcher == "brave") {
 									require "engines/text/brave.php";
-									$response = getbHTML($query, $page);
-									
-									send_text_th_response($response);
+									braveText($query, $page);
 								} elseif ($searcher == "bing") {
 									require "engines/text/bing.php";
-									$response = getbgHTML($query, $page);
-
-									send_text_bing_response($response);
+									bingText($query, $page);
 								} else {
-									$response = getHTML(htmlspecialchars($query), $page);
-									send_text_response($response);
+									googleText($query, $page);
 								}
 							} else {
-								$response = getHTML(htmlspecialchars($query), $page);
-								send_text_response($response);
+								googleText($query, $page);
 							}
 						}
 						break;
 					case 1:
 						require "engines/images/qwant.php";
-						$response = getiHTML($query, $page);
-						
-						send_image_response($response);
+						qwantImage($query, $page);
 						break;
 					case 2:
 						require "engines/videos/invidious.php";
-						$response = getvJson($query);
-						
-						send_video_response($response);
+						invidious($query);
 						break;
 					case 3:
 						require "engines/news/google.php";
-						$response = getnHTML($query, $page);
-						
-						send_news_response($response);
+						googleNews($query, $page);
 						break;
 					case 4:
 						require "engines/forums/reddit.php";
 						require "engines/forums/stackexchange.php";
 						require "engines/forums/quora.php";
-						$response = getrHTML($query);
-						 
-						send_red_response($response);
+						reddit($query);
 						
-						$response = getQuetreRes($query);
-						echoQResponse($response);
+						quetre($query);
 
-						$response = getstHTML($query);
-						send_stack_response($response);
+						stackEx($query);
 						break;
 					default:
-						send_text_response($response);
+						googleText($query, $page);
 						break;
 				}
 			?>
-			<script src="scripts/fallback-text.js"></script>"
+			<script src="scripts/fallback-text.js"></script>
+			<script src="scripts/preview-image.js"></script>
 		</div>
-		<div class="rbuttons">
+		<div class="page-buttons">
 				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
 					<input name="q" value="<?php echo $query; ?>" type="hidden">
 					<?php
 						if (intval($type) !== 1 && intval($type) !== 2 && intval($type) !== 4) {
 							if ($page > 0) {
-								echo "<button class=\"pagebtn\" type=\"submit\" name=\"pg\" value=" . intval($page) - 1 . ">Previous Page</button>";
+								echo "<button class=\"page-button\" type=\"submit\" name=\"pg\" value=" . intval($page) - 1 . ">Previous Page</button>";
 							}
 							if ($page < 10) {
-								echo "<button class=\"pagebtn\" type=\"submit\" name=\"pg\" value=" . intval($page) + 1 . ">Next Page</button>";
+								echo "<button class=\"page-button\" type=\"submit\" name=\"pg\" value=" . intval($page) + 1 . ">Next Page</button>";
 							}
 						}
 					?>
 					<input name="tp" value="<?php echo $type; ?>" type="hidden">
 				</form>
 		</div>
+		
+		<?php require "misc/footer.php"; ?>
 
-<?php require "other/footer.php"; ?>
+	</body>
+</html>

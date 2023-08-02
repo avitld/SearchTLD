@@ -1,5 +1,5 @@
 <?php
-	function getbgHTML($query, $page) {
+	function bingText($query, $page) {
 		global $config;
 		
 		$fpage = $page . "0";
@@ -40,10 +40,11 @@
 		$response = curl_exec($ch);
 
 		curl_close($ch);
-		return $response;
+
+		bingTextResponse($response);
 	}
 
-	function send_text_bing_response($response) {
+	function bingTextResponse($response) {
 		global $config;
 
 		if (!empty($response)) {
@@ -74,7 +75,7 @@
 						echo $title;
 					}
 					if (str_contains($link, "...") && !in_array($link, $uniqueLinks) && $blacklist === false && $title) {
-							echo "<div class=\"a-result\">";
+							echo "<div class=\"text-result\">";
 							echo "	<a href=\"$link\">";
 							echo "  	<span>$link</span>";
 							echo "		<h2>$title</h2>";
@@ -92,7 +93,7 @@
 						echo $resultNum;
 						echo $uniqueLinks;
 					}
-					echo "<p class=\"nores\" id=\"nores\">No results found, try a different query.</p>";
+					echo "<p class=\"noResults\" id=\"noResults\">No results found, try a different query.</p>";
 				}
 			}
 		}

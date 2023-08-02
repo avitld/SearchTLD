@@ -13,7 +13,8 @@
 </div>
 
 # Self Hosting
-There are [guides to self hosting on our wiki!](https://codeberg.org/avitld/SearchTLD/wiki)
+There are [guides to self hosting on our blog](https://blog.searchtld.com)
+or [our codeberg wiki!](https://codeberg.org/avitld/SearchTLD/wiki)
 
 # Benefits of SearchTLD
 <ul>

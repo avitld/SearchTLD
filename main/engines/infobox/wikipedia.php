@@ -1,5 +1,5 @@
 <?php
-function send_infobox($query) {
+function wikipediaInfo($query) {
     if (isset($_COOKIE["lang"])) {
         $lang = trim(htmlspecialchars($_COOKIE["lang"]));
         if (!preg_match('/^[a-z]{2}$/', $lang)) {
