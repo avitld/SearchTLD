@@ -72,7 +72,7 @@
                     }
 				}
 			} else {
-				echo "<p class=\"dym\">No results found.</p>";
+				echo "<p class=\"correction\">No results found.</p>";
 			}
 		}
 	}

@@ -185,7 +185,16 @@ header #image-mobile {
 
 header .type-selectors {
     display: flex;
+    overflow-x: scroll;
     padding: 2px;
+}
+
+.type-selectors::-webkit-scrollbar {
+    width: 0;
+}
+  
+.type-selectors::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 
 header .type-selectors button {
@@ -266,6 +275,10 @@ header .type-selectors button {
 
 .text-result:hover {
     border: 1px solid var(--border-color-hover);
+}
+
+.correction {
+    margin: 0.5rem auto;
 }
 
 .infobox {
@@ -536,9 +549,15 @@ footer a:hover {
     }
 
     header .type-selectors button {
-        font-size: 0.9rem;
+        font-size: 0.75rem;
         width: 4.3rem;
         margin: 0.3rem 0.3rem 0 0.3rem;
+    }
+
+    header .type-selectors button img {
+        margin-right: 0;
+        max-height: 0.75rem;
+        max-width: 0.75rem;
     }
 
     header .type-selectors {
@@ -549,6 +568,10 @@ footer a:hover {
         max-width: 2.8rem;
         max-height: 2.8rem;
         margin-right: 0;
+    }
+
+    .settings, .settings img {
+        display: none;
     }
 
     .card-grid {
@@ -569,6 +592,10 @@ footer a:hover {
 
     .footer-sidebar {
         font-size: xx-small;
+    }
+
+    .footer-sidebar h3 {
+        font-size: 1.2rem;
     }
 
     .search-container button[type="submit"] {
@@ -604,6 +631,21 @@ footer a:hover {
     
     #noResults {
         text-align: center;
+    }
+
+    .main-image-holder {
+        text-align: center;
+        background-color: var(--background-secondary);
+        border: 1px solid var(--border-color);
+        width: 90%;
+        margin: 5% auto 0 auto;
+        border-radius: 1.2rem;
+    }
+    
+    .main-image-holder img {
+        border-radius: 1.2rem;
+        max-width: 50%;
+        max-height: 50%;
     }
 }
 

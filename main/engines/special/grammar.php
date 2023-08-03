@@ -55,12 +55,12 @@
             $updatedSentence = implode(" ", $correctedQuery);
 
             if ($updatedSentence !== $query) {
-                echo "<div class=\"dym\"><small>Did you mean: <strong><a href=\"/search.php?q=" . urlencode($updatedSentence) . "&pg=0&tp=0\">$updatedSentence</a></strong></small></div>";
+                echo "<div class=\"correction\"><small>Did you mean: <strong><a href=\"/search.php?q=" . urlencode($updatedSentence) . "&pg=0&tp=0\">$updatedSentence</a></strong></small></div>";
             }
         }
 
         if (strtolower($query) == "vi" || strtolower($query) == "vim" || strtolower($query) == "neovim") {
-            echo "<div class=\"dym\"><small>Did you mean: <strong><a href=\"/search.php?q=emacs&pg=0&tp=0\">emacs</a></strong></small></div>";
+            echo "<div class=\"correction\"><small>Did you mean: <strong><a href=\"/search.php?q=emacs&pg=0&tp=0\">emacs</a></strong></small></div>";
         }
     }
 ?>

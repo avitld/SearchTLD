@@ -6,8 +6,8 @@
 	<ul>
 		<li><a href="https://codeatomic.net/SearchTLD/SearchTLD">Source Code</a></li>
 		<li><a href="/privacy">Privacy Policy</a>
-		<li><a target="_blank" href="https://schizo.gr/support/">Support Us</a></li>
-		<li><a href="about">About Us</a></li>
+		<li><a href="/settings">Settings</a>
+		<li><a href="/support">Support Us</a></li>
 		<li><a target="_blank" href="https://blog.searchtld.com">Blog</a></li>
 		<?php
 			if ($config["tor"]["enabled"] == "enabled") {
