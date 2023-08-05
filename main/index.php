@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<?php require "misc/header.php" ?>
+		<?php require "misc/templates/header.php" ?>
 		
 		<title>SearchTLD</title>
 	</head>
-	<?php require "misc/placeholder.php"; ?>
-	<?php require "misc/functions.php";
+	<?php require "misc/utils/placeholder.php"; ?>
+	<?php require "misc/functions/functions.php";
 		$config = readJson("config.json");
 	?>
 	<body id="has-background">
@@ -29,7 +29,7 @@
 					?>"> <button type="submit">
 					<?php
 						$theme = isset($_COOKIE["theme"]) ? $_COOKIE["theme"] : 'dark';
-						if ($theme == 'light') {
+						if ($theme == 'light' || $theme == 'candy') {
 							echo "<img src=\"/static/img/mag_light.png\" />";
 						} else {
 							echo "<img src=\"/static/img/mag_dark.png\" />";
@@ -87,7 +87,7 @@
 			</div>
 		</main>
 
-		<?php require "misc/footer.php"; ?>
+		<?php require "misc/templates/footer.php"; ?>
 
 	</body>
 </html>

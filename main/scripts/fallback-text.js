@@ -16,7 +16,7 @@ function countResults() {
 function fetchFallbackResults() {
 
     if (query && page) {
-        const url = `../misc/fallback.php?q=${encodeURIComponent(query)}&pg=${encodeURIComponent(page)}&me=${encodeURIComponent(method)}`;
+        const url = `../misc/js/fallback.php?q=${encodeURIComponent(query)}&pg=${encodeURIComponent(page)}&me=${encodeURIComponent(method)}`;
 
         fetch(url)
         .then(response => response.text())
@@ -29,10 +29,10 @@ function fetchFallbackResults() {
         .finally(() => {
             setInterval(() => {
                 const fallbackingMessage = document.getElementById('fallbacking');
-                if (fallbackingMessage) {
+                if (fallbackingMessage && countResults() > 2) {
                     fallbackingMessage.remove();
                 }
-            }, 10000);
+            }, 500);
         });
     }
 }
@@ -41,7 +41,7 @@ function runFallbackCheck() {
     if ( countResults() < 2 && !noRes && type == 0) {
         if (method !== "duck" && method !== "brave" && method !== "bing") {
             method = "duck";
-        } else if (method !== "brave" && method !== "bing") {
+        } else if (method == "duck") {
             method = "brave";
         } else {
             method = "bing";
@@ -53,13 +53,13 @@ function runFallbackCheck() {
 
 document.addEventListener('DOMContentLoaded', function () {
     if ( countResults() < 2 && type == 0 && !noRes) {
-        const fallbackingMessage = document.createElement('p');
+        const fallbackingMessage = document.createElement('img');
         fallbackingMessage.id = 'fallbacking';
-        fallbackingMessage.textContent = 'Results failed, testing fallbacks. Please wait';
+        fallbackingMessage.src = 'static/img/loading.svg';
         resultsContainer.appendChild(fallbackingMessage);
         runFallbackCheck();
         setInterval(() => {
-            if (interval < 2) {
+            if (interval < 2 && countResults() < 2) {
                 runFallbackCheck();
                 interval++
             }

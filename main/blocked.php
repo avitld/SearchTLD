@@ -1,5 +1,5 @@
 <?php
-    require "misc/functions.php";
+    require "misc/functions/functions.php";
     session_start();
 
     if (isset($_SESSION['rate_limit_triggered']) && $_SESSION['rate_limit_triggered']) {
@@ -19,7 +19,7 @@
 
 <html>
     <head>
-        <?php require "misc/header.php"; ?>
+        <?php require "misc/templates/header.php"; ?>
 		<title>Temporarily Suspended</title>
 	</head>
     <body id="has-background">
@@ -27,13 +27,13 @@
             <h1>Suspicious activity detected</h1>
             <p>Please confirm you are a human by completing the captcha below.</p>
             <form method="post">
-                <img src="misc/captcha.php" alt="CAPTCHA" class="captcha-image">
+                <img src="misc/utils/captcha.php" alt="CAPTCHA" class="captcha-image">
                 <br/>
                 <input type="text" id="captcha" name="captcha_challenge" style="padding: 10px;">
                 <input type="submit" name="submit" id="verify" value="Verify" style="cursor: pointer;">
             </form>
         </main>
-        <?php require "misc/footer.php"; ?>
+        <?php require "misc/templates/footer.php"; ?>
     </body>
 </html>
 

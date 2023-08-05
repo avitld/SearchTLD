@@ -1,56 +1,42 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <?php require "misc/header.php"; ?>
+        <?php require "misc/templates/header.php"; ?>
 		<title>Settings - SearchTLD</title>
 	</head>
-    <?php require "misc/functions.php"; ?>
+    <?php require "misc/functions/functions.php"; ?>
 	<body id="has-background cover">
-		<div align="center">
-		<?php
+		<main id="centered-body">
+            <?php
 
-            $config = readJson("config.json");
+                $config = readJson("config.json");
 
-            if (isset($_REQUEST["reset"])) {
-                setcookie("lang", "en", time() + (10 * 365 * 24 * 60 * 60));
-                setcookie("theme", "dark", time() + (10 * 365 * 24 * 60 * 60));
-                setcookie("border", "on", time() + (10 * 365 * 24 * 60 * 60));
-                setcookie("querymethod", "GET", time() + (10 * 365 * 24 * 60 * 60));
-                setcookie("searcher", "google", time() + (10 * 365 * 24 * 60 * 60));
-                setcookie("safesearch", "", time() - 1000);
+                if (isset($_REQUEST["reset"])) {
+                    setcookie("lang", "en", time() + (10 * 365 * 24 * 60 * 60));
+                    setcookie("theme", "dark", time() + (10 * 365 * 24 * 60 * 60));
+                    setcookie("border", "on", time() + (10 * 365 * 24 * 60 * 60));
+                    setcookie("querymethod", "GET", time() + (10 * 365 * 24 * 60 * 60));
+                    setcookie("searcher", "google", time() + (10 * 365 * 24 * 60 * 60));
+                    setcookie("safesearch", "", time() - 1000);
 
-                
-
-                $extension = '';
-
-                if ($config['hide_extension'] !== 'enabled') {
-                    $extension = '.php';
+                    header("Location: /settings");
+                    die();
                 }
 
-                header("Location: /settings$extension");
-                die();
+                if (isset($_REQUEST["home"])) {
+                    header("Location: /");
+                }
+
+                if (isset($_REQUEST["save"])) {
+                    foreach($_POST as $key=>$value) {
+                        setcookie($key, $value, time() + (10 * 365 * 24 * 60 * 60), '/');
+                    }
+                    global $config;
+
+                    header("Location: /settings");
+                    die();
             }
-
-            if (isset($_REQUEST["home"])) {
-                header("Location: /");
-            }
-
-			if (isset($_REQUEST["save"])) {
-            	foreach($_POST as $key=>$value) {
-                    setcookie($key, $value, time() + (10 * 365 * 24 * 60 * 60), '/');
-                }
-                global $config;
-
-                $extension = '';
-
-                if ($config['hide_extension'] !== 'enabled') {
-                    $extension = '.php';
-                }
-
-                header("Location: /settings$extension");
-                die();
-           }
-        ?>
+            ?>
 			<h1>SearchTLD Configuration</h1>
 			<hr>
 			<form method="post" enctype="multipart/form-data">
@@ -111,7 +97,7 @@
                 <label for="lang">Search Language:</label>
                 <select name="lang">
                 <?php
-                    require "misc/language.php";
+                    require "misc/utils/language.php";
                     foreach ($languages as $language) { 
                         $name = $language['name'];
                         $code = $language['code'];
@@ -133,16 +119,16 @@
                 </select>
 				<br/>
 				<br/>
-                <label for="tld">Search Region:</label>
+                <label for="tld">TLD Region:</label>
                 <select name="tld">
-                    <option value="com" 
+                    <option value=".com" 
                     <?php
                         if (!isset($_COOKIE['tld'])) {
                             echo "selected";
                         }
                     ?>>All</option>
                 <?php
-                    require "misc/language.php";
+                    require "misc/utils/language.php";
                     foreach ($languages as $language) { 
                         if ($tld) {
                             $name = $language['cname'];
@@ -159,6 +145,35 @@
                         }
                     }
                 ?>
+                </select>
+                <br/>
+                <br/>
+                <label for="region">Search Region:</label>
+                <select name="region">
+                    <option value="" 
+                    <?php
+                        if (!isset($_COOKIE['region'])) {
+                            echo "selected";
+                        }
+                    ?>>Any</option>
+                    <?php
+                        require "misc/utils/language.php";
+                        foreach ($languages as $language) { 
+                            if ($alphacode) {
+                                $code = $language['alphacode'];
+                                $name = $language['cname'];
+        
+                                $selected = '';
+                                if (isset($_COOKIE['region'])) {
+                                    if ($_COOKIE['region'] === $code) {
+                                        $selected = 'selected';
+                                    }
+                                }
+        
+                                echo "<option value=\"$code\" $selected>$name</option>";
+                            }
+                        }
+                    ?>
                 </select>
                 <br/>
                 <br/>
@@ -185,7 +200,7 @@
                 <br/>
                 <button name="home" id="home">Go Back</button>
 			</form>
-		</div>
-        <?php require "misc/footer.php"; ?>
+        </main>
+        <?php require "misc/templates/footer.php"; ?>
 	</body>
 </html>

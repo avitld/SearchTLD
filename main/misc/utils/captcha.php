@@ -38,7 +38,7 @@
     $white = imagecolorallocate($image, 255, 255, 255);
     $textcolors = [$black, $white];
     
-    $font = __DIR__ . "/arial.ttf";
+    $font = __DIR__ . "../fonts/arial.ttf";
     
     $string_length = mt_rand(5, 8);
     $captcha_string = generate_string($permitted_chars, $string_length);

@@ -8,7 +8,7 @@
 
 <html lang="en">
 	<head>
-		<?php require "misc/header.php"; ?>
+		<?php require "misc/templates/header.php"; ?>
 
 		<?php
 		 $border = isset($_COOKIE["border"]) ? $_COOKIE["border"] : 'on';
@@ -30,12 +30,12 @@
 	require "engines/text/google.php";
 	require "engines/infobox/wikipedia.php";
 	require "engines/special/grammar.php";
-	require "misc/functions.php";
+	require "misc/functions/functions.php";
 
 	$config = readJson('config.json');
 
 	if ($config['ratelimit'] === "enabled") {
-		require "misc/ratelimit.php";
+		require "misc/utils/ratelimit.php";
 	}
 ?>
 	<body>
@@ -104,18 +104,27 @@
 				}
 
 				$special_result = detectSpecialQuery($query);
-				if ($special_result == 1) {
-					require "engines/special/ip.php";
-					echoIP();
-				} else if ($special_result == 2) {
-					require "engines/special/useragent.php";
-					echoUA();
-				} else if ($special_result == 3) {
-					require "engines/special/base64.php";
-					encodeBase64($query);
-				} else if ($special_result == 4) {
-					require "engines/special/base64.php";
-					decodeBase64($query);
+				
+				switch ($special_result) {
+					case 1:
+						require "engines/special/ip.php";
+						echoIP();
+						break;
+					case 2:
+						require "engines/special/useragent.php";
+						echoUA();
+						break;
+					case 3:
+						require "engines/special/base64.php";
+						encodeBase64($query);
+						break;
+					case 4:
+						require "engines/special/base64.php";
+						decodeBase64($query);
+						break;
+					case 5:
+						require "engines/special/weather.php";
+						weather();
 				}
 			}
 		?>
@@ -196,7 +205,7 @@
 				</form>
 		</div>
 		
-		<?php require "misc/footer.php"; ?>
+		<?php require "misc/templates/footer.php"; ?>
 
 	</body>
 </html>

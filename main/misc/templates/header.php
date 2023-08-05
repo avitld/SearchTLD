@@ -18,5 +18,5 @@
 <link rel="stylesheet" type="text/css"
 <?php
 	$theme = isset($_COOKIE["theme"]) ? $_COOKIE["theme"] : 'dark';
-	echo 'href="/static/css/' . $theme . '.css">';
+	echo 'href="/static/css/themes/' . $theme . '.css">';
 ?>

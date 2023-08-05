@@ -6,20 +6,37 @@
 			$page = intval($page) - 1;
 		}
 
+		if (isset($_COOKIE['region'])) {
+			$region = $_COOKIE['region'];
+		} else {
+			$region = "us";
+		}
+
 		$url = "https://html.duckduckgo.com/html/?q=" . $query . "&s=" . $page;
 
 		if (isset($_COOKIE["lang"])) {
 			$lang = trim(htmlspecialchars($_COOKIE["lang"]));
-			$url .= "&lr=lang_$lang&hl=$lang";
+
+			$trimlang = $region . "-" . $lang;
+			$trimlangrev = $lang . "_" . $region;
+
+			$url .= "&lr=lang_$lang&hl=$lang&kl=$trimlang";
 		} else {
-			$url .= "&lr=lang_en&sl=en&hl=en";
+
+			$trimlang = "us" . "-" . "en";
+			$trimlangrev = "en" . "_" . "US";
+
+			$url .= "&lr=lang_en&sl=en&hl=en&kl=us-en";
 		}
 
 		if (isset($_COOKIE["safesearch"])) {
 			$url .= "&kp=-2";
 		}
 		
+		$cookies = "l=$trimlang;ad=$trimlangrev";
+		
 		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_COOKIE, $cookies);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
@@ -76,7 +93,7 @@
 						echo $title;
 					}
 
-					if (!in_array($link, $uniqueLinks) && $title !== null && $blacklist === false) {
+					if (!in_array($link, $uniqueLinks) && $title && $link && $blacklist === false) {
 							echo "<div class=\"text-result\">";
 							echo "	<a href=\"$link\">";
 							echo "  	<span>$link</span>";

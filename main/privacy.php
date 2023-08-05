@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<?php require "misc/header.php" ?>
+		<?php require "misc/templates/header.php" ?>
 		
 		<title>SearchTLD</title>
 	</head>
-	<?php require "misc/placeholder.php"; ?>
-	<?php require "misc/functions.php";
+	<?php require "misc/functions/functions.php";
 		$config = readJson("config.json");
 	?>
 	<body id="has-background">
@@ -34,7 +33,7 @@
 		</main>
         
 
-		<?php require "misc/footer.php"; ?>
+		<?php require "misc/templates/footer.php"; ?>
 
 	</body>
 </html>

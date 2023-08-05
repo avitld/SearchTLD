@@ -11,6 +11,8 @@
     {
         // Original code by pafefs, modified by avitld
         $modified_query = str_replace(" ","",strtolower($q));
+
+
         if (strpos($modified_query,"my") !== false && strpos($modified_query,"what") !== false && strpos($modified_query,"is") !== false ){
             if (strpos($modified_query, "ip")) {
                 return 1;
@@ -27,6 +29,10 @@
                     return 4;
                 }
             }
+        }
+
+        if (strpos($modified_query, "weather") !== false || strpos($modified_query, "meteo") !== false) {
+            return 5;
         }
     }
 

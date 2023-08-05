@@ -23,7 +23,13 @@ function wikipediaInfo($query) {
 
     $data = json_decode($response, true);
 
-    if (isset($data['query']['pages'])) {
+    if (
+        isset($data['query']['pages']) &&
+        strtolower($query) !== "weather" &&
+        strtolower($query) !== "meteo" &&
+        count($data['query']['pages']) === 1 &&
+        !isset($wikipediaData['query']['pages']['-1'])
+        ) {
         $pages = $data['query']['pages'];
 
         foreach ($pages as $page) {
@@ -42,14 +48,16 @@ function wikipediaInfo($query) {
                     $description .= "...";
                 }
 
-                echo "<div class=\"infobox\">";
-                if ($thumbnailUrl) {
-                    echo "<img src=\"$thumbnailUrl\">";
-                    echo "<hr>";
+                if (!strpos($description, 'may refer to')) {
+                    echo "<div class=\"infobox\">";
+                    if ($thumbnailUrl) {
+                        echo "<img src=\"$thumbnailUrl\">";
+                        echo "<hr>";
+                    }
+                    echo "<p>" . $description . "</p>";
+                    echo "<a href=\"https://$lang.wikipedia.org/wiki/$query\">$title at https://$lang.wikipedia.org/wiki/$query</a>";
+                    echo "</div>";
                 }
-                echo "<p>" . $description . "</p>";
-                echo "<a href=\"https://$lang.wikipedia.org/wiki/$query\">$title at https://$lang.wikipedia.org/wiki/$query</a>";
-                echo "</div>";
             }
         }
     }

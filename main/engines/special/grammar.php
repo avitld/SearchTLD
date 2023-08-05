@@ -3,15 +3,21 @@
     function getGrammar($query) {
         $url = "https://api.languagetoolplus.com/v2/check";
 
+        if (isset($_COOKIE['region'])) {
+            $region = strtoupper($_COOKIE['region']);
+        } else {
+            $region = "US";
+        }
+
         if (isset($_COOKIE["lang"])) {
-			$lang = trim(htmlspecialchars($_COOKIE["lang"]));
+			$lang = trim(htmlspecialchars($_COOKIE["lang"])) . "-" . $region;
 		} else {
 			$lang = "en-US";
 		}
 
         $data = [
             "text" => ucfirst($query),
-            "language" => "en-US",
+            "language" => $lang,
         ];
 
         $ch = curl_init($url);
@@ -54,7 +60,7 @@
 
             $updatedSentence = implode(" ", $correctedQuery);
 
-            if ($updatedSentence !== $query) {
+            if (strtolower($updatedSentence) !== strtolower($query)) {
                 echo "<div class=\"correction\"><small>Did you mean: <strong><a href=\"/search.php?q=" . urlencode($updatedSentence) . "&pg=0&tp=0\">$updatedSentence</a></strong></small></div>";
             }
         }

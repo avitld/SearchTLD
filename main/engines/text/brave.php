@@ -1,6 +1,12 @@
 <?php
 	function braveText($query, $page) {
 		global $config;
+
+		if (isset($_COOKIE['region'])) {
+			$region = $_COOKIE['region'];
+		} else {
+			$region = "us";
+		}
 			
 		if (intval($page) > 5) {
 			$page = intval($page) - 5;
@@ -13,6 +19,7 @@
 			$url .= "&language=$lang";
 		} else {
 			$url .= "&language=en";
+			$lang="us";
 		}
 
 		if (isset($_COOKIE["safesearch"])) {
@@ -20,8 +27,11 @@
 		}
 
         $url .= "&source=web"; // Measure to prevent being blocked
+
+        $cookies = "country=$region;useLocation=0;theme=dark";
 		
 		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_COOKIE, $cookies);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 3);

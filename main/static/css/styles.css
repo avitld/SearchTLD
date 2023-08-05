@@ -135,7 +135,7 @@ a:hover {
 }
   
 .info-card {
-    padding: 1.2rem;
+    padding: 1rem;
     background-color: hsla(288, 100%, 83%, 0.2);
     border-radius: 0.3rem;
     transition: 0.3s;
@@ -420,8 +420,14 @@ header .type-selectors button {
 }
 
 #fallbacking {
-	font-weight: bolder;
-	font-size: 1.4rem;
+	max-width: 5rem;
+    max-height: 5rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-self: center;
+    justify-self: center;
 }
 
 #noResults {
@@ -482,6 +488,8 @@ select {
 
 footer {
     position: relative;
+    display: flex;
+    align-items: center;
     margin: 0;
     left: 0;
     bottom: 0;
@@ -519,6 +527,7 @@ footer a:hover {
     text-align: center;
     font-size: x-small;
     float: right;
+    margin-left: auto;
 }
 
 .footer-sidebar .footer-text p {
