@@ -93,6 +93,7 @@
 							echo "	</a>";
 							echo "  <p>$description</p>";
 							echo "  <span id=\"engine\">Brave</span>";
+							echo "	<span id=\"cached\"><a href=\"https://web.archive.org/web/$link\">Archive</a></span>";
 							echo "</div>";
 	
 							$uniqueLinks[] = $link;

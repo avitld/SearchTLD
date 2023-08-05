@@ -106,4 +106,29 @@
 			echo '/static/img/logo_dark.png';
 		}
     }
+
+    function bangSearch($query) {
+        $isBang = substr($query, 0, 1) === "!";
+        $bangs = readJson('static/json/bangs.json');
+        if ($isBang) {
+            $searchFor = substr(explode(" ", $query)[0], 1);
+            $bangURL = null;
+
+            foreach ($bangs as $bang) {
+                if ($bang["t"] == $searchFor) {
+                    $bangURL = $bang["u"];
+                }
+            }
+
+            if ($bangURL) {
+                $bangQueryArray = explode("!" . $searchFor, $query);
+                $bangQuery = trim(implode("", $bangQueryArray));
+
+                $redirect = str_replace("{{{s}}}", $bangQuery, $bangURL);
+
+                header("Location: $redirect");
+                die();
+            }
+        }
+    }
 ?>

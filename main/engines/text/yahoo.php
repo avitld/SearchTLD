@@ -1,25 +1,14 @@
 <?php
-	function bingText($query, $page) {
+	function yahooText($query, $page) {
 		global $config;
-		
-		$fpage = $page . "0";
 
-		$url = "https://www.bing.com/search?q=" . urlencode($query) . "&form=QBLH&sp=-1&lq=0&pq=&sc=10-4&qs=n&sk=&cvid=C6422AEC94DF49E590A95EDAA8E46FB4&ghsh=0&ghacc=0&ghpl=&first=$page";
-		
-		if (isset($_COOKIE["lang"])) {
-			$lang = trim(htmlspecialchars($_COOKIE["lang"]));
-			$url .= "&mkt=" . urlencode($lang) . "-" . urlencode($lang);
-		} else {
-			$url .= "&mkt=en-US";
-		}
+		$url = "https://search.yahoo.com/search?p=" . urlencode($query) . "&ei=UTF-8&fp=1&save=0&b=8&pz=7&bct=0&pstart=$page";
 
-		if (isset($_COOKIE["safesearch"])) {
-			$url .= "&adlt=strict";
-		} else {
-			$url .= "&adlt=off";
-		}
+		
+		$cookies = "thamba=1;";
 		
 		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_COOKIE, $cookies);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
@@ -40,55 +29,54 @@
 		$response = curl_exec($ch);
 
 		curl_close($ch);
-
-		bingTextResponse($response);
+		yahooTextResponse($response);
 	}
 
-	function bingTextResponse($response) {
+	function yahooTextResponse($response) {
 		global $config;
 
 		if (!empty($response)) {
-			if ($config['debugMode'] == 'enabled') {
-				echo $response;
-			}
 
 			$dom = new DOMDocument();
 			@$dom->loadHTML($response);
 			$xpath = new DOMXPath($dom);
 
-			$results = $xpath->query('//ol[@id="b_results"]//li[contains(@class, "b_algo")]');
-			$uniqueLinks = [];
+            $results = $xpath->query('//div[contains(@class, "dd")]');
+            $uniqueLinks = [];
 			$resultNum = 0;
+            
 			if ($results) {
 				foreach ($results as $result) {
-					$title = $xpath->query('//h2//a', $result)->item(0);
-					@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
-					$link = $xpath->query('.//div[contains(@class, "b_attribution")]//cite', $result)->item(0);
-					@$link = $link->textContent;
-					$description = $xpath->query('.//div[contains(@class, "b_caption")]//p', $result)->item(0);
-					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
-					
+					$title = $xpath->evaluate('.//h3[contains(@class, "title")]//a', $result)->item(0);
+					$link = $xpath->evaluate('.//span[contains(@class, "d-ib")]', $title)->item(0)->textContent;
+					$origlink = $link;
+					$link = str_replace(['›', ' '], ['/', ''], $link);
+					$link = "https://$link";
 					$link = cleanUrl($link);
-					$blacklist = isDomainBlacklisted($link);
+					$description = htmlspecialchars($xpath->evaluate('.//span[contains(@class, "fc-falcon")]', $result)->item(0)->textContent, ENT_QUOTES, 'UTF-8');
+					$title = $title->textContent;
+					$title = str_replace($origlink, '', $title);
 					if ($config["debugMode"] == "enabled") {
 						echo $link;
 						echo $title;
 					}
-					if (str_contains($link, "...") && !in_array($link, $uniqueLinks) && $blacklist === false && $title) {
+
+					if (!in_array($link, $uniqueLinks) && $title && $link && $link !== "All") {
 							echo "<div class=\"text-result\">";
 							echo "	<a href=\"$link\">";
 							echo "  	<span>$link</span>";
 							echo "		<h2>$title</h2>";
 							echo "	</a>";
 							echo "  <p>$description</p>";
-							echo "<span id=\"engine\">Bing</span>";
-							echo "<span id=\"cached\"><a href=\"https://web.archive.org/web/$link\">Archive</a></span>";
+							echo "  <span id=\"engine\">Yahoo</span>";
+							echo "	<span id=\"cached\"><a href=\"https://web.archive.org/web/$link\">Archive</a></span>";
 							echo "</div>";
 	
 							$uniqueLinks[] = $link;
 							$resultNum++;
 					}
 				}
+
 				if ($resultNum == 0) {
 					if ($config["debugMode"] == "enabled") {
 						echo $resultNum;
@@ -99,5 +87,4 @@
 			}
 		}
 	}
-
 ?>

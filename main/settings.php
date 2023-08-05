@@ -182,6 +182,7 @@
 				<?php
                     $engines = "<option value=\"google\">Google</option>
                     <option value=\"ddg\">DuckDuckGo</option>
+                    <option value=\"yahoo\">Yahoo</option>
                     <option value=\"bing\">Bing</option>
                     <option value=\"brave\">Brave Search</option>";
 
@@ -191,6 +192,41 @@
                     }
 
                     echo $engines;
+                ?>
+                </select>
+                <br/>
+                <br/>
+                <label for="secondarysearch">Secondary Search Engine:</label>
+				<select name="secondarysearch">
+				<?php
+                    $engines = "<option value=\"ddg\">DuckDuckGo</option>
+                    <option value=\"google\">Google</option>
+                    <option value=\"yahoo\">Yahoo</option>
+                    <option value=\"bing\">Bing</option>
+                    <option value=\"brave\">Brave Search</option>";
+
+                    if (isset($_COOKIE["secondarysearch"])) {
+                        $search_cookie = $_COOKIE["secondarysearch"];
+                        $engines = str_replace($search_cookie . "\"", $search_cookie . "\" selected", $engines);
+                    }
+
+                    echo $engines;
+                ?>
+                </select>
+                <br/>
+                <br/>
+                <label for="suggestions">Search Suggestions:</label>
+				<select name="suggestions">
+				<?php
+                    $options = "<option value=\"on\">On</option>
+                    <option value=\"off\">Off</option>";
+
+                    if (isset($_COOKIE["suggestions"])) {
+                        $suggestion_cookie = $_COOKIE["suggestions"];
+                        $engines = str_replace($suggestion_cookie . "\"", $suggestion_cookie . "\" selected", $options);
+                    }
+
+                    echo $options;
                 ?>
                 </select>
                 <br/>

@@ -49,6 +49,39 @@ a:hover {
     justify-content: center;
 }
 
+#autocompleteList {
+    display: none;
+    padding: 0.6rem;
+    font-size: inherit;
+    max-width: 31.25rem;
+    width: 100%;
+    outline: 0;
+    margin: 0 auto;
+    border-radius: 0 0 1.12rem 1.12rem;
+    background-color: var(--element-background);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    color: var(--foreground-secondary);
+    transition: 0.3s;
+    list-style: none;
+}
+
+#autocompleteList li {
+    cursor: pointer;
+    border-radius: 0.5rem;
+    margin-bottom: 2px;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+#autocompleteList li:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#autocompleteList li:last-child {
+    margin-bottom: 0;
+}
+
 .search-container input[type="search"] {
     padding: 0.6rem;
     font-size: inherit;
@@ -278,7 +311,12 @@ header .type-selectors button {
 }
 
 .correction {
-    margin: 0.5rem auto;
+    max-width: 15.6rem;
+	margin: 1rem 5rem;
+	padding: 0.3rem;
+	background: var(--background-secondary);
+	border: 1px solid var(--border-color);
+	border-radius: 0.5rem;
 }
 
 .infobox {
@@ -451,6 +489,12 @@ header .type-selectors button {
     border: 1px solid var(--border-color-hover);
 }
 
+#cached {
+    text-align: right;
+    float: right;
+    margin-left: auto;
+}
+
 /* General */
 
 input[type="text"] {
@@ -615,6 +659,14 @@ footer a:hover {
         width: 65%;
     }
 
+    #autocompleteList {
+        width: 65%;
+    }
+
+    #autocompleteList li {
+        padding: 4px 1px;
+    }
+
     .infobox {
         position: relative;
         width: 80%;
@@ -622,7 +674,7 @@ footer a:hover {
     }
 
     .results {
-        margin: 0;
+        margin: 1.2rem 0;
     }
 
     .text-result {
@@ -641,6 +693,10 @@ footer a:hover {
     #noResults {
         text-align: center;
     }
+    
+    .correction {
+		margin: 1rem auto;
+	}
 
     .main-image-holder {
         text-align: center;
@@ -656,6 +712,10 @@ footer a:hover {
         max-width: 50%;
         max-height: 50%;
     }
+
+    #has-background {
+        background-size: cover;
+    }
 }
 
 /* Management for smaller screens */
@@ -667,7 +727,7 @@ footer a:hover {
     }
 
     .results {
-        margin: 0;
+        margin: 1.2rem 0;
     }
 
     .text-result {
@@ -685,4 +745,8 @@ footer a:hover {
     #noResults {
         text-align: center;
     }
+
+    .correction {
+		margin: 1rem auto;
+	}
 }

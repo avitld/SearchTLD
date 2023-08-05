@@ -12,7 +12,7 @@
 			$region = "us";
 		}
 
-		$url = "https://html.duckduckgo.com/html/?q=" . $query . "&s=" . $page;
+		$url = "https://html.duckduckgo.com/html/?q=" . urlencode($query) . "&s=" . $page;
 
 		if (isset($_COOKIE["lang"])) {
 			$lang = trim(htmlspecialchars($_COOKIE["lang"]));
@@ -101,6 +101,7 @@
 							echo "	</a>";
 							echo "  <p>$description</p>";
 							echo "  <span id=\"engine\">DuckDuckGo</span>";
+							echo "	<span id=\"cached\"><a href=\"https://web.archive.org/web/$link\">Archive</a></span>";
 							echo "</div>";
 	
 							$uniqueLinks[] = $link;

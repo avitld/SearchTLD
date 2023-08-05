@@ -40,12 +40,16 @@
 
 		$headers = @get_headers($url);
 
-		if(strpos( $headers[0], '200') === false) {
+		if (is_array($headers) && count($headers) > 0) {
+			if (!strpos($headers[0], '200')) {
+				$url = str_replace($tld, "com", $url);
+			}
+		} else {
 			$url = str_replace($tld, "com", $url);
 		}
 
 		$cookies = "CONSENT=PENDING+900;";
-		
+
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_COOKIE, $cookies);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36');
@@ -117,6 +121,7 @@
 								echo "	</a>";
 								echo "  <p>$description</p>";
 								echo "<span id=\"engine\">Google</span>";
+								echo "<span id=\"cached\"><a href=\"https://web.archive.org/web/$link\">Archive</a></span>";
 								echo "</div>";
 		
 								$uniqueLinks[] = $link;

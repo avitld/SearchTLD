@@ -4,6 +4,10 @@
 	$query = htmlspecialchars($_REQUEST["q"],ENT_QUOTES,'UTF-8');
 	$page = htmlspecialchars($_REQUEST["pg"],ENT_QUOTES,'UTF-8');
 	$type = htmlspecialchars($_REQUEST["tp"],ENT_QUOTES,'UTF-8');
+
+	if ($type < 0 || $type > 5 || $page < 0 || $page > 10 || empty($query)) {
+		header("Location: /");
+	}
 ?>
 
 <html lang="en">
@@ -33,6 +37,8 @@
 	require "misc/functions/functions.php";
 
 	$config = readJson('config.json');
+
+	bangSearch($query);
 
 	if ($config['ratelimit'] === "enabled") {
 		require "misc/utils/ratelimit.php";
@@ -129,32 +135,60 @@
 			}
 		?>
 		<div class="results" id="results">
-			<?php
+<?php
 				switch ($type) {
 					case 0:
 						if ($page > 5) {
 							require "engines/text/brave.php";
 							braveText($query, $page);
 						} elseif ($page < 5 && $page > 1) {
-							require "engines/text/ddg.php";
-							ddgText($query, $page);
-						} else {
-							if (isset($_COOKIE['searcher'])) {
-								$searcher = $_COOKIE['searcher'];
-								if ($searcher == "ddg") {
+							$secondarySearcher = isset($_COOKIE['secondarysearch']) ? $_COOKIE['secondarysearch'] : 'ddg';
+							switch ($secondarySearcher) {
+								case 'ddg':
 									require "engines/text/ddg.php";
 									ddgText($query, $page);
-								} elseif ($searcher == "brave") {
+									break;
+								case 'brave':
 									require "engines/text/brave.php";
 									braveText($query, $page);
-								} elseif ($searcher == "bing") {
+									break;
+								case 'bing':
 									require "engines/text/bing.php";
 									bingText($query, $page);
-								} else {
+									break;
+								case 'yahoo':
+									require "engines/text/yahoo.php";
+									yahooText($query, $page);
+									break;
+								case 'google':
 									googleText($query, $page);
-								}
-							} else {
-								googleText($query, $page);
+									break;
+								default:
+									googleText($query, $page);
+									break;
+							}
+						} else {
+							$searcher = isset($_COOKIE['searcher']) ? $_COOKIE['searcher'] : 'google';
+							switch ($searcher) {
+								case 'ddg':
+									require "engines/text/ddg.php";
+									ddgText($query, $page);
+									break;
+								case 'brave':
+									require "engines/text/brave.php";
+									braveText($query, $page);
+									break;
+								case 'bing':
+									require "engines/text/bing.php";
+									bingText($query, $page);
+									break;
+								case 'yahoo':
+									require "engines/text/yahoo.php";
+									yahooText($query, $page);
+									break;
+								default:
+									googleText($query, $page);
+									break;
 							}
 						}
 						break;
@@ -175,9 +209,7 @@
 						require "engines/forums/stackexchange.php";
 						require "engines/forums/quora.php";
 						reddit($query);
-						
 						quetre($query);
-
 						stackEx($query);
 						break;
 					default:
@@ -185,7 +217,6 @@
 						break;
 				}
 			?>
-			<script src="scripts/fallback-text.js"></script>
 			<script src="scripts/preview-image.js"></script>
 		</div>
 		<div class="page-buttons">

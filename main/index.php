@@ -20,7 +20,7 @@
 			echo "method=\"$method\"";
 			?> autocomplete="off" action="search">
 				<div class="search-container">
-					<input type="search" name="q" autofocus required placeholder="<?php
+					<input type="search" id="searchInput" name="q" autofocus required placeholder="<?php
 						$numb = pickRand();
 						returnArray($numb, $searchPlaceholders);
 					?> "
@@ -40,6 +40,14 @@
 				<input type="hidden" name="pg" value="0">
 				<input type="hidden" name="tp" value="0">
 			</form>
+			
+			<?php
+				$suggestionsCookie = $_COOKIE['suggestions'];
+				if (!isset($suggestionsCookie) || $suggestionsCookie == "on") {
+					echo "<div id=\"autocompleteList\"></div>";
+					echo "<script src=\"/scripts/autocomplete.js\"></script>";
+				}
+			?>
 			<div class="credit">
 				<p>Logo by <b><a href="https://github.com/snowfoxsh" target="_blank">snowfoxsh</a></b></p>
 			</div>

@@ -14,9 +14,8 @@ function countResults() {
 }
 
 function fetchFallbackResults() {
-
     if (query && page) {
-        const url = `../misc/js/fallback.php?q=${encodeURIComponent(query)}&pg=${encodeURIComponent(page)}&me=${encodeURIComponent(method)}`;
+        const url = `../misc/js/fallback.php?q=${encodeURIComponent(query)}&pg=${encodeURIComponent(page)}&me=${encodeURIComponent(method)}&type=text`;
 
         fetch(url)
         .then(response => response.text())
@@ -58,13 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fallbackingMessage.src = 'static/img/loading.svg';
         resultsContainer.appendChild(fallbackingMessage);
         runFallbackCheck();
-        setInterval(() => {
-            if (interval < 2 && countResults() < 2) {
-                runFallbackCheck();
-                interval++
-            }
-        }, 5000);
+        setInterval(runFallbackCheck, 5000);
     }
-
 });
 // @license-end

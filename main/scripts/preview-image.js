@@ -25,18 +25,14 @@ function hideOverlay() {
     body.style.overflow = 'auto';
 }
 
-images.forEach((image) => {
+images.forEach(image => {
     image.addEventListener('click', () => {
         const imageAttribute = image.querySelector('img');
-        let imageUrl = imageAttribute.getAttribute('src');
-        let imageTitle = imageAttribute.getAttribute('alt');
-        let imageWeblink = image.querySelector('a');
-        let imageWeblinkUrl = imageWeblink.getAttribute('alt');
-        showOverlay(imageUrl, imageTitle, imageWeblinkUrl);
+        showOverlay(imageAttribute.getAttribute('src'), imageAttribute.getAttribute('alt'), image.querySelector('a').getAttribute('alt'));
     });
 });
 
-overlay.addEventListener('click', (event) => {
+overlay.addEventListener('click', event => {
     if (event.target === overlay) {
         hideOverlay();
     }
