@@ -23,9 +23,11 @@ or [our codeberg wiki!](https://codeberg.org/avitld/SearchTLD/wiki)
   <li>Blocks harmful domains.</li>
   <li>Fallbacks to multiple search engines to ensure uptime.</li>
   <li>Rate Limiting for instances to protect against DDOS and Spam attacks.</li>
+  <li>Redirect to privacy friendly frontends.</li>
   <li>Very easy to self-host using prepared install scripts.</li>
   <li>Special queries (IP, UserAgent, Base64 Encoding, etc.).</li>
   <li>Easy to use and beautiful UI.</li>
+  <li>Advanced API with language settings and fallbacking.</li>
   <li>Libre JavaScript. (Not required)</li>
   <li>Works perfectly through tor.</li>
   <li>Fully open-source and protected under the AGPL v3.0.</li>
@@ -35,14 +37,7 @@ or [our codeberg wiki!](https://codeberg.org/avitld/SearchTLD/wiki)
 # Join our Matrix Server!
 <b>We now also have a Matrix server which is preferred over IRC.<br/>
 You can join manually join ``#schizos:schizo.gr`` or through <a href="https://matrix.to/#/#schizos:schizo.gr">this link</a></b>
-
-## Join our IRC!
-
-<b>We also have a #IRC channel on Freenode!<br/>
- Just register an account on Freenode and ``/join #searchtld``
-</b>
-
-## Rules for IRC & Matrix
+## Rules for Matrix
 <ul>
   <li><b>Be nice to each other.</b></li>
   <li><b>Do not say/use any racial, sexist, homophobic/transphobic, antisemetic, xenophobic... slurs. </b></li>
@@ -58,7 +53,7 @@ You can join manually join ``#schizos:schizo.gr`` or through <a href="https://ma
 | --- | --- | --- | --- | --- | --- | --- |
 | Requests | 14 | 216 | 50 | 330 | 50 | 139 |
 | Time till website fully loaded | 2.04s | 42.66 s | 2.27s | 5.91s | 5.63s | 46.62 |
-
+<a href="https://blog.searchtld.com/articles/full_comparison_of_searchtld_vs_other_meta-search_engines/">More info on this article</a>
 </div>
 
 # Read our news!

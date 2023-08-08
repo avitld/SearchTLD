@@ -136,4 +136,94 @@
 			}
 		}
 	}
+	function braveTextJSON($query, $page, $lang, $region) {
+		global $config;
+
+		$res = array();
+		
+		$url = "https://search.brave.com/search?q=" . urlencode($query) . "&offset=$page";
+
+		$url .= "&safe=strict";
+		$url .= "&language=$lang";
+		$url .= "&source=web";
+		
+		$cookies = "country=$region;useLocation=0;theme=dark";
+
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_COOKIE, $cookies);
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		if ($config['proxyIP'] !== 'disabled') {
+			$port = $config['proxyPort'];
+			$ip = $config['proxyIP'];
+			if ($config['proxyLogIn'] !== "user:password") {
+				$userpass = $config['proxyLogIn'];
+				curl_setopt($ch, CURLOPT_PROXYUSERPWD, $userpass);
+			}
+
+			curl_setopt($ch, CURLOPT_PROXY, $ip);
+			curl_setopt($ch, CURLOPT_PROXYPORT, $config);
+		}
+
+		$response = curl_exec($ch);
+
+		curl_close($ch);
+
+		if (!empty($response)) {
+			$dom = new DOMDocument();
+			@$dom->loadHTML($response);
+			$xpath = new DOMXPath($dom);
+
+            $results = $xpath->query('//div[contains(@class, "snippet")]');
+            $uniqueLinks = [];
+			$resultNum = 0;
+            
+			if ($results) {
+				foreach ($results as $result) {
+					$title = $xpath->query('.//span[contains(@class, "snippet-title")]', $result)->item(0);
+					@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
+					$link = $xpath->query('.//a[contains(@class, "result-header")]', $result)->item(0);
+					if ($link) { // Required for some reason... again...
+						@$link = $link->getAttribute("href");
+						$link = cleanUrl($link);
+					}
+					$description = $xpath->query('.//p[@class="snippet-description"]', $result)->item(0);
+					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
+					
+					$blacklist = isDomainBlacklisted($link);
+
+					if (strlen($description) < 1) {
+						$description = "No description provided.";
+					}
+
+					if ($title && !in_array($link, $uniqueLinks) && $blacklist === false) {
+						array_push($res, array(
+							"title" => trim($title),
+							"link" => $link,
+							"description" => $description
+						));
+
+						$uniqueLinks[] = $link;
+						$resultNum++;
+					}
+				}		
+
+				if ($resultNum == 0) {
+					$result = "Failed";
+					return $result;
+				}
+
+				return json_encode($res);
+			} else {
+				$result = "Failed";
+				return $result;
+			}
+		} else {
+			$result = "Failed";
+			return $result;
+		}
+	}
 ?>
