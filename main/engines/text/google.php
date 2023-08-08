@@ -7,10 +7,11 @@
 		if (isset($_COOKIE["tld"])) {
 			$tld = $_COOKIE["tld"];
 		} else {
-			$tld = ".com";
+			$tld = "com";
 		}
 
-		$url = "https://www.google$tld/search?q=" . urlencode($query) . "&start=" . urlencode($fpage) . "&num=12&filter=0&nfpr=1";
+		$url = "https://www.google.$tld/search?q=" . urlencode($query) . "&start=" . urlencode($fpage) . "&num=12&filter=0&nfpr=1";
+
 
 		if ($config['googleAPI']['enabled'] == 'enabled') {
 			$apikey = $config['googleAPI']['apiKey'];
@@ -108,14 +109,40 @@
 						$link = cleanUrl($link);
 						$blacklist = isDomainBlacklisted($link);
 
+						$oglink = $link;
+
+						if ($_COOKIE['enableFrontends'] !== 'disabled' && $config['frontendsEnabled'] == 'enabled') {
+							$link = checkFrontends($link);
+						}
+
 						if ($config["debugMode"] == "enabled") {
 							echo $link;
 							echo $title;
 						}
 
+						if (strlen($description) < 1) {
+							$description = "No description provided.";
+						}
+
 						if (!preg_match('/^\/search\?q=/', $link) && !in_array($link, $uniqueLinks) && $blacklist === false) {
+							
 								echo "<div class=\"text-result\">";
 								echo "	<a href=\"$link\">";
+
+								$link = urldecode($oglink);
+								$link = htmlspecialchars($link);
+								$link = str_replace('https://', '', $link);
+								$link = str_replace('/', ' › ', $link);
+		
+								$segments = explode(' › ', $link);
+								if (count($segments) > 2) {
+									$link = $segments[0] . ' › ' . $segments[1];
+								}
+	
+								if (strlen($link) <= 50) {
+									$link = substr($link, 0, 47) . '...';
+								}
+
 								echo "  	<span>$link</span>";
 								echo "		<h2>$title</h2>";
 								echo "	</a>";

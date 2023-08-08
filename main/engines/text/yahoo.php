@@ -61,9 +61,34 @@
 						echo $title;
 					}
 
+					$oglink = $link;
+
+					if (strlen($description) < 1) {
+						$description = "No description provided.";
+					}
+
+					if ($_COOKIE['enableFrontends'] !== 'disabled' && $config['frontendsEnabled'] == 'enabled') {
+						$link = checkFrontends($link);
+					}
+
 					if (!in_array($link, $uniqueLinks) && $title && $link && $link !== "All") {
 							echo "<div class=\"text-result\">";
 							echo "	<a href=\"$link\">";
+
+							$link = urldecode($oglink);
+							$link = htmlspecialchars($link);
+							$link = str_replace('https://', '', $link);
+							$link = str_replace('/', ' › ', $link);
+	
+							$segments = explode(' › ', $link);
+							if (count($segments) > 2) {
+								$link = $segments[0] . ' › ' . $segments[1];
+							}
+
+							if (strlen($link) >= 50) {
+								$link = substr($link, 0, 47) . '...';
+							}
+
 							echo "  	<span>$link</span>";
 							echo "		<h2>$title</h2>";
 							echo "	</a>";

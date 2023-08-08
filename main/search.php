@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <?php 
+
 	$query = htmlspecialchars($_REQUEST["q"],ENT_QUOTES,'UTF-8');
 	$page = htmlspecialchars($_REQUEST["pg"],ENT_QUOTES,'UTF-8');
 	$type = htmlspecialchars($_REQUEST["tp"],ENT_QUOTES,'UTF-8');
@@ -31,10 +32,9 @@
 	</head>
 
 <?php 
-	require "engines/text/google.php";
-	require "engines/infobox/wikipedia.php";
 	require "engines/special/grammar.php";
 	require "misc/functions/functions.php";
+	require "engines/infobox/wikipedia.php";
 
 	$config = readJson('config.json');
 
@@ -110,7 +110,7 @@
 				}
 
 				$special_result = detectSpecialQuery($query);
-				
+				echo "<div id=\"special\">";
 				switch ($special_result) {
 					case 1:
 						require "engines/special/ip.php";
@@ -132,6 +132,7 @@
 						require "engines/special/weather.php";
 						weather();
 				}
+				echo "</div>";
 			}
 		?>
 		<div class="results" id="results">
@@ -142,7 +143,7 @@
 							require "engines/text/brave.php";
 							braveText($query, $page);
 						} elseif ($page < 5 && $page > 1) {
-							$secondarySearcher = isset($_COOKIE['secondarysearch']) ? $_COOKIE['secondarysearch'] : 'ddg';
+							$secondarySearcher = isset($_COOKIE['secondarysearch']) ? $_COOKIE['secondarysearch'] : 'brave';
 							switch ($secondarySearcher) {
 								case 'ddg':
 									require "engines/text/ddg.php";
@@ -161,14 +162,12 @@
 									yahooText($query, $page);
 									break;
 								case 'google':
-									googleText($query, $page);
-									break;
-								default:
+									require "engines/text/google.php";
 									googleText($query, $page);
 									break;
 							}
 						} else {
-							$searcher = isset($_COOKIE['searcher']) ? $_COOKIE['searcher'] : 'google';
+							$searcher = isset($_COOKIE['searcher']) ? $_COOKIE['searcher'] : 'ddg';
 							switch ($searcher) {
 								case 'ddg':
 									require "engines/text/ddg.php";
@@ -186,9 +185,13 @@
 									require "engines/text/yahoo.php";
 									yahooText($query, $page);
 									break;
-								default:
+								case 'google':
+									require "engines/text/google.php";
 									googleText($query, $page);
 									break;
+								default:
+									require "engines/text/ddg.php";
+									ddgText($query, $page);
 							}
 						}
 						break;
@@ -213,10 +216,15 @@
 						stackEx($query);
 						break;
 					default:
-						googleText($query, $page);
+						ddgText($query, $page);
 						break;
 				}
+				/* The below is used for JavaScript so it can access parameters in both POST and GET requests */
+				echo "<input type=\"hidden\" id=\"query-info\" value=\"$query\" />";
+				echo "<input type=\"hidden\" id=\"page-info\" value=\"$page\" />";
+				echo "<input type=\"hidden\" id=\"type-info\" value=\"$type\" />";
 			?>
+			<script src="scripts/fallback-text.js"></script>
 			<script src="scripts/preview-image.js"></script>
 		</div>
 		<div class="page-buttons">

@@ -30,6 +30,8 @@
 	}
 
 	function stackExResponse($response) {
+		global $config;
+
 		if (!empty($response)) {
 			$dom = new DOMDocument();
 			@$dom->loadHTML($response);
@@ -50,6 +52,10 @@
                     @$date = htmlspecialchars($date->textContent);
                     $desc = $xpath->query('.//div[contains(@class, "excerpt")]', $result)->item(0);
                     @$desc = htmlspecialchars($desc->textContent);
+
+					if ($_COOKIE['enableFrontends'] !== 'disabled' && $config['frontendsEnabled'] == 'enabled') {
+						$link = checkFrontends($link);
+					}
 
                     if (!in_array($link, $uniqueLinks) && !($num >= 3)) {
 					    echo "<div class=\"text-result\">";

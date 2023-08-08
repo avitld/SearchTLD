@@ -2,12 +2,14 @@
 let method;
 const resultsContainer = document.getElementById('results');
 const noRes = document.getElementById('noResults');
-let interval = 0;
 
-const urlParams = new URLSearchParams(window.location.search);
-const query = urlParams.get('q');
-const page = urlParams.get('pg');
-const type = urlParams.get('tp');
+const queryInput = document.getElementById('query-info');
+const pageInput = document.getElementById('page-info');
+const typeInput = document.getElementById('type-info');
+
+const query = queryInput.value;
+const page = pageInput.value;
+const type = typeInput.value;
 
 function countResults() {
     return document.querySelectorAll('.text-result').length;
@@ -18,46 +20,40 @@ function fetchFallbackResults() {
         const url = `../misc/js/fallback.php?q=${encodeURIComponent(query)}&pg=${encodeURIComponent(page)}&me=${encodeURIComponent(method)}&type=text`;
 
         fetch(url)
-        .then(response => response.text())
-        .then(html => {
-            resultsContainer.innerHTML += html;
-        })
-        .catch(error => {
-            console.error('Error executing fallback:', error);
-        })
-        .finally(() => {
-            setInterval(() => {
-                const fallbackingMessage = document.getElementById('fallbacking');
-                if (fallbackingMessage && countResults() > 2) {
-                    fallbackingMessage.remove();
-                }
-            }, 500);
-        });
+            .then(response => response.text())
+            .then(html => {
+                resultsContainer.innerHTML += html;
+            })
+            .catch(error => {
+                console.error('Error executing fallback:', error);
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    const fallbackingMessage = document.getElementById('fallbacking');
+                    if (fallbackingMessage && countResults() > 2) {
+                        fallbackingMessage.remove();
+                    }
+                }, 500);
+            });
     }
 }
 
 function runFallbackCheck() {
-    if ( countResults() < 2 && !noRes && type == 0) {
-        if (method !== "duck" && method !== "brave" && method !== "bing") {
-            method = "duck";
-        } else if (method == "duck") {
-            method = "brave";
-        } else {
-            method = "bing";
-        }
-
+    if (countResults() < 2 && !noRes && type == 0) {
+        method = (method === "google" || method === "brave" || method === "bing") ? method : "google";
+        method = (method === "google") ? "brave" : "bing";
         fetchFallbackResults();
     }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    if ( countResults() < 2 && type == 0 && !noRes) {
+    if (countResults() < 2 && !noRes && type == 0) {
         const fallbackingMessage = document.createElement('img');
         fallbackingMessage.id = 'fallbacking';
         fallbackingMessage.src = 'static/img/loading.svg';
         resultsContainer.appendChild(fallbackingMessage);
-        runFallbackCheck();
-        setInterval(runFallbackCheck, 5000);
     }
+    runFallbackCheck();
+    setTimeout(runFallbackCheck, 5000);
 });
 // @license-end

@@ -14,11 +14,18 @@
     }
 
     function quetreResponse($data) {
+        global $config;
+
         if ($data['status'] == 'success') {
             foreach ($data['results'] as $result) {
                 if ($result['type'] == 'question' && $result['isDeleted'] == false) {
                     $title = htmlspecialchars($result['text'][0]['spans'][0]['text'], ENT_QUOTES, 'UTF-8');
                     $url = "https://quora.com" . $result['url'];
+
+                    if ($_COOKIE['enableFrontends'] !== 'disabled' && $config['frontendsEnabled'] == 'enabled') {
+						$url = checkFrontends($url);
+					}
+
                     $desc = "<p>Comments: " . $result['numComments'] . "<br/>Followers: " . $result['numFollowers'];
                     echo "<div class=\"text-result\">";
                     echo "  <span><a href=\"$url\">$url</a></span><br/>";

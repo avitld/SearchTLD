@@ -16407,7 +16407,7 @@
       "c":"Shopping",
       "s":"eBay: completed listings",
       "t":"ceb",
-      "u":"https://www.ebay.com/csc/items/?_nkw={{{s}}}+&LH_Complete=1",
+      "u":"https://www.ebay.com/sch/i.html?_nkw={{{s}}}&_sacat=0",
       "sc":"Online (marketplace)",
       "d":"www.ebay.com",
       "r":0

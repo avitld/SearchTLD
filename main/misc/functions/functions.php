@@ -125,10 +125,87 @@
                 $bangQuery = trim(implode("", $bangQueryArray));
 
                 $redirect = str_replace("{{{s}}}", $bangQuery, $bangURL);
+                $redirect = checkFrontends($redirect);
 
                 header("Location: $redirect");
                 die();
             }
+        }
+    }
+
+    function checkFrontends($url) {
+        global $config;
+
+        if (isset($_COOKIE['enableFrontends']) && $_COOKIE['enableFrontends'] == 'disabled') {
+            return $url;
+        }
+
+        if ($config['frontendsEnabled'] == 'enabled') {
+            foreach ($config['frontends'] as $frontendName => $frontend) {
+                if (strpos($url, $frontend['origin']) !== false) {
+                    $url = replaceWithFrontend($url, $frontendName, $frontend['origin']);
+                    break;
+                }
+            }
+        }
+        return $url;
+    }
+
+    function replaceWithFrontend($url, $frontend, $origin) {
+        global $config;
+
+        $frontends = $config['frontends'];
+
+        if (isset($_COOKIE[$frontend]) || $config['frontendsEnabled'] == 'enabled') {
+            if (isset($_COOKIE[$frontend]) && !empty(trim($_COOKIE[$frontend]))) {
+                $frontend = $_COOKIE[$frontend];
+            } else if (!empty($frontends[$frontend]['link'])) {
+                $frontend = $frontends[$frontend]['link'];
+            } else {
+                return $url;
+            }
+
+            if (strpos($url, 'wikipedia.org') !== false) {
+                $split = explode('.', $url);
+
+                if (count($split) > 1) {
+                    $lang = explode('://', $split[0])[1];
+                    $url = $frontend . explode($origin, $url)[1] . (strpos($url, '?') !== false ? '&' : '?') . "lang=$lang";
+                }
+            } else if (strpos($url, 'gist.github.com') !== false) {
+                $gist = explode('gist.github.com', $url)[1];
+                $url = "$frontend/gist$gist";
+            } else if (strpos($url, 'fandom.com') !== false) {
+                $split = explode('.', $url);
+                if (count($split) > 1) {
+                    $wiki = explode('://', $split[0])[1];
+                    $url = "$frontend/$wiki" . explode($origin, $url)[1];
+                }
+            } else if (strpos($url, 'stackexchange.com') !== false) {
+                $stackDomain = explode(".", explode("://", $url)[1])[0];
+                $stackPath = explode('stackexchange.com', $url)[1];
+                $url = "$frontend/exchange/$stackDomain/$stackPath";
+            } else {
+                $url = $frontend . explode($origin, $url)[1];
+            }
+            return trim($url);
+        } else {
+            return $url;
+        }
+    }
+
+    function frontendSettings() {
+        global $config;
+
+        foreach ($config['frontends'] as $frontendTitle => $frontend) {
+            $description = $frontend['desc'];
+            $url = $frontend['link'];
+            $title = ucfirst($frontendTitle);
+            $title = $title == "Piped" ? "Piped / Invidious" : $title;
+            echo "<div class=\"frontend-holder\">";
+            echo "<label for=\"$frontendTitle\">$title Instance: </label>";
+            echo "<input type=\"url\" placeholder=\"$description\" value=\"$url\" id=\"$frontendTitle\" name=\"$frontendTitle\"/>";
+            echo "</div>";
         }
     }
 ?>

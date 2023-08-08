@@ -1,5 +1,7 @@
 <?php
 function wikipediaInfo($query) {
+    global $config;
+
     if (isset($_COOKIE["lang"])) {
         $lang = trim(htmlspecialchars($_COOKIE["lang"]));
         if (!preg_match('/^[a-z]{2}$/', $lang)) {
@@ -35,6 +37,11 @@ function wikipediaInfo($query) {
         foreach ($pages as $page) {
             if (isset($page['pageid']) && $page['pageid'] > 0) {
                 $title = $page['title'];
+                $link = "https://$lang.wikipedia.org/wiki/$query";
+
+                if ($_COOKIE['enableFrontends'] !== 'disabled' && $config['frontendsEnabled'] == 'enabled') {
+                    $link = checkFrontends($link);
+                }
 
                 if (isset($page['thumbnail'])) {
                     $thumbnailUrl = $page['thumbnail']['source'];
@@ -55,7 +62,7 @@ function wikipediaInfo($query) {
                         echo "<hr>";
                     }
                     echo "<p>" . $description . "</p>";
-                    echo "<a href=\"https://$lang.wikipedia.org/wiki/$query\">$title at https://$lang.wikipedia.org/wiki/$query</a>";
+                    echo "<a href=\"$link\">$title at $link</a>";
                     echo "</div>";
                 }
             }

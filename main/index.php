@@ -40,7 +40,6 @@
 				<input type="hidden" name="pg" value="0">
 				<input type="hidden" name="tp" value="0">
 			</form>
-			
 			<?php
 				$suggestionsCookie = $_COOKIE['suggestions'];
 				if (!isset($suggestionsCookie) || $suggestionsCookie == "on") {

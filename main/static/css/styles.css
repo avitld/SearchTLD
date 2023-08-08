@@ -66,6 +66,11 @@ a:hover {
     list-style: none;
 }
 
+#autocompleteList li a {
+    color: var(--foreground);
+    font-weight: normal;
+}
+
 #autocompleteList li {
     cursor: pointer;
     border-radius: 0.5rem;
@@ -276,6 +281,10 @@ header .type-selectors button {
     margin-top: 2rem;
 }
 
+.video-result {
+    text-align: center;
+}
+
 .text-result {
     max-width: 44rem;
     margin-bottom: 1.25rem;
@@ -301,7 +310,7 @@ header .type-selectors button {
 }
 
 .text-result .thumbnail {
-    border-radius: 03rem;
+    border-radius: 0.3rem;
     max-width: 35%;
     max-height: 35%;
 }
@@ -489,13 +498,71 @@ header .type-selectors button {
     border: 1px solid var(--border-color-hover);
 }
 
+#special {
+    margin-left: 5rem;
+    margin-top: 2rem;
+}
+
 #cached {
     text-align: right;
     float: right;
     margin-left: auto;
 }
 
+#settings-buttons {
+    padding: 1rem 0;
+}
+
+.padded-main {
+    padding: 1rem;
+}
+
 /* General */
+
+.tabs {
+    padding-bottom: 0px;
+}
+
+.tab-link {
+    margin-bottom: 0;
+    padding: 0.6rem 2.3rem;
+    outline: 0;
+    border: 1px solid var(--border-color);
+    border-bottom: 0;
+    border-radius: 0.5rem 0.5rem 0 0;
+    background-color: var(--background);
+    transition: 0.3s;
+    margin-left: 0.3rem;
+}
+
+.tab-link:hover {
+    border: 1px solid var(--border-color-hover);
+    border-bottom: 0;
+}
+
+select {
+    display: block;
+    margin: 0.6rem auto;
+}
+
+.frontend-holder input[type="url"] {
+	padding: 0.3rem;
+	font-size: 1.2rem;
+	max-width: 20rem;
+	width: 100%;
+	outline: 0;
+	border-radius: 1.12rem;
+	background-color: var(--background-secondary);
+	border: 1px solid var(--border-color);
+	color: var(--foreground-secondary);
+    margin: 0.2rem auto;
+    text-align: center;
+    display: block;
+}
+
+.frontend-holder label {
+    margin: 0.3rem auto;
+}
 
 input[type="text"] {
 	padding: 0.3rem;
@@ -716,6 +783,10 @@ footer a:hover {
     #has-background {
         background-size: cover;
     }
+    
+    #special {
+        margin: 2rem 0 0 0;
+    }
 }
 
 /* Management for smaller screens */
@@ -749,4 +820,8 @@ footer a:hover {
     .correction {
 		margin: 1rem auto;
 	}
+
+    #special {
+        margin: 2rem 0 0 0;
+    }
 }

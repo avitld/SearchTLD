@@ -30,6 +30,8 @@
 	}
 
 	function redditResponse($response) {
+		global $config;
+
 		if (!empty($response)) {
 			$dom = new DOMDocument();
 			@$dom->loadHTML($response);
@@ -58,6 +60,10 @@
                     }
 
 					$link = cleanUrl($link);
+
+					if ($_COOKIE['enableFrontends'] !== 'disabled' && $config['frontendsEnabled'] == 'enabled') {
+						$link = checkFrontends($link);
+					}
 
                     if ($title && strpos($link, "reddit.com") !== false && !in_array($link, $uniqueLinks) && !($num >= 7)) {
 					    echo "<div class=\"text-result\">";

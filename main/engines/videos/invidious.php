@@ -17,19 +17,26 @@
     }
 
     function invidiousVideoResponse($rawResponse) {
+		global $config;
+
         $response = json_decode($rawResponse, true);
-		$url = "https://yt.revvy.de";
+
+		$url = "https://invidious.tiekoetter.com";
+
 		if ($response) {
 			foreach ($response as $vresponse) {
 				if ($vresponse["type"] == "video") {
 					$title = htmlspecialchars($vresponse["title"],ENT_QUOTES,'UTF-8');
-					$vurl = htmlspecialchars("https://yewtu.be/watch?v=" . $vresponse["videoId"]);
+					$vurl = htmlspecialchars("https://youtube.com/watch?v=" . $vresponse["videoId"]);
+					if ($_COOKIE['enableFrontends'] !== 'disabled' && $config['frontendsEnabled'] == 'enabled') {
+						$vurl = checkFrontends($vurl);
+					}
 					$uploader = htmlspecialchars($vresponse["author"],ENT_QUOTES,'UTF-8');
 					$views = htmlspecialchars($vresponse["viewCount"],ENT_QUOTES,'UTF-8');
 					$uploaded = htmlspecialchars($vresponse["publishedText"],ENT_QUOTES,'UTF-8');
 					$thumbnail = htmlspecialchars($url . "/vi/" . explode("/vi/" ,$vresponse["videoThumbnails"][4]["url"])[1]);
 	
-					echo "<div class=\"text-result\">";
+					echo "<div class=\"text-result video-result\">";
 					echo "	<a href=\"$vurl\">";
 					echo "		<h2 style=\"padding-bottom: 0; margin-bottom: 0;\">$title</h2><br/>";
 					echo "		<img class=\"thumbnail\" src=\"proxy-image.php?url=$thumbnail\" />";

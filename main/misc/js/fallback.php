@@ -9,9 +9,9 @@
     if ($method == "brave") {
         require "../../engines/text/brave.php";
         braveText($query, $page);
-    } elseif ($method == "duck") {
-        require "../../engines/text/ddg.php";
-        ddgText($query, $page);
+    } elseif ($method == "google") {
+        require "../../engines/text/google.php";
+        googleText($query, $page);
     } elseif ($method == "bing") {
         require "../../engines/text/bing.php";
         bingText($query, $page);

@@ -16,9 +16,15 @@ function sendAutocompleteRequest(query) {
             if (suggestions) {
                 autocompleteList.style.display = "block";
                 suggestions.forEach((suggestion) => {
-                    const listItem = document.createElement("li");
-                    listItem.textContent = suggestion;
-                    listItem.classList.add("suggestion");
+                    const listItem = document.createElement('li');
+
+
+                    const anchor = document.createElement("a");
+                    anchor.href = `/search?q=${suggestion}&pg=0&tp=0`;
+                    anchor.textContent = suggestion;
+                    anchor.classList.add("suggestion");
+
+                    listItem.appendChild(anchor);
                     autocompleteList.appendChild(listItem);
                     listItem.addEventListener("click", () => {
                         searchInput.value = suggestion;
