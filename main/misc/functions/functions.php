@@ -124,7 +124,7 @@
                 $bangQueryArray = explode("!" . $searchFor, $query);
                 $bangQuery = trim(implode("", $bangQueryArray));
 
-                $redirect = str_replace("{{{s}}}", $bangQuery, $bangURL);
+                $redirect = str_replace("{{{s}}}", str_replace('%26quot%3B','%22', urlencode($bangQuery)), $bangURL);
                 $redirect = checkFrontends($redirect);
 
                 header("Location: $redirect");

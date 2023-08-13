@@ -30,6 +30,6 @@
     filter: brightness(400);
 }
 
-.type-selectors #active {
+.type-selectors #active img {
     filter: none;
 }

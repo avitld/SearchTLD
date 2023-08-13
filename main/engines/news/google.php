@@ -13,12 +13,12 @@
 			$url .= "&hl=en&lr=en";
 		}
 
-		if (isset($_COOKIE["safesearch"])) {
+		if ($_COOKIE['safesearch'] == 'on') {
 			$url .= "&safe=medium";
 		}
 		
 		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36');
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -62,11 +62,15 @@
 				$link = cleanUrl($link);
 
 				if (!in_array($href, $uniqueLinks)) {
-		        		echo "<div class=\"text-result\">";
-		        		echo "	<a href=\"$href\" class=\"title\">$title</a>";
-		        		echo "  <p class=\"mlink\" style=\"margin-top: 0; padding-top: 0;\">$link</a>";
-		        		echo "  <p class=\"description\">$description</a>";
-		        		echo "</div>";
+						echo "<div class=\"text-result\">";
+						echo "	<a href=\"$href\">";
+						echo "  	<span>$link</span>";
+						echo "		<h2>$title</h2>";
+						echo "	</a>";
+						echo "  <p>$description</p>";
+						echo "	<span id=\"engine\">Google</span>";
+						echo "	<span id=\"cached\"><a href=\"https://web.archive.org/web/$link\">Archive</a></span>";
+						echo "</div>";
 
 		        		$uniqueLinks[] = $link;
 				}

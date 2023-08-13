@@ -9,7 +9,7 @@
 		
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_COOKIE, $cookies);
-		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36');
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -65,6 +65,8 @@
 
 					if (strlen($description) < 1) {
 						$description = "No description provided.";
+					} else if (strlen($description) > 110) {
+						$description = substr($description, 0, 57) . '...';
 					}
 
 					if ($_COOKIE['enableFrontends'] !== 'disabled' && $config['frontendsEnabled'] == 'enabled') {

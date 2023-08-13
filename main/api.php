@@ -6,17 +6,9 @@
     $query = urlencode(htmlspecialchars($_REQUEST['q'], ENT_QUOTES, 'utf-8'));
     $page = $_REQUEST['pg'];
     $type = $_REQUEST['tp'];
-    $lang = $_REQUEST['lg'];
-    $region = $_REQUEST['rg'];
-
-    if (empty($lang)) {
-        $lang = "en";
-    }
-
-    if (empty($region)) {
-        $region = "us";
-    }
-
+    $lang = $_REQUEST['lg'] ?? "en";
+    $region = $_REQUEST['rg'] ?? "us";
+    
     if (
         !isset($_REQUEST['q']) ||
         !isset($_REQUEST['tp']) ||
@@ -65,7 +57,8 @@
                         <h3>Parameter Usage</h3>
                         <p>
                             The types are the same as in regular SearchTLD, however the API does not support
-                            images (type 2) and forums (type 4).
+                            images (type 2) and forums (type 5). However the types are different in the API,
+                            type 0 is text, type 2 is video and type 3 is news.
                             <br/>
                             For the language parameter, you just use the short code of your specified language (e.g.: English -> en)
                             <br/>and the same thing for region (e.g.: United Kingdom -> uk).
@@ -98,7 +91,15 @@
             $results = invidiousVideoJSON($query, $page);
             break;
         case 3:
-            $results = json_encode("Temporarily Down :(");
+            require "engines/news/startpage.php";
+            $results = spNewsJSON($query, $page, $lang);
+            if ($results == "Failed") {
+                $results = json_encode(
+                    array(
+                        "response" => "Failed to get response. Try again later."
+                    )
+                );
+            }
             break;
         default:
             $results = json_encode(

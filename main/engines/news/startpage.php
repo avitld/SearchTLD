@@ -1,42 +1,20 @@
 <?php
-	function ddgText($query, $page) {
+	function spNews($query, $page) {
 		global $config;
-
-		if (intval($page) > 1) {
-			$page = intval($page) - 1;
-		}
-
-		if (isset($_COOKIE['region'])) {
-			$region = $_COOKIE['region'];
-		} else {
-			$region = "us";
-		}
-
-		$url = "https://html.duckduckgo.com/html/?q=" . urlencode($query) . "&s=" . $page;
-
+		
 		if (isset($_COOKIE["lang"])) {
 			$lang = trim(htmlspecialchars($_COOKIE["lang"]));
-
-			$trimlang = $region . "-" . $lang;
-			$trimlangrev = $lang . "_" . strtoupper($region);
-
-			$url .= "&lr=lang_$lang&hl=$lang&kl=$trimlang";
 		} else {
-
-			$trimlang = "us" . "-" . "en";
-			$trimlangrev = "en" . "_" . "US";
-
-			$url .= "&lr=lang_en&sl=en&hl=en&kl=us-en";
+			$lang = "english";
 		}
 
-		if ($_COOKIE['safesearch'] == 'on') {
-			$url .= "&kp=-2";
+		$url = "https://www.startpage.com/sp/search?t=device&cat=news&language=$lang&lui=$lang&query=" . urlencode($query);
+
+		if ($_COOKIE['safesearch'] !== 'on') {
+			$url .= "&qadf=none";
 		}
-		
-		$cookies = "l=$trimlang;ad=$trimlangrev";
-		
+
 		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_COOKIE, $cookies);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
@@ -57,112 +35,94 @@
 		$response = curl_exec($ch);
 
 		curl_close($ch);
-		ddgTextResponse($response);
+		
+		spNewsResponse($response);
 	}
 
-	function ddgTextResponse($response) {
+	function spNewsResponse($response) {
 		global $config;
 
 		if (!empty($response)) {
+			if ($config['debugMode'] == 'enabled') {
+				echo $response;
+			}
 
 			$dom = new DOMDocument();
 			@$dom->loadHTML($response);
 			$xpath = new DOMXPath($dom);
 
-            $results = $xpath->query('//div[contains(@class, "result")]');
-            $uniqueLinks = [];
+			$results = $xpath->query('//div[contains(@class, "article")]');
+			$uniqueLinks = [];
 			$resultNum = 0;
-            
+
 			if ($results) {
 				foreach ($results as $result) {
-					$title = $xpath->evaluate('.//h2[contains(@class, "result__title")]', $result)->item(0);
+					$title = $xpath->query('.//a[contains(@role, "link")]', $result)->item(0);
+					$link = $title ? $title->getAttribute("href") : null;
 					@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
-					$link = $xpath->evaluate('.//a[contains(@class, "result__url")]', $result)->item(0);
-					if ($link) { // Required for some reason..?
-						@$link = $link->textContent;
-						$link = "https://" . trim($link);
-						$link = cleanUrl($link);
-					}
-					$description = $xpath->evaluate('.//a[@class="result__snippet"]', $result)->item(0);
+					$source = $xpath->query('.//span[contains(@class, "source")]', $result)->item(0);
+					@$source = $source->textContent;
+					$description = $xpath->query('.//div[contains(@class, "description")]', $result)->item(0);
 					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
 					
+					if (strlen($description) < 1) {
+						$description = "No description provided.";
+					} else if (strlen($description) > 110) {
+						$description = substr($description, 0, 57) . '...';
+					}
+
+					if (strpos($title, "@media") !== false) {
+						$title = preg_replace('/@media[^}]+}}/', '', $title);
+					}
+
+					$link = cleanUrl($link);
 					$blacklist = isDomainBlacklisted($link);
 
-					$oglink = $link;
+					if ($_COOKIE['enableFrontends'] !== 'disabled' && $config['frontendsEnabled'] == 'enabled') {
+						$link = checkFrontends($link);
+					}
 
 					if ($config["debugMode"] == "enabled") {
 						echo $link;
 						echo $title;
 					}
 
-					if (strlen($description) < 1) {
-						$description = "No description provided.";
-					} else if (strlen($description) > 110) {
-						$description = substr($description, 0, 57) . '...';
-					}
-
-					if ($_COOKIE['enableFrontends'] !== 'disabled' && $config['frontendsEnabled'] == 'enabled') {
-						$link = checkFrontends($link);
-					}
-
-					if (!in_array($link, $uniqueLinks) && $title && $link && $blacklist === false) {
+					if (!in_array($link, $uniqueLinks) && $blacklist === false) {
+							
 							echo "<div class=\"text-result\">";
 							echo "	<a href=\"$link\">";
-
-							$link = urldecode($oglink);
-							$link = htmlspecialchars($link);
-							$link = str_replace('https://', '', $link);
-							$link = str_replace('/', ' › ', $link);
-	
-							$segments = explode(' › ', $link);
-							if (count($segments) > 2) {
-								$link = $segments[0] . ' › ' . $segments[1];
-							}
-
-							if (strlen($link) <= 50) {
-								$link = substr($link, 0, 47) . '...';
-							}
-
-							echo "  	<span>$link</span>";
+							echo "  	<span>$source</span>";
 							echo "		<h2>$title</h2>";
 							echo "	</a>";
 							echo "  <p>$description</p>";
-							echo "  <span id=\"engine\">DuckDuckGo</span>";
-							echo "	<span id=\"cached\"><a href=\"https://web.archive.org/web/$link\">Archive</a></span>";
+							echo "<span id=\"engine\">Startpage</span>";
+							echo "<span id=\"cached\"><a href=\"https://web.archive.org/web/$link\">Archive</a></span>";
 							echo "</div>";
-	
+		
 							$uniqueLinks[] = $link;
 							$resultNum++;
 					}
 				}
 
-				if ($resultNum == 0) {
-					if ($config["debugMode"] == "enabled") {
-						echo $resultNum;
-						echo $uniqueLinks;
-					}
+			if ($resultNum == 0) {
+				if ($config["debugMode"] == "enabled") {
+					echo $resultNum;
+					echo $uniqueLinks;
+				}
 					echo "<p class=\"noResults\" id=\"noResults\">No results found, try a different query.</p>";
 				}
 			}
 		}
 	}
 
-	function ddgTextJSON($query, $page, $lang, $region) {
+	function spNewsJSON($query, $page, $lang) {
 		global $config;
-
-		$res = array();
 		
-		$url = "https://html.duckduckgo.com/html/?q=" . urlencode($query) . "&s=" . $page;
+		$res = array();
 
-		$trimlang = $region . "-" . $lang;
-		$trimlangrev = $lang . "_" . strtoupper($region);
-
-		$url .= "&lr=lang_$lang&hl=$lang&kl=$trimlang";
-
-		$cookies = "l=$trimlang;ad=$trimlangrev";
+		$url = "https://www.startpage.com/sp/search?t=device&cat=news&language=$lang&lui=$lang&query=" . urlencode($query);
 
 		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_COOKIE, $cookies);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
@@ -189,21 +149,16 @@
 			@$dom->loadHTML($response);
 			$xpath = new DOMXPath($dom);
 
-			$results = $xpath->query('//div[contains(@class, "result")]');
+			$results = $xpath->query('//div[contains(@class, "article")]');
 			$uniqueLinks = [];
 			$resultNum = 0;
 
 			if ($results) {
 				foreach ($results as $result) {
-					$title = $xpath->evaluate('.//h2[contains(@class, "result__title")]', $result)->item(0);
+					$title = $xpath->query('.//a[contains(@role, "link")]', $result)->item(0);
+					$link = $title ? $title->getAttribute("href") : null;
 					@$title = htmlspecialchars($title->textContent,ENT_QUOTES,'UTF-8');
-					$link = $xpath->evaluate('.//a[contains(@class, "result__url")]', $result)->item(0);
-					if ($link) { // Required for some reason..?
-						@$link = $link->textContent;
-						$link = "https://" . trim($link);
-						$link = cleanUrl($link);
-					}
-					$description = $xpath->evaluate('.//a[@class="result__snippet"]', $result)->item(0);
+					$description = $xpath->query('.//div[contains(@class, "description")]', $result)->item(0);
 					@$description = htmlspecialchars($description->textContent,ENT_QUOTES,'UTF-8');
 					
 					if (strlen($description) < 1) {
@@ -212,19 +167,25 @@
 						$description = substr($description, 0, 57) . '...';
 					}
 
+					if (strpos($title, "@media") !== false) {
+						$title = preg_replace('/@media[^}]+}}/', '', $title);
+					}
+
+					$link = cleanUrl($link);
 					$blacklist = isDomainBlacklisted($link);
 
-					if (!in_array($link, $uniqueLinks) && $title && $link && $blacklist === false) {
+					if (!in_array($link, $uniqueLinks) && $blacklist === false) {
 						array_push($res, array(
-							"title" => trim($title),
+							"title" => $title,
 							"link" => $link,
 							"description" => $description
 						));
 
 						$uniqueLinks[] = $link;
 						$resultNum++;
+
 					}
-				}		
+				}
 
 				if ($resultNum == 0) {
 					$result = "Failed";
@@ -241,4 +202,5 @@
 			return $result;
 		}
 	}
+
 ?>
