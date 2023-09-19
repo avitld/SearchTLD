@@ -75,3 +75,8 @@ If you run an instance of SearchTLD and want it placed on the list open an issue
   <li><b>Do not use cloudflare.</b></li>
   <li><b>Do not remove the original donation link.</b></li>
 </ul>
+
+# "All Rights Reserved" Notice
+This notice is NOT referring to the project and it's code. It is referring to the name of the project.
+Context matters, this does not include hosting the service on your webserver. You are free to use the name
+of the project but not to claim it as your own (e.g. making a different project and calling it SearchTLD)
