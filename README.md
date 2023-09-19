@@ -67,6 +67,7 @@ If you run an instance of SearchTLD and want it placed on the list open an issue
 | URL | Country |
 | --- | --- |
 | [searchtld.com](https://searchtld.com) | 🇩🇪 DE |
+| [emll.xyz](https://tld.emll.xyz/) | 🇸🇪 SE |
 
 ### Instance Rules
 <ul>
