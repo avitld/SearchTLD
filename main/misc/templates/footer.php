@@ -4,7 +4,7 @@
 
 <footer>
 	<ul>
-		<li><a href="https://codeatomic.net/SearchTLD/SearchTLD">Source Code</a></li>
+		<li><a href="https://codeatomic.net/avitld/SearchTLD">Source Code</a></li>
 		<li><a href="/privacy">Privacy Policy</a>
 		<li><a href="/settings">Settings</a>
 		<li><a href="/support">Support Us</a></li>
@@ -23,7 +23,7 @@
 		</div>
 		<div class="footer-text">
 			<p class="copyright-notice">
-				© 2023 SearchTLD. All rights reserved.
+				© 2023 SearchTLD.
 			</p>
 			<p class="license-notice">
 				This software is provided as-is, without any warranty or guarantee of any kind.<br/>

@@ -620,7 +620,7 @@ footer ul {
     padding: 0.25rem;
     list-style: none;
     display: inline-block;
-    max-width: 8rem;
+    max-width: 9.25rem;
     vertical-align: middle;
 }
 
@@ -803,6 +803,8 @@ footer a:hover {
 
     .text-result {
         margin: 0 auto 1.25rem auto;
+        width: 80%;
+        max-width: 80%;
     }
 
     .page-buttons {
