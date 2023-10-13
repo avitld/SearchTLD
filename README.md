@@ -1,5 +1,5 @@
 <div align=center>
-<h1>SearchTLD </h1>
+<h1>SearchTLD</h1>
 <h3>Privacy Respecting and Fast Meta-Search Engine</h3>
 </div>
 
@@ -12,32 +12,32 @@
   <img src=".github/scr2.png" width="80%" height="80%">
 </div>
 
-# Self Hosting
+# 👨‍💻 Self Hosting
 There are [guides to self hosting on our blog](https://blog.searchtld.com)
 or [our codeberg wiki!](https://codeberg.org/avitld/SearchTLD/wiki)
 
-# Benefits of SearchTLD
+# ✅ Benefits of SearchTLD
 <ul>
   <b>
-  <li>Cleans URLs of tracking elements.</li>
-  <li>Blocks harmful domains.</li>
-  <li>Fallbacks to multiple search engines to ensure uptime.</li>
-  <li>Rate Limiting for instances to protect against DDOS and Spam attacks.</li>
-  <li>Redirect to privacy friendly frontends.</li>
-  <li>Very easy to self-host using prepared install scripts.</li>
-  <li>Special queries (IP, UserAgent, Base64 Encoding, etc.).</li>
-  <li>Easy to use and beautiful UI.</li>
-  <li>Advanced API with language settings and fallbacking.</li>
-  <li>Libre JavaScript. (Not required)</li>
-  <li>Works perfectly through tor.</li>
-  <li>Fully open-source and protected under the AGPL v3.0.</li>
+  <li>✔️ Cleans URLs of tracking elements.</li>
+  <li>✔️ Blocks harmful domains.</li>
+  <li>✔️ Fallbacks to multiple search engines to ensure uptime.</li>
+  <li>✔️ Rate Limiting for instances to protect against DDOS and Spam attacks.</li>
+  <li>✔️ Redirect to privacy friendly frontends.</li>
+  <li>✔️ Very easy to self-host using prepared install scripts.</li>
+  <li>✔️ Special queries (IP, UserAgent, Base64 Encoding, etc.).</li>
+  <li>✔️ Easy to use and beautiful UI.</li>
+  <li>✔️ Advanced API with language settings and fallbacking.</li>
+  <li>✔️ Libre JavaScript. (Not required)</li>
+  <li>✔️ Works perfectly through tor.</li>
+  <li>✔️ Fully open-source and protected under the AGPL v3.0.</li>
   </b>
 </ul>
 
-# Join our Matrix Server!
+# 🌐 Join our Matrix Server!
 <b>We now also have a Matrix server which is preferred over IRC.<br/>
 You can join manually join ``#schizos:schizo.gr`` or through <a href="https://matrix.to/#/#schizos:schizo.gr">this link</a></b>
-## Rules for Matrix
+## 📖 Rules for Matrix
 <ul>
   <li><b>Be nice to each other.</b></li>
   <li><b>Do not say/use any racial, sexist, homophobic/transphobic, antisemetic, xenophobic... slurs. </b></li>
@@ -45,7 +45,7 @@ You can join manually join ``#schizos:schizo.gr`` or through <a href="https://ma
   <li><b>Do not spam the channel.</b></li>
 </ul>
 
-# Speed comparison: SearchTLD vs Other Search Engines
+# 📶 Speed comparison: SearchTLD vs Other Search Engines
 
 <div align=center>
 
@@ -56,11 +56,11 @@ You can join manually join ``#schizos:schizo.gr`` or through <a href="https://ma
 <a href="https://blog.searchtld.com/articles/full_comparison_of_searchtld_vs_other_meta-search_engines/">More info on this article</a>
 </div>
 
-# Read our news!
+# 📰 Read our news!
 We now have a page dedicated to news about the website, including the source code of how we make the pages.
 It's available [here!](https://blog.searchtld.com)
 
-# Instances
+# 💻 Instances
 
 If you run an instance of SearchTLD and want it placed on the list open an issue.
 
