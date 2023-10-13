@@ -29,7 +29,7 @@ read -p "Clone blog aswell? " blogc
 if [ $mirror_lower == "codeberg" ]; then
     git clone https://codeberg.org/avitld/SearchTLD tempstld
 elif [ $mirror_lower == "codeatomic" ]; then
-    git clone https://codeatomic.net/SearchTLD/SearchTLD tempstld
+    git clone https://codeatomic.net/avitld/SearchTLD tempstld
 else
     git clone https://github.com/avitld/SearchTLD tempstld
 fi
