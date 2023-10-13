@@ -12,11 +12,11 @@
   <img src=".github/scr2.png" width="80%" height="80%">
 </div>
 
-# 👨‍💻 Self Hosting
-There are [guides to self hosting on our blog](https://blog.searchtld.com)
-or [our codeberg wiki!](https://codeberg.org/avitld/SearchTLD/wiki)
+# 💕 Thank You
+[![Stargazers repo roster for @avitld/SearchTLD](https://reporoster.com/stars/dark/avitld/SearchTLD)](https://github.com/avitld/SearchTLD/stargazers)
+[![Forks repo roster for @avitld/SearchTLD](https://reporoster.com/forks/dark/avitld/SearchTLD)](https://github.com/avitld/SearchTLD/forks)
 
-# ✅ Benefits of SearchTLD
+# ✅ Features of SearchTLD
 <ul>
   <b>
   <li>✔️ Cleans URLs of tracking elements.</li>
@@ -33,6 +33,10 @@ or [our codeberg wiki!](https://codeberg.org/avitld/SearchTLD/wiki)
   <li>✔️ Fully open-source and protected under the AGPL v3.0.</li>
   </b>
 </ul>
+
+# 👨‍💻 Self Hosting
+There are [guides to self hosting on our blog](https://blog.searchtld.com)
+or [our codeberg wiki!](https://codeberg.org/avitld/SearchTLD/wiki)
 
 # 🌐 Join our Matrix Server!
 <b>We now also have a Matrix server which is preferred over IRC.<br/>
