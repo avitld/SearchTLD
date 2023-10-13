@@ -13,7 +13,8 @@
 		$url = "https://www.google.$tld/search?q=" . urlencode($query) . "&start=" . urlencode($fpage) . "&num=12&filter=0&nfpr=1";
 
 
-		if ($config['googleAPI']['enabled'] == 'enabled') {
+		if ($config['googleAPI']['enabled'] == 'enabled'
+		&& isset($config['googleAPI']['apiKey']) ) {
 			$apikey = $config['googleAPI']['apiKey'];
 			$url = "https://www.googleapis.com/customsearch/v1?key=$apikey&q=" . urlencode($query);
 		}
@@ -49,10 +50,10 @@
 			$url = str_replace($tld, "com", $url);
 		}
 
-		$cookies = "CONSENT=PENDING+900;";
+		//$cookies = "CONSENT=PENDING+900;";
 
 		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_COOKIE, $cookies);
+		//curl_setopt($ch, CURLOPT_COOKIE, $cookies);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
@@ -109,8 +110,6 @@
 						$link = cleanUrl($link);
 						$blacklist = isDomainBlacklisted($link);
 
-						$oglink = $link;
-
 						if ($_COOKIE['enableFrontends'] !== 'disabled' && $config['frontendsEnabled'] == 'enabled') {
 							$link = checkFrontends($link);
 						}
@@ -131,21 +130,21 @@
 								echo "<div class=\"text-result\">";
 								echo "	<a href=\"$link\">";
 
-								$link = urldecode($oglink);
-								$link = htmlspecialchars($link);
-								$link = str_replace('https://', '', $link);
-								$link = str_replace('/', ' › ', $link);
+								$oglink = urldecode($link);
+								$oglink = str_replace('https://', '', $oglink);
+								$oglink = htmlspecialchars($oglink);
+								$oglink = str_replace('/', ' › ', $oglink);
 		
 								$segments = explode(' › ', $link);
 								if (count($segments) > 2) {
-									$link = $segments[0] . ' › ' . $segments[1];
+									$oglink = $segments[0] . ' › ' . $segments[1];
 								}
 	
-								if (strlen($link) <= 50) {
-									$link = substr($link, 0, 47) . '...';
+								if (strlen($oglink) >= 50) {
+									$oglink = substr($oglink, 0, 47) . '...';
 								}
 
-								echo "  	<span>$link</span>";
+								echo "  	<span>$oglink</span>";
 								echo "		<h2>$title</h2>";
 								echo "	</a>";
 								echo "  <p>$description</p>";

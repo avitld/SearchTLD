@@ -88,8 +88,6 @@
 					
 					$blacklist = isDomainBlacklisted($link);
 
-					$oglink = $link;
-
 					if ($config["debugMode"] == "enabled") {
 						echo $link;
 						echo $title;
@@ -109,21 +107,21 @@
 							echo "<div class=\"text-result\">";
 							echo "	<a href=\"$link\">";
 
-							$link = urldecode($oglink);
-							$link = htmlspecialchars($link);
-							$link = str_replace('https://', '', $link);
-							$link = str_replace('/', ' › ', $link);
+							$oglink = urldecode($link);
+							$oglink = str_replace('https://', '', $oglink);
+							$oglink = htmlspecialchars($oglink);
+							$oglink = str_replace('/', ' › ', $oglink);
 	
 							$segments = explode(' › ', $link);
 							if (count($segments) > 2) {
-								$link = $segments[0] . ' › ' . $segments[1];
+								$oglink = $segments[0] . ' › ' . $segments[1];
 							}
 
-							if (strlen($link) <= 50) {
-								$link = substr($link, 0, 47) . '...';
+							if (strlen($oglink) >= 50) {
+								$oglink = substr($oglink, 0, 47) . '...';
 							}
 
-							echo "  	<span>$link</span>";
+							echo "  	<span>$oglink</span>";
 							echo "		<h2>$title</h2>";
 							echo "	</a>";
 							echo "  <p>$description</p>";

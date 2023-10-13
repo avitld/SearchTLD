@@ -57,7 +57,7 @@
                         <h3>Parameter Usage</h3>
                         <p>
                             The types are the same as in regular SearchTLD, however the API does not support
-                            images (type 2) and forums (type 5). However the types are different in the API,
+                            images (type 2) and forums (type 5). However, the type numbers are different in the API:
                             type 0 is text, type 2 is video and type 3 is news.
                             <br/>
                             For the language parameter, you just use the short code of your specified language (e.g.: English -> en)

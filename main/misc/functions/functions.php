@@ -198,9 +198,9 @@
         global $config;
 
         foreach ($config['frontends'] as $frontendTitle => $frontend) {
-            $description = $frontend['desc'];
+            $description = htmlspecialchars($frontend['desc']);
             $url = $frontend['link'];
-            $title = ucfirst($frontendTitle);
+            $title = htmlspecialchars(ucfirst($frontendTitle));
             $title = $title == "Piped" ? "Piped / Invidious" : $title;
             echo "<div class=\"frontend-holder\">";
             echo "<label for=\"$frontendTitle\">$title Instance: </label>";
