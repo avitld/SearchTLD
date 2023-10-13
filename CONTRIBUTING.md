@@ -38,7 +38,7 @@ Harassment and offensive behavior are not tolerated within our community.
 
 ## Communication
 
-1. Join the official communication channels for the project, such as the mailing list, chat rooms, or forums.
+1. Join the official communication channels for the project, such as the chat rooms available in Matrix and IRC chats.
 2. Engage in discussions and provide constructive feedback on other contributors' ideas and suggestions.
 3. Seek help from other contributors when needed.
 
