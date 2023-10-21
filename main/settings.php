@@ -53,7 +53,6 @@
                             $themes = "<option value=\"dark\">Night</option>
                             <option value=\"light\">Light</option>
                             <option value=\"nord\">Nord</option>
-                            <option value=\"catppuccin\">Catppuccin</option>
                             <option value=\"midnight\">Midnight</option>
                             <option value=\"pitchblack\">Pitch-Black</option>
                             <option value=\"alien\">Alien</option>
