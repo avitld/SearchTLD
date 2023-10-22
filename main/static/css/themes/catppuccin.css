@@ -4,16 +4,16 @@
     --foreground: hsl(226, 64%, 88%);
     --foreground-secondary: hsl(228, 24%, 72%);
 
-    --element-background: hsl(232, 97%, 85%)
+    --element-background: hsl(232, 97%, 85%);
 
     --link: hsl(232, 97%, 85%);
     --link-hover: hsl(217, 92%, 76%);
     --link-secondary: hsl(228, 17%, 64%);
     --link-secondary-hover: hsl(230, 13%, 55%);
 
-    --border-color: hsl(240, 23%, 9%);
+    --border-color: hsl(240, 23%, 20%);
     --card-border: hsl(240, 23%, 9%);
-    --border-color-hover: hsl(240, 21%, 12%);
+    --border-color-hover: hsl(240, 21%, 22%);
 
     color-scheme: dark;
 }
