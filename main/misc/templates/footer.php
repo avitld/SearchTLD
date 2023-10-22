@@ -4,7 +4,7 @@
 
 <footer>
 	<ul>
-		<li><a href="https://codeatomic.net/avitld/SearchTLD">Source Code</a></li>
+		<li><a href="https://github.com/avitld/SearchTLD">Source Code</a></li>
 		<li><a href="/privacy">Privacy Policy</a>
 		<li><a href="/settings">Settings</a>
 		<li><a href="/support">Support Us</a></li>
