@@ -13,8 +13,8 @@
 </div>
 
 # 💕 Thank You
-[![Stargazers repo roster for @avitld/SearchTLD](https://reporoster.com/stars/dark/avitld/SearchTLD)](https://github.com/avitld/SearchTLD/stargazers)
-[![Forks repo roster for @avitld/SearchTLD](https://reporoster.com/forks/dark/avitld/SearchTLD)](https://github.com/avitld/SearchTLD/forks)
+[![Stargazers repo roster for @avitld/SearchTLD](http://reporoster.com/stars/dark/avitld/SearchTLD)](https://github.com/avitld/SearchTLD/stargazers)
+[![Forks repo roster for @avitld/SearchTLD](http://reporoster.com/forks/dark/avitld/SearchTLD)](https://github.com/avitld/SearchTLD/forks)
 
 # ✅ Features of SearchTLD
 <ul>
@@ -38,10 +38,10 @@
 There are [guides to self hosting on our blog](https://blog.searchtld.com)
 or [our codeberg wiki!](https://codeberg.org/avitld/SearchTLD/wiki)
 
-# 🌐 Join our Matrix Server!
-<b>We now also have a Matrix server which is preferred over IRC.<br/>
-You can join manually join ``#schizos:schizo.gr`` or through <a href="https://matrix.to/#/#schizos:schizo.gr">this link</a></b>
-## 📖 Rules for Matrix
+# 🌐 Join our Telegram Group!
+<b>Matrix & IRC have been moved over to Telegram for convenience. Matrix was really heavy on our servers and Telegram is also less prone to bugs and crashes.<br/> 
+You can join our Telegram @ <a href="//t.me/searchtld">t.me/searchtld</a></b>
+## 📖 Rules for Telegram
 <ul>
   <li><b>Be nice to each other.</b></li>
   <li><b>Do not say/use any racial, sexist, homophobic/transphobic, antisemetic, xenophobic... slurs. </b></li>
