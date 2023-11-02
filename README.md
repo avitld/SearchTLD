@@ -63,6 +63,8 @@ You can join our Telegram @ <a href="//t.me/searchtld">t.me/searchtld</a></b>
 # 📰 Read our news!
 We now have a page dedicated to news about the website, including the source code of how we make the pages.
 It's available [here!](https://blog.searchtld.com)
+## Blog unavailable
+The blog is being reworked so it will be offline for a while.
 
 # 💻 Instances
 
