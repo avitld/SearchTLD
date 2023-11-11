@@ -140,13 +140,18 @@ a:hover {
 
 .card {
     width: 100%;
-    height: 25rem;
+    height: 20rem;
 }
 
 #first-card {
     border-top: 0.4rem solid var(--card-border);
     color: white;
     background: linear-gradient(hsl(224, 100%, 52%) 0%, hsl(231, 91%, 48%) 70%, var(--background-secondary) 100%);
+}
+
+#first-card p {
+	max-width: 70%;
+	margin: 0 auto;
 }
 
 #second-card {
