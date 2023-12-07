@@ -88,9 +88,9 @@ a:hover {
 }
 
 .search-container input[type="search"] {
-    padding: 0.6rem;
+    padding: 10px;
     font-size: inherit;
-    max-width: 31.25rem;
+    max-width: 500px;
     width: 100%;
     outline: 0;
     margin-right: 0;
@@ -112,13 +112,13 @@ a:hover {
     color: var(--foreground-secondary);
     border: 1px solid var(--border-color);
     outline: 0;
-    padding: 0.62rem 1.25rem 0.62rem 1.25rem;
+    padding: 10px 20px 10px 20px;
     margin-left: 0;
     display: flex;
     align-items: center;
     font-size: 1.2rem;
     cursor: pointer;
-    border-radius: 0 1.12rem 1.12rem 0;
+    border-radius: 0 18px 18px 0;
     transition: 0.3s;
 }
 
@@ -724,7 +724,7 @@ footer a:hover {
     }
 
     .search-container button[type="submit"] {
-        padding: 0.40rem 1.25rem 0.40rem 1.25rem;
+        padding: 7.4px 20px 7.2px 20px;
     }
 
     .search-container input[type="search"] {
@@ -786,7 +786,7 @@ footer a:hover {
     }
 
     #has-background {
-        background-size: cover;
+        background-size: contain;
     }
     
     #special {
