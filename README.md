@@ -24,7 +24,7 @@
   <li>✔️ Fallbacks to multiple search engines to ensure uptime.</li>
   <li>✔️ Rate Limiting for instances to protect against DDOS and Spam attacks.</li>
   <li>✔️ Redirect to privacy friendly frontends.</li>
-  <li>✔️ Very easy to self-host using prepared install scripts.</li>
+  <li>✔️ Very easy to self-host using docker and docker-compose.</li>
   <li>✔️ Special queries (IP, UserAgent, Base64 Encoding, etc.).</li>
   <li>✔️ Easy to use and beautiful UI.</li>
   <li>✔️ Advanced API with language settings and fallbacking.</li>
@@ -35,8 +35,7 @@
 </ul>
 
 # 👨‍💻 Self Hosting
-There are [guides to self hosting on our blog](https://blog.searchtld.com)
-or [our codeberg wiki!](https://codeberg.org/avitld/SearchTLD/wiki)
+There are [guides to self hosting on our GitHub wiki!](https://github.com/avitld/SearchTLD/wiki)
 
 # 🌐 Join our Telegram Group!
 <b>Matrix & IRC have been moved over to Telegram for convenience. Matrix was really heavy on our servers and Telegram is also less prone to bugs and crashes.<br/> 
