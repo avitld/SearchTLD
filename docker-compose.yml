@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: 8.2
+    container_name: searchtld_nginx_container
+    hostname: searchtld
+    ports:
+      - "8080:80"
+    networks:
+      - st_network
+    image: searchtld
+
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/conf.d/searchtld.conf
+
+networks:
+  st_network:
+    driver: bridge

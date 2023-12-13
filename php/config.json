@@ -1,0 +1,95 @@
+{
+    "ratelimit": "enabled",
+    "cleanURLs": "enabled",
+    "blockHarmfulUrls": "enabled",
+    "proxyIP": "disabled",
+    "proxyPort": "49155",
+    "proxyLogIn": "user:password",
+    "debugMode": "disabled",
+    "googleAPI": {
+    	"enabled": "disabled",
+    	"apiKey": "your-api-key"
+    },
+    "tor": {
+        "enabled": "disabled",
+        "instanceURL": "http://example.onion"
+    },
+    "frontendsEnabled": "enabled",
+    "frontends": {
+        "piped": {
+            "origin": "youtube.com",
+            "link": "https://piped.video",
+            "desc": "YouTube frontend"
+        },
+        "wikiless": {
+            "origin": "wikipedia.org",
+            "link": "https://wikiless.org",
+            "desc": "Wikipedia frontend"
+        },
+        "destructables":  {
+            "origin": "instructables.com",
+            "link": "https://ds.vern.cc",
+            "desc": "Instructables frontend"
+        },
+        "rimgo": {
+            "origin": "imgur.com",
+            "link": "https://rimgo.vern.cc",
+            "desc": "imgur frontend"
+        },
+        "scribe": {
+            "origin": "medium.com",
+            "link": "https://scribe.rip",
+            "desc": "Medium frontend"
+        },
+        "gothub": {
+            "origin": "github.com",
+            "link": "https://gh.bloatcat.tk",
+            "desc": "GitHub frontend"
+        },
+        "nitter": {
+            "origin": "twitter.com",
+            "link": "https://nitter.net",
+            "desc": "Twitter frontend"
+        },
+        "libreddit": {
+            "origin": "reddit.com",
+            "link": "https://safereddit.com",
+            "desc": "Reddit frontend"
+        },
+        "proxitok": {
+            "origin": "tiktok.com",
+            "link": "https://proxitok.pabloferreiro.es",
+            "desc": "TikTok frontend"
+        },
+        "quetre": {
+            "origin": "quora.com",
+            "link": "https://quetre.iket.me",
+            "desc": "Quora frontend"
+        },
+        "libremdb": {
+            "origin": "imdb.com",
+            "link": "https://libremdb.iket.me",
+            "desc": "IMDb frontend"
+        },
+        "breezewiki": {
+            "origin": "fandom.com",
+            "link": "https://breezewiki.com",
+            "desc": "Fandom frontend"
+        },
+        "anonymousoverflow": {
+            "origin": "stackexchange.com",
+            "link": "https://ao.vern.cc",
+            "desc": "StackExchange frontend"
+        },
+        "suds":  {
+            "origin": "snopes.com",
+            "link": "https://sd.vern.cc",
+            "desc": "Snopes frontend"
+        },
+        "biblioreads": {
+            "origin": "goodreads.com",
+            "link": "https://biblioreads.eu.org",
+            "desc": "GoodReads frontend"
+        }
+    }
+}

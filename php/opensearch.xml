@@ -1,0 +1,9 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>SearchTLD</ShortName>
+  <Description>Free and privacy respecting meta-search engine</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://searchtld.com/static/img/favicon.ico</Image>
+  <Url type="text/html" template="https://searchtld.com/search?q={searchTerms}&amp;pg=0&amp;tp=0"/>
+  <moz:SearchForm>https://searchtld.com/</moz:SearchForm>
+</OpenSearchDescription>
