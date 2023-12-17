@@ -8,13 +8,13 @@
 </div>
 
 <div align=center>
-  <img src=".github/scr1.png" width="80%" height="80%">
-  <img src=".github/scr2.png" width="80%" height="80%">
+  <img src=".github/scr1.png" width="65%" height="65%">
+  <img src=".github/scr2.png" width="65%" height="65%">
 </div>
 
-# 💕 Thank You
-[![Stargazers repo roster for @avitld/SearchTLD](http://reporoster.com/stars/dark/avitld/SearchTLD)](https://github.com/avitld/SearchTLD/stargazers)
-[![Forks repo roster for @avitld/SearchTLD](http://reporoster.com/forks/dark/avitld/SearchTLD)](https://github.com/avitld/SearchTLD/forks)
+# 💕 Help the project grow
+If you like what this project is doing, please leave a star on our GitHub repo.
+It really helps make the project more well-known.
 
 # ✅ Features of SearchTLD
 <ul>
