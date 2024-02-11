@@ -3,6 +3,8 @@
 <h3>Privacy Respecting and Fast Meta-Search Engine</h3>
 </div>
 
+<h1>IMPORTANT: The website will be down for at least a week, I have been struggling to work on this project more due to external obligations, contributions are needed more than ever right now to ensure the project stays alive. I will be trying my best to release at least bug fixes for SearchTLD. Thanks to everyone who contributed and used SearchTLD.</h1>
+
 <div align=center>
   <a href="https://github.com/avitld/SearchTLD/blob/main/LICENSE"><img src="https://img.shields.io/github/license/avitld/SearchTLD?color=purple&style=for-the-badge"></a>
 </div>
